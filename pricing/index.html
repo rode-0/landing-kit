@@ -51,8 +51,8 @@ ul{margin:8px 0 0;padding-left:20px}
 <span class="hint">Prices as of Nov 2026. Check claude.com/pricing.</span></div>
 <div class="q" id="planOtherQ" hidden><label for="planOther">Your Claude cost per month ($)</label><input id="planOther" type="number" min="0" step="1" value="20"></div>
 <div class="q"><label for="host">Hosting</label>
-<select id="host"><option value="0">Each client has their own free Netlify account</option><option value="9">I host everyone: Netlify Personal, $9</option><option value="20">I host everyone: Netlify Pro, $20</option></select>
-<span class="hint">Client-owned free accounts cost you nothing and the client owns the site.</span></div>
+<select id="host"><option value="9">I host everyone: Netlify Personal, $9 (recommended to start)</option><option value="20">I host everyone: Netlify Pro, $20 (more clients)</option><option value="0">Each client has their own free Netlify account</option></select>
+<span class="hint">Hosting everyone in your account lets you make updates yourself. Its cost is covered by your monthly care price.</span></div>
 <div class="q"><label for="other">Other monthly costs ($)</label><input id="other" type="number" min="0" step="1" value="0"><span class="hint">Phone, software, anything else for this work</span></div>
 </div>
 </section>
@@ -113,7 +113,8 @@ ul{margin:8px 0 0;padding-left:20px}
 <li><strong>Use Claude Opus 5.5 or newer.</strong> It uses your limit faster than smaller models, and it makes better sites.</li>
 <li><strong>The client pays</strong> for their domain (usually $10 to $20 a year) and owns it.</li>
 <li><strong>Contact forms</strong> are free for up to 250 messages a month per business (Web3Forms).</li>
-<li><strong>Hosting</strong>: a free Netlify account per client is the simplest. If you host everyone in one account, the free plan runs out after roughly 20 updates a month.</li>
+<li><strong>Hosting</strong>: host every client in your own Netlify account (Personal or Pro) and include it in the monthly care price. Netlify's free plan allows only one person per account and runs out after roughly 20 updates a month.</li>
+<li><strong>Getting paid</strong>: set up the monthly care price as an automatic monthly invoice (Square, Stripe or PayPal all do this), so the client's card is charged each month.</li>
 </ul>
 </section>
 </main>
@@ -121,7 +122,7 @@ ul{margin:8px 0 0;padding-left:20px}
 (function(){
   var $=function(id){return document.getElementById(id)};
   var ids=['plan','planOther','host','other','hSite','hUpd','rate','newSites','careClients','updPer','pSite','pCare','cName','me'];
-  var KEY='lk-pricing-v1';
+  var KEY='lk-pricing-v2';
   try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');ids.forEach(function(i){if(s[i]!==undefined)$(i).value=s[i]})}catch(e){}
   var num=function(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0};
   var money=function(v){return (v<0?'-$':'$')+Math.round(Math.abs(v)).toLocaleString('en-US')};

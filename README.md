@@ -18,7 +18,7 @@ You collect the business's details and photos, Claude designs the page with you,
 3. **Add this kit to the Project.** On this page, click the green **Code** button, then **Download ZIP**. Unzip it, then drag `PROMPT.md`, `check_page.py` and everything in the `library` folder into the Project's files.
 4. **In the Project instructions**, type: `Follow PROMPT.md for every website.`
 5. **Pick the model.** When you start a chat, open the model menu (next to the message box) and choose **Claude Opus 5.5**, or a newer Opus if there is one. This kit was built and tested with Opus.
-6. **Get a free Netlify account** at [netlify.com](https://www.netlify.com). This is where the websites live.
+6. **Get a Netlify account** at [netlify.com](https://www.netlify.com). This is where all your clients' websites live. Start free; move to the $9 Personal plan once you have a few clients.
 7. **Put the question page online** (you only do this once): drag the `intake` folder from the ZIP onto [app.netlify.com/drop](https://app.netlify.com/drop). Netlify gives you a link. That's the page you'll send to every client.
 
 ---
@@ -37,12 +37,17 @@ You collect the business's details and photos, Claude designs the page with you,
 
 ## What it costs, and what to charge
 
-- **You pay:** a Claude plan (Pro is $20 a month; Max is $100 or $200 for much more use). That's usually it.
-- **Free:** hosting on Netlify (give each client their own free account, so they own their site) and contact forms for up to 250 messages a month.
-- **The client pays:** their domain name, usually $10 to $20 a year.
-- **How many sites your plan covers** isn't a fixed number, because Claude's limits reset every few hours and weekly. After your first two or three sites, check how much of your weekly limit each one used.
+**The simple way to sell this:** the client pays you a one-time price for the site and a monthly care price. The care price covers hosting, the contact form and small updates. The only thing the client pays for directly is their domain name.
 
-Put the `pricing` folder online the same way as the question page, and open it to work out your prices. It shows what each site costs you, what you really earn per hour, and writes a quote you can send the client.
+- **You pay:** a Claude plan (Pro is $20 a month; Max is $100 or $200 for much more use) and Netlify hosting for all your clients in one account (Personal is $9 a month, Pro is $20). Your care prices cover both.
+- **Free:** contact forms, for up to 250 messages a month per business.
+- **The client pays:** their domain name (usually $10 to $20 a year). Always buy it in the client's name, with their card, so they own it. You just help connect it.
+- **Getting paid:** set up the monthly care price as an automatic monthly invoice in Square, Stripe or PayPal, so nobody has to remember.
+- **How many sites your Claude plan covers** isn't a fixed number, because Claude's limits reset every few hours and weekly. After your first two or three sites, check how much of your weekly limit each one used.
+
+**Two tools in this kit help:**
+- `pricing/` works out your prices and writes a quote you can send. Put it online the same way as the question page.
+- `tracker/tracker.xlsx` keeps track of your clients: domains, renewal dates, care plans, payments and updates. Open it in Google Sheets (File, then Import) or Excel. It highlights domains that renew soon and setups that haven't been paid.
 
 *Prices as of November 2026. Check claude.com/pricing and netlify.com/pricing for current prices.*
 
@@ -75,5 +80,6 @@ If the business already uses Square, Calendly, Jane, OpenTable or similar, give 
 | `check_page.py` | A checker Claude runs on each page before showing it to you. |
 | `intake/` | The question page you send to clients. |
 | `pricing/` | A calculator for your costs and prices, with a quote you can send. |
+| `tracker/` | A spreadsheet to keep track of clients, domains, renewals and payments. |
 | `library/` | Notes and tested pieces Claude uses to design well. Add the whole folder to the Project. |
 | `examples/` | Pictures of sites made with this kit. |
