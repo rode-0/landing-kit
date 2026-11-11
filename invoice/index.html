@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Invoice Maker</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<style>
+:root{--bg:#f6f4ef;--surface:#fffdf9;--fg:#1d1b18;--muted:#625d55;--line:#d9d3c8;--accent:#2f5d50;--on-accent:#fff;
+--head:"Schibsted Grotesk",system-ui,sans-serif;--body:"Literata",Georgia,serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#151412;--surface:#1d1b18;--fg:#ece7de;--muted:#a49d92;--line:#35312b;--accent:#8cc7b3;--on-accent:#10201b;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:1180px;margin:0 auto;padding-block:36px 80px;display:grid;gap:36px}
+@media (min-width:1000px){main{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}}
+header.page{grid-column:1/-1}
+h1,h2,label,button,.k{font-family:var(--head)}
+h1{font-size:clamp(30px,6vw,42px);line-height:1.05;margin:0}
+.lede{color:var(--muted);margin:10px 0 0;max-width:60ch}
+.edit section{border-top:2px solid var(--fg);padding-top:14px;margin-bottom:28px}
+h2{font-size:19px;margin:0 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 18px}
+.q{display:grid;gap:4px;min-width:0}
+label{font-size:15px;font-weight:600}
+input,textarea,select{font:inherit;font-size:16px;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:9px 11px;min-height:44px;width:100%}
+textarea{min-height:76px;resize:vertical}
+input:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.items .row{display:grid;grid-template-columns:minmax(0,1fr) 64px 100px 44px;gap:8px;margin-bottom:8px;align-items:center}
+.items .head{font-family:var(--head);font-size:13px;color:var(--muted)}
+button{font-size:15px;font-weight:600;border:1px solid var(--line);border-radius:6px;padding:0 14px;min-height:44px;cursor:pointer;background:var(--surface);color:var(--fg)}
+button.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+button.x{padding:0;width:44px;font-size:20px;line-height:1}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:8px}
+#msg{font-family:var(--head);font-size:14px;color:var(--muted)}
+.hint{font-family:var(--head);font-size:13px;color:var(--muted)}
+/* the invoice itself */
+.sheet{background:#fff;color:#1d1b18;border:1px solid var(--line);border-radius:8px;padding:40px 36px;font:15px/1.5 "Literata",Georgia,serif;position:sticky;top:16px}
+.sheet .top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.sheet .title{font:700 30px/1 "Schibsted Grotesk",system-ui,sans-serif;letter-spacing:.02em}
+.sheet .meta{text-align:right;font-family:"Schibsted Grotesk",system-ui,sans-serif;font-size:14px}
+.sheet .meta b{display:inline-block;min-width:80px;color:#625d55;font-weight:500}
+.sheet .parties{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:32px 0 28px}
+.sheet .k{font-size:12px;color:#625d55;text-transform:none;font-weight:600;margin-bottom:4px}
+.sheet .who{white-space:pre-line}
+.sheet table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.sheet th{font:600 12px "Schibsted Grotesk",system-ui,sans-serif;color:#625d55;text-align:left;padding:8px 0;border-bottom:2px solid #1d1b18}
+.sheet td{padding:10px 0;border-bottom:1px solid #e3ddd2;vertical-align:top}
+.sheet .n{text-align:right;white-space:nowrap;padding-left:12px}
+.sheet .totals{margin-left:auto;width:min(280px,100%);margin-top:16px;font-family:"Schibsted Grotesk",system-ui,sans-serif}
+.sheet .totals div{display:flex;justify-content:space-between;padding:4px 0}
+.sheet .totals .grand{border-top:2px solid #1d1b18;margin-top:6px;padding-top:10px;font-size:20px;font-weight:700}
+.sheet .pay{margin-top:32px;white-space:pre-line}
+.sheet .notes{margin-top:18px;color:#625d55;white-space:pre-line}
+@media print{
+  body{background:#fff;padding:0}
+  main{display:block;padding:0}
+  header.page,.edit{display:none}
+  .sheet{border:0;border-radius:0;padding:0;position:static}
+  @page{margin:18mm}
+}
+</style>
+</head>
+<body>
+<main>
+<header class="page">
+<h1>Invoice maker</h1>
+<p class="lede">Fill in the left side and the invoice builds on the right. Your own details and the next invoice number are remembered on this device. Nothing is sent anywhere.</p>
+</header>
+
+<div class="edit">
+<section><h2>You</h2>
+<div class="grid">
+<div class="q"><label for="me">Your name or business</label><input id="me" data-keep></div>
+<div class="q"><label for="meContact">Email and phone</label><input id="meContact" data-keep></div>
+</div>
+<div class="q" style="margin-top:12px"><label for="meAddr">Your address (optional)</label><input id="meAddr" data-keep></div>
+</section>
+
+<section><h2>Client</h2>
+<div class="grid">
+<div class="q"><label for="client">Business name</label><input id="client"></div>
+<div class="q"><label for="clientContact">Contact person and email</label><input id="clientContact"></div>
+</div>
+<div class="q" style="margin-top:12px"><label for="clientAddr">Client address (optional)</label><input id="clientAddr"></div>
+</section>
+
+<section><h2>Invoice</h2>
+<div class="grid">
+<div class="q"><label for="num">Invoice number</label><input id="num"></div>
+<div class="q"><label for="date">Date</label><input id="date" type="date"></div>
+<div class="q"><label for="terms">Due in (days)</label><input id="terms" type="number" min="0" step="1" value="14" data-keep></div>
+</div>
+</section>
+
+<section><h2>What you're billing</h2>
+<div class="items" id="items">
+<div class="row head"><span>Description</span><span>Qty</span><span>Price ($)</span><span></span></div>
+</div>
+<div class="quick">
+<button type="button" data-add="New website: design, build and launch|1|600">+ New website</button>
+<button type="button" data-add="month|1|40">+ Monthly care</button>
+<button type="button" data-add="Extra update|1|40">+ Extra update</button>
+<button type="button" data-add="|1|0">+ Blank line</button>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="q"><label for="tax">Sales tax (%)</label><input id="tax" type="number" min="0" step="0.01" value="0" data-keep><span class="hint">Often 0 for website services. Check your state's rules.</span></div>
+</div>
+</section>
+
+<section><h2>How to pay</h2>
+<div class="q"><label for="pay">Payment instructions</label><textarea id="pay" data-keep placeholder="Pay online: (your Square, Stripe or PayPal link)
+Zelle: (your email or phone)
+Check payable to: (your name)"></textarea></div>
+<div class="q" style="margin-top:12px"><label for="notes">Note to the client (optional)</label><textarea id="notes" placeholder="Thank you for your business."></textarea></div>
+</section>
+
+<div class="actions">
+<button type="button" class="primary" id="print">Save as PDF or print</button>
+<button type="button" id="copy">Copy as text</button>
+<button type="button" id="next">Start the next invoice</button>
+<span id="msg" role="status"></span>
+</div>
+<p class="hint">To save a PDF, choose "Save as PDF" as the printer. Then add the invoice to the Log tab of your tracker.</p>
+</div>
+
+<article class="sheet" id="sheet" aria-label="Invoice preview">
+<div class="top">
+<div><div class="title">INVOICE</div><div class="who" id="pMe" style="margin-top:14px"></div></div>
+<div class="meta"><div><b>Number</b> <span id="pNum"></span></div><div><b>Date</b> <span id="pDate"></span></div><div><b>Due</b> <span id="pDue"></span></div></div>
+</div>
+<div class="parties"><div><div class="k">Bill to</div><div class="who" id="pClient"></div></div><div></div></div>
+<table><thead><tr><th>Description</th><th class="n">Qty</th><th class="n">Price</th><th class="n">Amount</th></tr></thead><tbody id="pItems"></tbody></table>
+<div class="totals"><div><span>Subtotal</span><span id="pSub"></span></div><div id="pTaxRow"><span id="pTaxLabel">Tax</span><span id="pTax"></span></div><div class="grand"><span>Total due</span><span id="pTotal"></span></div></div>
+<div class="pay"><div class="k">How to pay</div><div id="pPay"></div></div>
+<div class="notes" id="pNotes"></div>
+</article>
+</main>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var KEY='lk-invoice-v1', st={};
+  try{st=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+  var keep=[].slice.call(document.querySelectorAll('[data-keep]'));
+  keep.forEach(function(el){if(st[el.id]!==undefined)el.value=st[el.id]});
+  var nextNo=st.nextNo||1;
+  var pad=function(n){return 'INV-'+String(n).padStart(4,'0')};
+  var todayISO=function(){var d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
+  $('num').value=pad(nextNo); $('date').value=todayISO();
+  var money=function(v){return '$'+(Math.round(v*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})};
+  var fmtDate=function(iso){if(!iso)return '';var p=iso.split('-');var d=new Date(+p[0],+p[1]-1,+p[2]);return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})};
+  var monthName=function(){var p=$('date').value.split('-');var d=p.length===3?new Date(+p[0],+p[1]-1,1):new Date();return d.toLocaleDateString('en-US',{month:'long',year:'numeric'})};
+  function addRow(desc,qty,price){
+    var r=document.createElement('div'); r.className='row';
+    var n=document.querySelectorAll('#items .row').length;
+    r.innerHTML='<input aria-label="Description" class="d"><input aria-label="Quantity" class="qy" type="number" min="0" step="1"><input aria-label="Price" class="pr" type="number" min="0" step="0.01"><button type="button" class="x" aria-label="Remove line">&times;</button>';
+    r.querySelector('.d').value=desc; r.querySelector('.qy').value=qty; r.querySelector('.pr').value=price;
+    r.querySelector('.x').addEventListener('click',function(){r.remove();render()});
+    r.querySelectorAll('input').forEach(function(i){i.addEventListener('input',render)});
+    $('items').appendChild(r); render();
+  }
+  document.querySelectorAll('[data-add]').forEach(function(b){b.addEventListener('click',function(){
+    var p=b.dataset.add.split('|'); addRow(p[0]==='month'?'Monthly care: '+monthName():p[0],p[1],p[2]);
+  })});
+  function items(){return [].slice.call(document.querySelectorAll('#items .row:not(.head)')).map(function(r){
+    var q=parseFloat(r.querySelector('.qy').value)||0,p=parseFloat(r.querySelector('.pr').value)||0;
+    return {d:r.querySelector('.d').value.trim(),q:q,p:p,a:q*p};}).filter(function(i){return i.d||i.a})}
+  function totals(){var it=items(),sub=it.reduce(function(s,i){return s+i.a},0),tr=parseFloat($('tax').value)||0,tax=Math.round(sub*tr)/100;return {it:it,sub:sub,tr:tr,tax:tax,total:sub+tax}}
+  function due(){var p=$('date').value.split('-');if(p.length!==3)return '';var d=new Date(+p[0],+p[1]-1,+p[2]);d.setDate(d.getDate()+(parseInt($('terms').value,10)||0));return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}
+  function lines(id){return $(id).value.trim()}
+  function render(){
+    var t=totals();
+    $('pMe').textContent=[lines('me'),lines('meContact'),lines('meAddr')].filter(Boolean).join('\n');
+    $('pClient').textContent=[lines('client'),lines('clientContact'),lines('clientAddr')].filter(Boolean).join('\n')||'Client name';
+    $('pNum').textContent=$('num').value; $('pDate').textContent=fmtDate($('date').value); $('pDue').textContent=due();
+    var tb=$('pItems'); tb.textContent='';
+    t.it.forEach(function(i){var tr=document.createElement('tr');[i.d,String(i.q),money(i.p),money(i.a)].forEach(function(v,k){var td=document.createElement('td');td.textContent=v;if(k)td.className='n';tr.appendChild(td)});tb.appendChild(tr)});
+    $('pSub').textContent=money(t.sub); $('pTaxRow').hidden=!t.tr; $('pTaxLabel').textContent='Sales tax ('+t.tr+'%)'; $('pTax').textContent=money(t.tax); $('pTotal').textContent=money(t.total);
+    $('pPay').textContent=lines('pay')||'(Add how the client can pay)'; $('pNotes').textContent=lines('notes');
+    try{keep.forEach(function(el){st[el.id]=el.value});st.nextNo=nextNo;localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}
+  }
+  document.querySelectorAll('.edit input,.edit textarea').forEach(function(el){el.addEventListener('input',render)});
+  $('print').addEventListener('click',function(){render();window.print()});
+  $('copy').addEventListener('click',function(){
+    var t=totals(), out=['INVOICE '+$('num').value,'Date: '+fmtDate($('date').value)+'   Due: '+due(),'','From: '+$('pMe').textContent.replace(/\n/g,', '),'Bill to: '+$('pClient').textContent.replace(/\n/g,', '),''];
+    t.it.forEach(function(i){out.push(i.d+'  '+i.q+' x '+money(i.p)+' = '+money(i.a))});
+    out.push('','Subtotal: '+money(t.sub)); if(t.tr)out.push('Sales tax ('+t.tr+'%): '+money(t.tax)); out.push('Total due: '+money(t.total),'','How to pay:',lines('pay')); if(lines('notes'))out.push('',lines('notes'));
+    var txt=out.join('\n'), done=function(m){$('msg').textContent=m;setTimeout(function(){$('msg').textContent=''},2500)};
+    if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(function(){done('Copied')},function(){done('Copy did not work here. Use Save as PDF instead.')});
+    else done('Copy did not work here. Use Save as PDF instead.');
+  });
+  $('next').addEventListener('click',function(){
+    var cur=parseInt(($('num').value.match(/(\d+)\s*$/)||[])[1],10); nextNo=(isFinite(cur)?cur:nextNo)+1;
+    $('num').value=pad(nextNo); $('date').value=todayISO(); ['client','clientContact','clientAddr','notes'].forEach(function(i){$(i).value=''});
+    document.querySelectorAll('#items .row:not(.head)').forEach(function(r){r.remove()}); render(); $('msg').textContent='Ready for '+pad(nextNo);
+  });
+  render();
+})();
+</script>
+</body>
+</html>

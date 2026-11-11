@@ -4,6 +4,8 @@ Make a clean, professional website for a small business with Claude. No coding.
 
 You collect the business's details and photos, Claude designs the page with you, and you put it online for free by dragging one file onto a website.
 
+**New to this?** Start with the [business guide](GUIDE.md): who to approach, what to say, what to charge, and how to deliver.
+
 ![Five example sites made with this kit](examples/overview.png)
 
 *Five made-up businesses, each designed for its own customers. Photo credits are in [examples/CREDITS.md](examples/CREDITS.md).*
@@ -45,8 +47,9 @@ You collect the business's details and photos, Claude designs the page with you,
 - **Getting paid:** set up the monthly care price as an automatic monthly invoice in Square, Stripe or PayPal, so nobody has to remember.
 - **How many sites your Claude plan covers** isn't a fixed number, because Claude's limits reset every few hours and weekly. After your first two or three sites, check how much of your weekly limit each one used.
 
-**Two tools in this kit help:**
+**Tools in this kit that help:**
 - `pricing/` works out your prices and writes a quote you can send. Put it online the same way as the question page.
+- `invoice/` makes clean invoices you can save as a PDF and send, with numbers, due dates and how to pay. For the monthly care plan, an automatic monthly invoice in Square, Stripe or PayPal is easier.
 - `tracker/tracker.xlsx` keeps track of your clients: domains, renewal dates, care plans, payments and updates. Open it in Google Sheets (File, then Import) or Excel. It highlights domains that renew soon and setups that haven't been paid.
 
 *Prices as of November 2026. Check claude.com/pricing and netlify.com/pricing for current prices.*
@@ -91,5 +94,8 @@ If the business already uses Square, Calendly, Jane, OpenTable or similar, give 
 | `intake/` | The question page you send to clients. |
 | `pricing/` | A calculator for your costs and prices, with a quote you can send. |
 | `tracker/` | A spreadsheet to keep track of clients, domains, renewals and payments. |
+| `invoice/` | Make an invoice and save it as a PDF. |
+| `GUIDE.md` | How to start the business and find clients. |
+| `templates/` | Messages to send businesses, and a simple client agreement. |
 | `library/` | Notes and tested pieces Claude uses to design well. Add the whole folder to the Project. |
 | `examples/` | Pictures of sites made with this kit. |
