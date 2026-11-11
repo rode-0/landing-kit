@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make a preview for your client</title>
+<meta name="robots" content="noindex">
+<style>
+/* Layout: one narrow column: drop the page, three fields, then the download and the message to send */
+:root{--bg:#f6f4ef;--surface:#fffdf9;--fg:#1d1b18;--muted:#625d55;--line:#d9d3c8;--accent:#2f5d50;--on-accent:#fff;--ok:#2f6b47}
+@media (prefers-color-scheme:dark){:root{--bg:#151412;--surface:#1d1b18;--fg:#ece7de;--muted:#a49d92;--line:#35312b;--accent:#8cc7b3;--on-accent:#10201b;--ok:#8fd0a5;color-scheme:dark}}
+body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0;padding:40px 16px 80px}
+main{max-width:620px;margin:0 auto;display:grid;gap:22px}
+h1{font-size:clamp(28px,6vw,38px);line-height:1.1;margin:0}
+p{margin:0}.muted{color:var(--muted)}
+.drop{border:2px dashed var(--line);border-radius:10px;padding:26px 18px;text-align:center;background:var(--surface);cursor:pointer}
+.drop.on{border-color:var(--accent)}
+.drop strong{display:block;margin-bottom:4px}
+label{font-weight:600;display:block;margin-bottom:4px}
+input[type=text]{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;width:100%;box-sizing:border-box;min-height:46px}
+.grid{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+.grid .wide{grid-column:1/-1}
+button,.btn{font:600 16px/1 system-ui,sans-serif;background:var(--accent);color:var(--on-accent);border:0;border-radius:6px;padding:14px 18px;cursor:pointer;min-height:48px;text-decoration:none;display:inline-block}
+button.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+button:disabled{opacity:.5;cursor:not-allowed}
+button:focus-visible,a:focus-visible,input:focus-visible,.drop:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+textarea{font:15px/1.5 system-ui,sans-serif;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;width:100%;box-sizing:border-box;min-height:190px}
+.status{color:var(--ok);font-weight:600}
+ol{margin:0;padding-left:22px}
+@media (max-width:520px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>Make a preview for your client</h1>
+<p class="muted">Send the owner a copy they can look at but can't use as their website until they've paid. It stays on this computer; nothing is uploaded.</p>
+</header>
+
+<div class="drop" id="drop" tabindex="0" role="button" aria-describedby="dropHelp">
+<strong id="dropName">Drop the page from Claude here</strong>
+<span id="dropHelp" class="muted">or click to choose the .html file you downloaded</span>
+<input type="file" id="file" accept=".html,.htm,text/html" hidden>
+</div>
+
+<div class="grid">
+<div><label for="biz">Business name</label><input type="text" id="biz" placeholder="Vito's Pizzeria"></div>
+<div><label for="ver">Version</label><input type="text" id="ver" value="1"></div>
+<div><label for="contact">Owner's first name</label><input type="text" id="contact" placeholder="Sal"></div>
+<div><label for="from">Your name</label><input type="text" id="from" placeholder="Your name"></div>
+</div>
+
+<p><button type="button" id="make" disabled>Make the preview</button> <span class="status" id="status" role="status"></span></p>
+
+<section id="after" hidden>
+<ol>
+<li><a class="btn" id="dl" href="#">Download the preview file</a></li>
+<li style="margin-top:12px">Send it to the owner with this message (email or text), with the file attached:</li>
+</ol>
+<label for="msg" class="muted" style="font-weight:500;margin-top:10px">Message</label>
+<textarea id="msg" readonly></textarea>
+<p style="margin-top:8px"><button type="button" class="ghost" id="copy">Copy the message</button> <span class="status" id="copied" role="status"></span></p>
+<p class="muted" style="margin-top:10px">Open the preview yourself first to check it. Send the real page only after the final payment, when you launch the site.</p>
+</section>
+</main>
+<script src="preview.js"></script>
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)}, src='', fname='', url='';
+  function slug(s){return (s||'site').toLowerCase().replace(/['’]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'site'}
+  function load(f){ if(!f) return; fname=f.name; var r=new FileReader(); r.onload=function(){ src=String(r.result);
+      var t=(src.match(/<title>([^<]*)<\/title>/i)||[])[1]; if(t&&!$('biz').value) $('biz').value=t.split(/[|·–—-]/)[0].trim();
+      $('dropName').textContent=fname; $('make').disabled=false; $('status').textContent=''; }; r.readAsText(f); }
+  $('drop').addEventListener('click',function(){$('file').click()});
+  $('drop').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();$('file').click()}});
+  $('file').addEventListener('change',function(){load(this.files[0])});
+  ['dragenter','dragover'].forEach(function(ev){$('drop').addEventListener(ev,function(e){e.preventDefault();$('drop').classList.add('on')})});
+  ['dragleave','drop'].forEach(function(ev){$('drop').addEventListener(ev,function(e){e.preventDefault();$('drop').classList.remove('on')})});
+  $('drop').addEventListener('drop',function(e){load(e.dataTransfer.files[0])});
+  $('make').addEventListener('click',function(){
+    var o={business:$('biz').value.trim(),version:$('ver').value.trim()||'1',contact:$('contact').value.trim(),from:$('from').value.trim()};
+    var out=lkPreview(src,o); if(url) URL.revokeObjectURL(url);
+    url=URL.createObjectURL(new Blob([out],{type:'text/html'}));
+    var name=slug(o.business)+'-preview-v'+slug(o.version)+'.html';
+    $('dl').href=url; $('dl').download=name; $('dl').textContent='Download '+name;
+    $('msg').value=lkPreviewMessage(o); $('after').hidden=false; $('status').textContent='Preview ready.';
+  });
+  $('copy').addEventListener('click',function(){
+    var t=$('msg'), done=function(m){$('copied').textContent=m};
+    var sel=function(){t.focus();t.select();done('Selected. Copy it with your keyboard or press and hold.')};
+    try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t.value).then(function(){done('Copied')},sel)}else sel()}catch(e){sel()}
+  });
+})();
+</script>
+</body>
+</html>

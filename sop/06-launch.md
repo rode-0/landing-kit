@@ -1,11 +1,11 @@
 # 6. Launch
 
-The file you sent the client is only a preview. To put the real site online you need, once per site:
+The preview you sent the client can't be used as a website. To put the real site online you need, once per site:
 
 **Before you start**
 - [ ] A **computer** (not a phone or tablet): step 3 is drag and drop.
 - [ ] **Signed in to your Netlify account** (setup Level 1). A site dropped without signing in isn't saved to your account and can be deleted after a short time.
-- [ ] The client has said the site is approved.
+- [ ] The client has said the site is approved, and **the final payment has arrived** (send the final invoice when they approve; launch when it's paid).
 - [ ] About 30 minutes the first time.
 
 **Steps**
@@ -17,7 +17,7 @@ The file you sent the client is only a preview. To put the real site online you 
 4. **Contact form** (if the site has one): get a free key at web3forms.com with the email that should receive messages, paste the key into the Claude chat, download the updated page, and drag its folder onto the site's **Deploys** page in Netlify. Then send a test message from the live site and check it arrives.
 5. **Domain:** help the client buy their domain in their own name (any registrar), then connect it in Netlify under Domain management. Netlify adds the secure padlock (https) by itself; it can take a little while.
    **If they already have a domain, and especially email on it:** don't move the domain or change its nameservers. At the domain seller, add only the website records Netlify shows you, and never change or delete the email (MX) records. If anything is unclear, stop and ask the domain seller's support first. Breaking a client's email is the worst mistake you can make here.
-6. **Email the client** that it's live, with the final invoice (email 7).
+6. **Email the client** that it's live (email 7). Now you can send them the real page file for their records.
 7. **Track it:** click the first empty cell in column A of the Clients tab and paste Claude's row. Set Stage to "Live" or "Care plan" and add the website address, domain and renewal date. Save the final `index.html` in the client's backup folder, named by date.
 
 **If you get stuck**

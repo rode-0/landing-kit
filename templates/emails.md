@@ -15,11 +15,11 @@ Hi [Name], I'm putting your site together. Could you tell me: [question 1]? [que
 
 ## 3. First draft ready
 Subject: Your website draft is ready
-Hi [Name], here's the first version (attached; tap it to open it in your browser). Have a look on your phone and computer, and reply with anything you'd like changed. Your price includes [2] rounds of changes.
+Hi [Name], here's a preview of your new site (attached; tap it to open it in your browser). It's marked PREVIEW and the buttons are switched off until it's live. Have a look on your phone and computer, and reply with anything you'd like changed. Your price includes [2] rounds of changes.
 
 ## 4. After a round of changes
 Subject: Updated website: round [N]
-Hi [Name], here's the updated version (attached). What changed: [short list]. Still waiting on: [anything missing].
+Hi [Name], here's the updated preview (attached). What changed: [short list]. Still waiting on: [anything missing].
 
 ## 5. Extra round notice
 Subject: About the next round of changes

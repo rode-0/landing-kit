@@ -21,7 +21,7 @@ Write the clock time at the start and end of each step in the time log. Count on
 | 3 | Discovery and quote | Reads the sample client's answers, notes what the client already has, sends a quote from the pricing page | Quote shows the price, included rounds, extra-round price and the care update cap |
 | 4 | Deposit (simulated) | Makes a deposit invoice in the invoice maker and saves it as PDF; logs "Payment" in the tracker | PDF made; the Log row shows in "Money received this month" |
 | 5 | Build | New chat in the Project: pastes the answers, attaches the 4 photos | Version 1 with a customer brief, "Checks: passed" or what wasn't checked, a request for phone screenshots, a Log line in a box |
-| 6 | Phone check | Downloads the version, opens the file on their phone, sends 3 screenshots to Claude | Claude reviews the screenshots and fixes anything it sees |
+| 6 | Preview and phone check | Downloads the version, makes a preview package in tools/preview, opens the preview on their phone, sends 3 screenshots to Claude | Claude reviews the screenshots and fixes anything it sees |
 | 7 | Rounds | Sends round notes 1 and 2, then 3 | Rounds 1-2 done with "What changed"; round 3 stops with an extra-round email draft; after "the client said yes" it's done |
 | 8 | Tracker paste | Pastes each Log line, and the Clients row after approval | Every value lands in its named column; grey columns fill in; Next step shows something sensible |
 | 9 | Launch (safe) | Says "approved", taps each link on Claude's list, drags the page folder onto Netlify Drop, makes a Web3Forms key with their own email, gets the page updated with it, sends a test message from the live site | Live netlify.app link opens on the phone; the test message arrives in their inbox |

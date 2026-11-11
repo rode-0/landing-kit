@@ -10,7 +10,7 @@
 **1. What I'll make.** A one-page website for [Client business] with your logo, photos, services, hours and contact details, working on phones and computers. Includes [2] rounds of changes before launch. Each extra round of changes is $[amount], and I'll tell you before starting one.
 
 **2. Price and payment.**
-- New website: $[amount]. Half ($[amount]) is due before I start. The rest is due when the site goes live.
+- New website: $[amount]. Half ($[amount]) is due before I start. The rest is due when you approve the final version, before the site goes live. Until then you get previews marked PREVIEW, not the working files.
 - Monthly care: $[amount] a month, starting the month the site goes live. Covers up to [2] small updates a month (hours, prices, notices, photos, short text) and keeping the site online. Bigger changes, or more updates than that, are quoted first.
 - Invoices are due within [14] days.
 

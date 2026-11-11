@@ -57,6 +57,7 @@ Use the pricing page in `tools/pricing` to set your numbers.
 | `tools/setup/` | Your setup checklist: what to do first, what's next, and your saved links. |
 | `tools/intake/` | The question page you send clients. |
 | `tools/pricing/` | Works out your prices and writes a quote. |
+| `tools/preview/` | Makes a preview of a client's site they can look at but not use, plus the message to send. |
 | `tools/invoice/` | Makes invoices you can save as a PDF. |
 | `tools/tracker/` | Your dashboard spreadsheet: clients, stages, money, rounds, renewals. |
 | `templates/` | Messages to find clients, emails for each stage, and a simple client agreement. |
@@ -71,6 +72,6 @@ Use the pricing page in `tools/pricing` to set your numbers.
 - **Photos or the logo don't show.** Tell Claude "the photos aren't showing" and it will fix it.
 - **Something looks wrong on a phone.** Attach a screenshot in the chat and say what's wrong.
 - **All my clients' sites say "Site not available".** Your Netlify credits ran out. Upgrade your plan or turn on auto recharge in Netlify's billing settings, or wait for next month.
-- **Claude won't make a share link for the client's site.** That's expected: Claude doesn't publish public pages with a real business's name. Send the page file as an attachment instead (step 5).
+- **Claude won't make a share link for the client's site.** That's expected: Claude doesn't publish public pages with a real business's name. Send a preview package from the preview maker instead (step 5).
 - **I can't get the site online.** Launch needs a computer and you signed in to Netlify. See the checklist and "If you get stuck" in [step 6](sop/06-launch.md).
 - **A pasted tracker line landed in one cell.** Copy it from Claude's box (it uses tabs), click the first empty cell in column A, and paste again.
