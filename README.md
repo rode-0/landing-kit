@@ -27,12 +27,9 @@ flowchart TD
     H --> I["Paid: put it online<br/><i>Netlify, their own domain</i>"]
     I --> J["Monthly care<br/><i>small updates, automatic billing</i>"]
     J -- "client asks for a change" --> E
-    K[("Tracker<br/>every client, payment,<br/>round and next step")] -.- C
-    K -.- H
-    K -.- J
 ```
 
-The client only gets the working site after the final payment. Until then they see previews.
+Every step goes in your tracker, which shows each client's next step. The client only gets the working site after the final payment; until then they see previews.
 
 ## How the business runs
 
