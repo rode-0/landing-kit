@@ -115,6 +115,46 @@ for a in [a for t, a in p.tags if t == "a"]:
     if h in ("#", "") : warn("A link has an empty href")
     if re.search(r"example\.com|[-/_.]example\b|[-/_]sample\b|your-?(link|booking|name)", h, re.I): fail(f"Placeholder link: {h}. Ask for the real one or leave it out")
 
+# Links to a section that doesn't exist
+ids = {a.get("id") for _, a in p.tags if a.get("id")} | {a.get("name") for t, a in p.tags if t == "a" and a.get("name")}
+for h in sorted({a.get("href", "") for t, a in p.tags if t == "a"}):
+    if h.startswith("#") and len(h) > 1 and h[1:] not in ids and h != "#top":
+        fail(f"Link to '{h}' but no element has id=\"{h[1:]}\"; the link goes nowhere")
+
+# Wider than a phone
+for sel, body in rules:
+    sel = sel.strip()
+    for prop, px in re.findall(r"(?<![\w-])(min-width|width)\s*:\s*(\d+)px", body):
+        if int(px) <= 480: continue
+        if re.fullmatch(r"(html|body|main|:root|\*)(\s*,\s*(html|body|main|:root|\*))*", sel):
+            fail(f"'{sel}' has {prop}:{px}px; the page will scroll sideways on phones")
+        elif prop == "min-width":
+            warn(f"'{sel[:50]}' has min-width:{px}px; check it doesn't push the page wider than a 375px phone")
+
+# Text the same color as its own background
+def _norm(c):
+    c = c.strip().lower().replace(" ", "").replace("!important", "")
+    m = re.fullmatch(r"#([0-9a-f])([0-9a-f])([0-9a-f])", c)
+    return "#" + "".join(x * 2 for x in m.groups()) if m else {"white": "#ffffff", "black": "#000000"}.get(c, c)
+for sel, body in rules:
+    col = re.search(r"(?:^|;)\s*color\s*:\s*([^;]+)", body)
+    bg = re.search(r"background(?:-color)?\s*:\s*(#[0-9a-fA-F]{3,8}|rgba?\([^)]*\)|var\(--[\w-]+\)|white|black)\s*(?:;|$)", body)
+    if col and bg and _norm(col.group(1)) == _norm(bg.group(1)):
+        fail(f"'{sel.strip()[:50]}' sets text and background to the same color ({col.group(1).strip()}); the text is invisible")
+
+# JavaScript syntax (needs node; claude.ai's sandbox and CI usually have it)
+import shutil, subprocess, tempfile, os
+scripts = [m.group(1) for m in re.finditer(r"<script(?![^>]*\bsrc=)(?![^>]*application/ld\+json)[^>]*>(.*?)</script>", src, re.S)]
+if scripts and shutil.which("node"):
+    for i, code in enumerate(scripts):
+        with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False) as fh: fh.write(code); name = fh.name
+        r = subprocess.run(["node", "--check", name], capture_output=True, text=True); os.unlink(name)
+        if r.returncode:
+            msg = [l for l in r.stderr.splitlines() if "Error" in l]
+            fail(f"Script {i+1} has a JavaScript error ({(msg or ['syntax error'])[0].strip()[:80]}); every script on the page may stop")
+elif scripts:
+    warn("JavaScript was not syntax-checked here (no node). Read each script once for unclosed brackets")
+
 # Fictional phone numbers (555-0100 to 555-0199 are reserved for fiction)
 if re.search(r"555[-.\s)]*01\d\d", text): warn("The phone number is in the 555-01xx range, which is reserved for fiction. Confirm the real number")
 
