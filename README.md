@@ -25,8 +25,8 @@ You collect the business's details and photos, Claude designs the page with you,
 
 ## For each new client
 
-1. **Send the client your question page link.** They answer on their phone, tap **Copy my answers**, and text or email them back to you. Ask them to send 4 to 10 of their own photos too.
-2. **Start a new chat in your Websites Project** (with Claude Opus 5.5 or newer selected). Paste their answers and attach their photos.
+1. **Send the client your question page link.** They answer on their phone, tap **Copy my answers**, and text or email them back to you. Ask them to send their logo and 4 to 10 of their own photos too.
+2. **Start a new chat in your Websites Project** (with Claude Opus 5.5 or newer selected). Paste their answers and attach their logo and photos.
 3. **Pick a direction (optional).** Say "show me concepts" if you'd like three quick layout ideas to choose from first.
 4. **Look at the page Claude makes.** Tell Claude what to change in plain words, as many times as you like. Claude keeps a numbered version each time and tells you what changed.
 5. **Show the client.** Click **Publish** on the page in Claude and send the client the link. Paste their comments back into the chat.

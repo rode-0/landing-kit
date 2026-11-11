@@ -86,10 +86,13 @@ Rework it until it only makes sense for this business.
 
 ## 5. Design: a top independent studio, not a template
 **Balance three things: a logo, graphics and photos.** None of them should carry the page alone.
-- **Logo:** use the client's logo if given (embed it). If not, design a simple starter logo as inline SVG:
-  a wordmark in the display font, optionally with a small mark from the business's world or its
-  initials. Use it in the nav, the footer and as the favicon, and tell me it's a starter logo the client
-  can replace.
+- **Logo:** the client provides their logo. Use it in the nav, the footer and as the favicon, and take
+  the site's colors from it. Embed it in the page (inline SVG if they send SVG; otherwise a data URI).
+  Handle the usual problems: a white or colored box around a PNG or JPG (remove the background with code,
+  or place the logo on a surface that matches it), a dark logo in dark mode (make a light version or set
+  it on a light shape), and a tiny or blurry file (use it small and ask for a bigger one or an SVG).
+  Never redraw, recolor or "improve" the logo beyond that. Only if no logo has arrived yet, make a simple
+  starter wordmark in the display font and say it's a stand-in until theirs arrives.
 - **Graphics:** give the site a small graphic language drawn from the business (a comb and razor line for a
   barber, a wave line for a lakeside studio, a stem and leaf for a florist, a pipe bend for a plumber).
   Simple vector line drawings in ONE consistent style and stroke, plus shapes, color fields or a subtle
@@ -188,7 +191,8 @@ Phone:
 Email:
 Address (or "don't show"):
 Social links:
-Brand colors or logo, if any:
+Logo (attach it, the biggest file you have):
+Brand colors, if any:
 Photos (attach them and say what each shows):
 Sites you like, and competitors:
 Feel, in three words:
