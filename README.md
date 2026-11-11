@@ -29,6 +29,8 @@ Follow these steps in order. Each one is a short page.
 
 **Not sure what to do next?** Ask Claude in your Websites Project: "What do I do next?"
 
+Who sets up, pays for and looks after each service: [who owns what](sop/who-owns-what.md).
+
 ---
 
 ## What it costs, and what to charge
