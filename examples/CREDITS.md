@@ -1,7 +1,7 @@
 # Photo credits
 
 The example businesses are made up. Their photos are stand-ins from Wikimedia Commons, used under the licenses below.
-The overview picture (`overview.jpg`) shows these photos and is shared under CC BY-SA 4.0.
+The overview picture (`overview.png`) shows these photos and is shared under CC BY-SA 4.0.
 
 ## Tidy Paws (dog groomer)
 - [Head Miniature Poodle Mysore May24 A7CR 00091.jpg](https://commons.wikimedia.org/wiki/File%3AHead_Miniature_Poodle_Mysore_May24_A7CR_00091.jpg) by Timothy A. Gonsalves, but please mention me as the author. I would much appreciate if you send me an email tagooty@yahoo.com or write on my talk page, for my information. Please contact me before commercial use. Please do not upload an edited image here without consulting me. I would like to make corrections only at my own source to ensure that the changes improve the image and are preserved.Otherwise you may upload an edited image with a new name. Please use one of the templates derivative or extract., CC BY-SA 4.0

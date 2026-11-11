@@ -4,7 +4,7 @@ Make a clean, professional website for a small business with Claude. No coding.
 
 You collect the business's details and photos, Claude designs the page with you, and you put it online for free by dragging one file onto a website.
 
-![Five example sites made with this kit](examples/overview.jpg)
+![Five example sites made with this kit](examples/overview.png)
 
 *Five made-up businesses, each designed for its own customers. Photo credits are in [examples/CREDITS.md](examples/CREDITS.md).*
 
