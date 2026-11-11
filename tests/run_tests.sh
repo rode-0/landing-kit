@@ -4,6 +4,9 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 echo "== behaviors.js logic"
 node tests/test_behaviors.js
+echo "== paste bundle is current and loads"
+node -e "require('fs'); new Function(require('fs').readFileSync('claude/library/behaviors-paste.js','utf8')+'; if(typeof lpkStatus!==\'function\')throw new Error(\'missing lpkStatus\')')()"
+grep -q "lpkNextClass" claude/library/behaviors-paste.js
 echo "== checker passes a good page"
 python3 claude/check_page.py tests/fixtures/good.html
 echo "== checker fails a bad page"

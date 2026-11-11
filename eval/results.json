@@ -1,0 +1,258 @@
+{
+ "aggregate": {
+  "cases_complete": 10,
+  "avg_model_minutes": {
+   "v1": 2.7,
+   "r1": 0.3,
+   "r2": 0.2,
+   "r3": 0.2,
+   "final": 0.2
+  },
+  "avg_model_total": 3.7,
+  "avg_tokens": 119587.2,
+  "avg_human_minutes": 61.4,
+  "avg_cost_low": 0.3,
+  "avg_cost_high": 0.6,
+  "avg_round_model_minutes": 0.2
+ },
+ "runs": [
+  {
+   "case": "groomer",
+   "channel": "form",
+   "model_minutes": {
+    "v1": 3.0,
+    "r1": 0.4,
+    "r2": 0.3,
+    "r3": 0.5,
+    "final": 0.2
+   },
+   "model_total": 4.4,
+   "tokens": 113852,
+   "cost_range": [
+    0.28,
+    0.6
+   ],
+   "human_minutes": 65,
+   "requests_done": "6/6",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS 0 fails 1 warn (555 phone)"
+  },
+  {
+   "case": "bookkeeping",
+   "channel": "email",
+   "model_minutes": {
+    "v1": 2.7,
+    "r1": 0.1,
+    "r2": 0.2,
+    "r3": 0.1,
+    "final": 0.3
+   },
+   "model_total": 3.4,
+   "tokens": 109496,
+   "cost_range": [
+    0.27,
+    0.58
+   ],
+   "human_minutes": 56,
+   "requests_done": "5/5",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS 0 fails, 1 warning (555 number)"
+  },
+  {
+   "case": "bakery",
+   "channel": "form",
+   "model_minutes": {
+    "v1": 2.8,
+    "r1": 0.5,
+    "r2": 0.4,
+    "r3": 0.2,
+    "final": 0.2
+   },
+   "model_total": 4.1,
+   "tokens": 119405,
+   "cost_range": [
+    0.3,
+    0.63
+   ],
+   "human_minutes": 65,
+   "requests_done": "5/5",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS 0 fails, 1 warning"
+  },
+  {
+   "case": "architect",
+   "channel": "email",
+   "model_minutes": {
+    "v1": 2.5,
+    "r1": 0.4,
+    "r2": 0.1,
+    "r3": 0.2,
+    "final": 0.2
+   },
+   "model_total": 3.4,
+   "tokens": 121799,
+   "cost_range": [
+    0.3,
+    0.64
+   ],
+   "human_minutes": 56,
+   "requests_done": "4/4",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS: 0 fails, 1 warning (555-01xx phone)"
+  },
+  {
+   "case": "physio",
+   "channel": "form",
+   "model_minutes": {
+    "v1": 2.5,
+    "r1": 0.1,
+    "r2": 0.1,
+    "r3": 0.3,
+    "final": 0.2
+   },
+   "model_total": 3.2,
+   "tokens": 125936,
+   "cost_range": [
+    0.31,
+    0.66
+   ],
+   "human_minutes": 65,
+   "requests_done": "5/5",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS: 0 fails, 1 warning"
+  },
+  {
+   "case": "barber",
+   "channel": "form",
+   "model_minutes": {
+    "v1": 2.6,
+    "r1": 0.5,
+    "r2": 0.4,
+    "r3": 0.2,
+    "final": 0.2
+   },
+   "model_total": 3.9,
+   "tokens": 125093,
+   "cost_range": [
+    0.31,
+    0.66
+   ],
+   "human_minutes": 65,
+   "requests_done": "4/4",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS: 0 fails, 1 warning (555 number)"
+  },
+  {
+   "case": "plumber",
+   "channel": "email",
+   "model_minutes": {
+    "v1": 2.2,
+    "r1": 0.2,
+    "r2": 0.2,
+    "r3": 0.2,
+    "final": 0.3
+   },
+   "model_total": 3.1,
+   "tokens": 117272,
+   "cost_range": [
+    0.29,
+    0.62
+   ],
+   "human_minutes": 56,
+   "requests_done": "4/4",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS: 0 fails, 1 warning (555-01xx phone)"
+  },
+  {
+   "case": "yoga",
+   "channel": "form",
+   "model_minutes": {
+    "v1": 2.7,
+    "r1": 0.2,
+    "r2": 0.2,
+    "r3": 0.3,
+    "final": 0.2
+   },
+   "model_total": 3.6,
+   "tokens": 118720,
+   "cost_range": [
+    0.29,
+    0.63
+   ],
+   "human_minutes": 65,
+   "requests_done": "3/3",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS 0 fails, 1 warning"
+  },
+  {
+   "case": "restaurant",
+   "channel": "email",
+   "model_minutes": {
+    "v1": 2.8,
+    "r1": 0.2,
+    "r2": 0.1,
+    "r3": 0.2,
+    "final": 0.2
+   },
+   "model_total": 3.5,
+   "tokens": 112069,
+   "cost_range": [
+    0.28,
+    0.59
+   ],
+   "human_minutes": 56,
+   "requests_done": "4/4",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS 0 fails, 1 warning (555 phone)"
+  },
+  {
+   "case": "florist",
+   "channel": "form",
+   "model_minutes": {
+    "v1": 3.4,
+    "r1": 0.2,
+    "r2": 0.2,
+    "r3": 0.2,
+    "final": 0.2
+   },
+   "model_total": 4.2,
+   "tokens": 132230,
+   "cost_range": [
+    0.33,
+    0.7
+   ],
+   "human_minutes": 65,
+   "requests_done": "4/4",
+   "round3_flagged": true,
+   "tracker_lines": true,
+   "checker_final": "PASS: 0 fails, 1 warning (555-01xx phone)"
+  }
+ ],
+ "assumptions": {
+  "human_minutes": {
+   "intake": 6,
+   "v1_review": 8,
+   "round_relay_form": 6,
+   "round_relay_email": 3,
+   "round_review": 5,
+   "launch": 12,
+   "domain_first_time": 15,
+   "admin": 6
+  },
+  "prices_per_mtok": [
+   4.0,
+   20.0,
+   0.2
+  ],
+  "output_share": 0.08
+ }
+}

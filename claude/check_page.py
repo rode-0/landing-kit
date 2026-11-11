@@ -89,7 +89,7 @@ for sel, body in rules:
     if not m or "font" in body: continue
     for sel2, body2 in rules:
         sel2 = sel2.strip()
-        if sel2 != sel and sel2.startswith(sel + " ") and re.search(r"font(-size)?\s*:[^;]*(clamp\(|[3-9](\.\d+)?rem|\d+vw)", body2):
+        if sel2 != sel and sel2.startswith(sel + " ") and re.search(r"font(-size)?\s*:[^;]*(clamp\(|(?<![\d.])[3-9](\.\d+)?rem|\d+vw)", body2):
             fail(f"'{sel}' limits width to {m.group(1)}ch but its child '{sel2}' has big text; ch uses the parent's small font, so the big text gets squeezed. Move the max-width onto '{sel2}'")
             break
 
@@ -98,8 +98,9 @@ for sel, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
     if re.search(r"(^|[\s,])(body|html|p|:root)\s*$", sel.strip()) and re.search(r"tnum|tabular-nums", body):
         warn(f"Tabular numbers set on '{sel.strip()}' (running text). Some fonts then widen commas and periods; keep tnum to prices, tables and times")
 # Missing space before an inline link inside text
-for m in re.finditer(r"[A-Za-z,.:;]<a\b", src):
-    ctx = src[max(0, m.start()-25):m.start()+1]
+body_html = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", src, flags=re.S)
+for m in re.finditer(r"[A-Za-z,.:;]<a\b", body_html):
+    ctx = body_html[max(0, m.start()-25):m.start()+1]
     if re.search(r"[>\s]$", ctx[:-1]) is None and not re.search(r"</\w+>$", ctx): 
         snip = re.sub(r"\s+", " ", ctx[-25:])
         warn("No space before a link: ..." + snip + "<a")
