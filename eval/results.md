@@ -168,3 +168,15 @@ the final invoice to the step table in eval/README.md.
 page file; email 7 still attached the final invoice after launch). Both are fixed, along with: where the preview maker is
 and how to run it, a contact-name fallback, which email draft goes with which step, setup-paid blanks, dated content, and
 re-reading copy for unsupported claims. A 3-case confirmation runs on the fixed prompt before release.
+
+### Confirmation on the released wording (f9c8967, 3 cases: plumber, bakery, barber)
+
+All checks passed in 3/3: checker 15/15, requested changes 12/12, extra round stopped with the $60 price and done after
+"go ahead", tab-separated Log lines, 18-field Clients row, outside links listed, phone screenshots requested, preview
+package suggested with the preview maker steps explained, final invoice (email 6) before launch. Whole-run Claude time
+5.0 to 5.2 minutes.
+
+**Known items for the next version** (small wording notes from these runs): when to repeat the preview steps (in full
+the first time, one line after); always draft the matching client email even without Gmail; no page or Checks line in
+the extra-round stop reply; add dated content with an end date by default; remind the user to fill in $[amount] in email
+6 when no setup price was given; staff names don't count as the owner for the contact field.
