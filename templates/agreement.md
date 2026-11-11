@@ -11,12 +11,12 @@
 
 **2. Price and payment.**
 - New website: $[amount]. Half ($[amount]) is due before I start. The rest is due when the site goes live.
-- Monthly care: $[amount] a month, starting the month the site goes live. Covers small updates (hours, prices, notices, photos, text) and keeping the site online. Larger changes are quoted first.
+- Monthly care: $[amount] a month, starting the month the site goes live. Covers up to [2] small updates a month (hours, prices, notices, photos, short text) and keeping the site online. Bigger changes, or more updates than that, are quoted first.
 - Invoices are due within [14] days.
 
 **3. What you provide.** Your answers to my questions, your logo, and photos you own or have permission to use. You confirm the facts on the site are correct before launch.
 
-**4. Your domain.** You buy and own your domain name, in your name. I'll help you connect it.
+**4. Your domain.** You buy and own your domain name, in your name. I'll help you connect it. If you already have a domain or email on it, I'll only add what the website needs and won't change your email.
 
 **5. Ownership.** Once the website is paid for in full, the site's content is yours: your words, photos and logo, and the finished page. If you stop the care plan, I'll give you a copy of the site's files.
 
