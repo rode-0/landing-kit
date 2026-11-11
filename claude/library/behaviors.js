@@ -79,7 +79,8 @@ function lpkNextClass(now, sch) {
 
 /* ---------- 2. Notice bar that hides itself ----------
    <div class="notice" data-until="2026-11-28" data-tz="America/New_York">Closed Nov 26-27 for Thanksgiving.</div>
-   Shows until (not including) the date in data-until, in the business's time zone. */
+   data-until is the FIRST day the bar is hidden (business time zone). A notice that "ends 2026-11-28"
+   (last day shown) gets data-until="2026-11-29". */
 function lpkNotices(now) {
   document.querySelectorAll('[data-until]').forEach(function (el) {
     var today = lpkLocal(now || new Date(), el.dataset.tz || 'UTC').date;
