@@ -5,7 +5,7 @@ The preview you sent the client can't be used as a website. To put the real site
 **Before you start**
 - [ ] A **computer** (not a phone or tablet): step 3 is drag and drop.
 - [ ] **Signed in to your Netlify account** (setup Level 1). A site dropped without signing in isn't saved to your account and can be deleted after a short time.
-- [ ] The client has said the site is approved, and **the final payment has arrived** (send the final invoice when they approve; launch when it's paid).
+- [ ] The client has said the site is approved, and **the final payment has arrived** (send the final invoice with email 6 when they approve; launch when it's paid).
 - [ ] About 30 minutes the first time.
 
 **Steps**

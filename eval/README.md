@@ -22,6 +22,8 @@ These are estimates, not measurements. Adjust them in `tools/pricing` to match h
 | Review Version 1 (on phone and computer) | 8 |
 | Pass on one round of client notes | 6 by form, 3 with Gmail connected |
 | Review one new version | 5 |
+| Make and send a preview package (preview maker + message) | 3 per version |
+| Final invoice at approval (launch waits for payment) | 3 |
 | Launch: download, Netlify, test the form | 12 |
 | Invoice and tracker | 6 |
 | Connect a client's domain (first time) | 15 |

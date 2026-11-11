@@ -137,3 +137,34 @@ partly answered customer questions.
 
 **Not tested here:** a real claude.ai Project, real phone screenshots, Netlify deploys, Web3Forms delivery,
 Google Sheets import, and a real non-technical person. The first user rehearsal is planned (`eval/user-test`).
+
+## Time study 3: preview package and payment-first launch (candidate dab9098, 2026-11-11)
+
+Same 10 cases on the v1.0.3 candidate, run by Claude Code agents (not a claude.ai Project). New checks: Claude points the
+user to the preview package (not the real page or a public link), and the final invoice comes before launch.
+
+| Check | Result |
+|---|---|
+| Checker on every version | 50/50 PASS (1 warning each: the fictional 555-01xx number) |
+| Requested changes made | 45/45 |
+| Round 3 stopped for the client's OK; email drafted with the $60 price | 10/10; 10/10 |
+| Round 3 done after "go ahead" | 10/10 |
+| Tab-separated Log lines; 18-field Clients row | 10/10; 10/10 |
+| Outside links listed; phone screenshots requested | 10/10; 10/10 |
+| Preview package suggested instead of the real page | 10/10 |
+| Final invoice before launch | 10/10 |
+| Claude's time per site, whole run (reading, building, checking, all rounds) | 5.2 minutes on average (4.5 to 5.7) |
+| Tokens per site; API-equivalent cost | about 131k; $0.33 to $0.69 |
+
+Whole-run time replaces per-step minutes here: some agents logged a step's text in the same command as its time marks,
+so per-step times understate drafting. Claude in claude.ai is slower (it writes the whole page into the chat each version).
+
+**Your time per site (estimate, not measured):** about 38 minutes straight to live with no change rounds, about 66 with the
+2 included rounds and about 80 with 3 when notes come by form (about 3 minutes less per round with Gmail connected), plus
+about 15 minutes the first time you connect a client's domain. These add 3 minutes per preview package and 3 minutes for
+the final invoice to the step table in eval/README.md.
+
+**What Claude found hard:** every run hit two leftovers from the preview change (a hosting-steps line still said to send the
+page file; email 7 still attached the final invoice after launch). Both are fixed, along with: where the preview maker is
+and how to run it, a contact-name fallback, which email draft goes with which step, setup-paid blanks, dated content, and
+re-reading copy for unsupported claims. A 3-case confirmation runs on the fixed prompt before release.

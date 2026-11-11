@@ -25,13 +25,13 @@ Hi [Name], here's the updated preview (attached). What changed: [short list]. St
 Subject: About the next round of changes
 Hi [Name], happy to make these changes. Your agreement included [2] rounds, so this one is an extra round at $[amount]. Reply "go ahead" and I'll start.
 
-## 6. Ready to launch
-Subject: Ready to go live?
-Hi [Name], if you're happy with this version, reply "approved" and I'll put it online. To use your own web address, buy the domain in your name at [registrar] and send me the login invite, and I'll connect it.
+## 6. Approved: final invoice
+Subject: Your final invoice, then we go live
+Hi [Name], thanks for approving the site. I've attached the final invoice ([amount], including [any extra rounds]). As soon as it's paid I'll put the site online. To use your own web address, buy the domain in your name at [registrar] and send me the login invite, and I'll connect it.
 
 ## 7. Live
 Subject: Your website is live
-Hi [Name], your site is live at [address]. I've attached the final invoice. Your monthly care plan starts this month: just email me whenever something changes (hours, prices, photos, a holiday) and I'll update it. If you know another business owner who needs a site, I'd be grateful for an introduction.
+Hi [Name], your site is live at [address]. Thanks for your payment. Your monthly care plan starts this month: just email me whenever something changes (hours, prices, photos, a holiday) and I'll update it. If you know another business owner who needs a site, I'd be grateful for an introduction.
 
 ## 8. Domain renewal reminder
 Subject: Your web address renews soon

@@ -12,6 +12,28 @@ You find local businesses, collect their details, logo and photos, Claude design
 
 ---
 
+## How the business works
+
+```mermaid
+flowchart TD
+    A["Find a local business<br/><i>outreach messages, your own site</i>"] --> B["Meet for 15 minutes<br/><i>what they already have, quote</i>"]
+    B --> C["They sign and pay the deposit<br/><i>agreement, invoice maker</i>"]
+    C --> D["Collect answers, logo and photos<br/><i>question page</i>"]
+    D --> E["Claude builds the site<br/><i>your Websites Project</i>"]
+    E --> F["Send a preview<br/><i>preview maker: marked PREVIEW, buttons off</i>"]
+    F --> G{"Changes?"}
+    G -- "yes: 2 rounds included,<br/>extra rounds are paid" --> E
+    G -- "approved" --> H["Final invoice<br/><i>invoice maker</i>"]
+    H --> I["Paid: put it online<br/><i>Netlify, their own domain</i>"]
+    I --> J["Monthly care<br/><i>small updates, automatic billing</i>"]
+    J -- "client asks for a change" --> E
+    K[("Tracker<br/>every client, payment,<br/>round and next step")] -.- C
+    K -.- H
+    K -.- J
+```
+
+The client only gets the working site after the final payment. Until then they see previews.
+
 ## How the business runs
 
 Follow these steps in order. Each one is a short page.
