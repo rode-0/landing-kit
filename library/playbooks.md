@@ -53,9 +53,16 @@ thinking, never as a layout to copy. If the trade isn't here, use the closest on
 
 ## Gym, studio, class-based business
 - Visitor: deciding whether to try it. Questions: "What's the schedule? What does it cost? Is it for beginners?"
-- First screen: the next classes or the schedule, the intro offer if given, the booking action.
+- First screen: the next class (library helper), the intro offer if given, the booking action.
+- Needs from the client: the full class schedule (class, day, time). Ask for it if only opening hours are given.
 - Often useful: what a first class is like, coaches by name, membership prices.
 - Avoid: aggressive all-caps hype, stock fitness photos, fake "transformation" stats.
+
+## Florist, gift and delivery shop
+- Visitor: needs something today, on a phone. Questions: "Can you deliver today? What does it cost? Can I pick up?"
+- First screen: the same-day cutoff and the days it applies, starting prices, the order button.
+- Often useful: sympathy and event sections kept separate from everyday orders, delivery area, pickup details.
+- Avoid: photos that imply the wrong occasion (red roses beside sympathy), generic stock bouquets.
 
 ## Shop or retailer
 - Visitor: local, checking before a visit. Questions: "Do you have what I need? When are you open? Where do I park?"

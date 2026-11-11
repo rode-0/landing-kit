@@ -1,5 +1,6 @@
 /* Landing Page Kit: tested behaviors.
-   Copy only the blocks a page needs into one <script> at the end of <body>.
+   Copy only the blocks a page needs into one script tag at the end of the page body.
+   Copy the functions only; leave these comments out of the page.
    Put this in the head first: a script tag containing  document.documentElement.classList.add('js')
    These are behavior only. Layout and look always come from the page's own design. */
 
@@ -44,13 +45,37 @@ function lpkStatus(now, cfg) {
     var hrs = closed[key] ? [] : (cfg.hours[wd] || []);
     if (hrs.length) {
       var label = d === 1 ? 'tomorrow' : names[(idx + d) % 7];
+      if (d >= 7) label += ', ' + nd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
       return { open: false, text: fill(why ? (w.holiday || w.closed) : w.closed, { day: label, open: lpkClock(hrs[0][0]), why: why }) };
     }
   }
   return { open: false, text: '' };
 }
 // Use: var s = lpkStatus(new Date(), CFG); el.textContent = s.text; el.dataset.open = s.open;
+// Emergency or 24/7 phone lines: keep the regular hours in CFG and add the 24/7 line as fixed text next
+// to the status ("Emergency calls answered 24/7"), so the status never contradicts it.
 // Keep the plain written hours in the HTML too, so the page works without JavaScript.
+
+/* ---------- 1b. Next class (for class-based businesses: yoga, fitness, lessons) ----------
+   schedule = { tz:'America/Chicago', classes:[ {day:'mon', time:'06:15', name:'Gentle Flow'}, ... ] }
+   Returns 'Next class: Gentle Flow, today at 5:30pm' (or 'tomorrow at', or a weekday). */
+function lpkNextClass(now, sch) {
+  var days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'], names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var t = lpkLocal(now, sch.tz), idx = days.indexOf(t.wd);
+  for (var d = 0; d < 8; d++) {
+    var wd = days[(idx + d) % 7];
+    var todays = sch.classes.filter(function (c) { return c.day === wd; })
+      .map(function (c) { return { c: c, m: +c.time.slice(0, 2) * 60 + +c.time.slice(3, 5) }; })
+      .filter(function (x) { return d > 0 || x.m > t.mins; })
+      .sort(function (a, b) { return a.m - b.m; });
+    if (todays.length) {
+      var when = d === 0 ? 'today' : d === 1 ? 'tomorrow' : names[(idx + d) % 7];
+      var c = todays[0].c;
+      return 'Next class: ' + (c.name ? c.name + ', ' : '') + when + ' at ' + lpkClock(c.time);
+    }
+  }
+  return '';
+}
 
 /* ---------- 2. Notice bar that hides itself ----------
    <div class="notice" data-until="2026-11-28" data-tz="America/New_York">Closed Nov 26-27 for Thanksgiving.</div>
@@ -114,7 +139,7 @@ function lpkForm(id, fallbackText) {
       .then(function () { btn.disabled = false; });
   });
 }
-// Use: lpkForm('request', 'Please email hello@example.com or call (555) 010-0000.')
+// Use: lpkForm('request', 'Please email or call us instead.')  (put the real email and phone in the text)
 
 /* ---------- 6. One Copy button (use sparingly: the email address only) ----------
    <button type="button" data-copy="hello@business.com">Copy</button> */
@@ -136,4 +161,4 @@ function lpkCopy() {
    @media (min-width:760px){.mbar{display:none}}
    body{padding-bottom:64px} on phones so the bar never covers the footer. */
 
-if (typeof module !== 'undefined') module.exports = { lpkStatus: lpkStatus, lpkLocal: lpkLocal, lpkClock: lpkClock };
+if (typeof module !== 'undefined') module.exports = { lpkStatus: lpkStatus, lpkLocal: lpkLocal, lpkClock: lpkClock, lpkNextClass: lpkNextClass };

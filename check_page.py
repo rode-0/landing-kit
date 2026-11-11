@@ -108,11 +108,14 @@ for m in re.finditer(r"[A-Za-z,.:;]<a\b", src):
 # Contact
 for m in re.finditer(r'name="access_key"\s+value="([^"]*)"', src):
     k = m.group(1)
-    if not k or re.search(r"test|0000|your|xxxx|key_here", k, re.I): fail(f"Contact form key looks like a placeholder ({k[:12]}...). Ask for the real Web3Forms key or remove the form")
+    if not k or re.search(r"test|0000|your|xxxx|key_here|example|sample", k, re.I): fail(f"Contact form key looks like a placeholder ({k[:12]}...). Ask for the real Web3Forms key or remove the form")
 for a in [a for t, a in p.tags if t == "a"]:
     h = a.get("href", "")
     if h in ("#", "") : warn("A link has an empty href")
     if re.search(r"example\.com|[-/_.]example\b|[-/_]sample\b|your-?(link|booking|name)", h, re.I): fail(f"Placeholder link: {h}. Ask for the real one or leave it out")
+
+# Fictional phone numbers (555-0100 to 555-0199 are reserved for fiction)
+if re.search(r"555[-.\s)]*01\d\d", text): warn("The phone number is in the 555-01xx range, which is reserved for fiction. Confirm the real number")
 
 # Copy tells
 tells = ["Welcome to", "Elevate", "Unlock", "Seamless", "seamless", "Your trusted partner", "lorem ipsum", "Lorem ipsum",

@@ -14,7 +14,10 @@ thinking and behavior, never as a layout to copy.
 - If something essential is missing (what they do, how to reach them), ask up to 5 short questions in
   one message before building. If I say "build first", put those questions in your reply instead.
 - Placeholders: a form key or booking link that contains "test", "example", "sample", "your" or a run of
-  zeros is a placeholder. Leave that feature out and ask for the real one.
+  zeros is a placeholder. Leave that feature out and ask for the real one. A phone number in the
+  555-0100 to 555-0199 range is fictional: use it, but ask for the real number.
+- Customer quotes: use them only as written, with the name given. If the form doesn't say the customer
+  agreed to be quoted, use it and ask.
 - Customer questions the facts can't answer (a price, a wait time, what happens at a first visit): don't
   write around them. Leave them off the page, or point to the real action ("See open times on the booking
   page"), and list them under "Still waiting on" so I can ask the client.
@@ -34,7 +37,9 @@ Then build the page from the brief, not from a template. Choose only the section
 put them in the order they need them. Examples:
 - "Can I go there now?" → live open/closed status (in the business's time zone, US-style times like 2pm),
   what's available today, address with a map link. The status only knows the hours; if they close early
-  when sold out, say so in words next to it ("or until we sell out"). For businesses that come to you, use availability
+  when sold out, say so in words next to it ("or until we sell out"). Time promises like "order by 1pm
+  for same-day delivery" need the days they apply; if the form doesn't say, ask. For classes, show the
+  next class (library) and a real timetable from the schedule. For businesses that come to you, use availability
   wording ("Booking today until 5pm").
 - "Who should I hire?" → how pricing works (a real "from" price if possible), who does the work, first
   steps.
@@ -69,15 +74,31 @@ Rework it until it only makes sense for this business.
 - For the top of the page, use the photo that best answers the customer's question, or no photo if words
   answer it better. Keep the subject whole in the crop.
 - Check photos against the facts; the facts win over how a photo is labelled. Crop out other businesses'
-  signs, logos and addresses. If a photo contradicts the business (a different address on the sign, a spa
-  for a clinic, products they don't sell), leave it out, even on "build first", and say why. If no photo
+  signs, logos and addresses (including names reflected in mirrors). If a photo contradicts the business
+  (another business's name, a place that can't be theirs, a spa for a clinic, products they don't sell, a
+  product shot covered in a brand's logos), leave it out, even on "build first", and say why. If no photo
   shows the owner, the work or the business's own premises (a landmark or skyline doesn't count), design
-  with type and ask for real photos. Doubtful but not contradicting: use it modestly and ask.
+  with type and ask for real photos. Doubtful but not contradicting (a room whose style doesn't fit, flowers
+  growing in a field, a dish that isn't on the menu): use it small, with no caption that claims it, and ask.
 - Captions only when they add information the photo doesn't show. Never name a person unless told who it
   is, and never place a photo where it implies something untrue.
 - Light correction (exposure, color cast) is fine; filters are not. Real alt text on every image.
 
 ## 5. Design: a top independent studio, not a template
+**Balance three things: a logo, graphics and photos.** None of them should carry the page alone.
+- **Logo:** use the client's logo if given (embed it). If not, design a simple starter logo as inline SVG:
+  a wordmark in the display font, optionally with a small mark from the business's world or its
+  initials. Use it in the nav, the footer and as the favicon, and tell me it's a starter logo the client
+  can replace.
+- **Graphics:** give the site a small graphic language drawn from the business (a comb and razor line for a
+  barber, a wave line for a lakeside studio, a stem and leaf for a florist, a pipe bend for a plumber).
+  Simple vector line drawings in ONE consistent style and stroke, plus shapes, color fields or a subtle
+  CSS pattern. Use them 2 to 4 times: as section dividers, framing a photo, behind a price list, in the
+  first screen. Hand-drawn in SVG, original, never generic icon sets.
+- **Photos:** one ingredient, not the whole show. At most one large photo per screen; work photos into the
+  design (a color block or shape behind, an offset frame, a shaped crop, a caption set in the type)
+  instead of stacking plain rectangles. With weak or few photos, let the logo, graphics and type lead.
+
 - Pick one direction from the library (Warm editorial, Clean Swiss, Gallery, Bold local, Classic trust,
   Soft modern) and say in one sentence why it fits this customer. Don't default to a cream page with a
   big serif.
@@ -93,8 +114,8 @@ Rework it until it only makes sense for this business.
   the observer never runs. Nothing moves under prefers-reduced-motion. No parallax, bouncing or counters.
 - Client style requests ("more fun", "like a chalkboard") win over these rules; do them tastefully.
 
-**What makes a site look AI-made. Avoid:** icons in colored squares, checkmark chips or pill tags, small
-all-caps labels above every heading (one quiet label where it helps is fine), card grids, cartoon or blob art, emoji, gradient text, "Welcome to",
+**What makes a site look AI-made. Avoid:** generic icons in colored squares or icon sets, checkmark chips or pill tags, small
+all-caps labels above every heading (one quiet label where it helps is fine), card grids, cartoon or blob art (simple line drawings in the brand's own style are fine), emoji, gradient text, "Welcome to",
 "Elevate", "Seamless", "Trusted partner", centered everything, the same rounded corners and shadows on
 everything, decorative charts or diagrams (rulers, calendars, maps, bar strips) that don't answer a real
 question better than words, giant statistics used as decoration, every heading written as a question,
@@ -159,6 +180,8 @@ Booking link, if any:
 Services or products (one per line, with prices if you want them shown):
 Where you work / service area:
 Hours:
+Class schedule (class name, day and time), if you run classes:
+Delivery or service details (days, area, order cutoffs), if any:
 Why customers pick you (real reasons):
 Customer quotes (name and permission), if any:
 Phone:
