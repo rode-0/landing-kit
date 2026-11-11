@@ -59,6 +59,8 @@ jobs:
         if: ${{ !inputs.dry_run }}
         env:
           GH_TOKEN: ${{ github.token }}
+          NOTES: ${{ inputs.notes }}
+          VERSION: ${{ inputs.version }}
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
@@ -68,7 +70,7 @@ jobs:
           git push origin main
           git tag -a "v${{ inputs.version }}" -m "Landing Kit ${{ inputs.version }}"
           git push origin "v${{ inputs.version }}"
-          notes="${{ inputs.notes }}"
+          notes="$NOTES"
           [ -z "$notes" ] && notes="Landing Kit ${{ inputs.version }}. Download the ZIP below and follow sop/01-set-up.md."
           gh release create "v${{ inputs.version }}" "dist/landing-kit-${{ inputs.version }}.zip" \
             --title "Landing Kit ${{ inputs.version }}" --notes "$notes"
