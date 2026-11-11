@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixture Bakery</title>
+<meta name="description" content="A test page that should pass the checker.">
+<meta property="og:title" content="Fixture Bakery">
+<style>
+:root{--bg:#fff;--ink:#111}
+@media (prefers-color-scheme:dark){:root{--bg:#111;--ink:#eee}}
+body{background:var(--bg);color:var(--ink)}
+html.js .rv{opacity:0;transition:opacity .3s}
+html.js .rv.in{opacity:1}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transition:none}}
+</style>
+</head>
+<body>
+<h1 class="rv">Fixture Bakery</h1>
+<p>Open Wednesday to Sunday. Call <a href="tel:+12075550000">(207) 555-0000</a>.</p>
+<script>
+document.documentElement.classList.add('js');
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in')})});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+setTimeout(function(){document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')})},3000);
+</script>
+</body>
+</html>
