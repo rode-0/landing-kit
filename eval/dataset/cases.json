@@ -1,0 +1,122 @@
+[
+ {
+  "id": "groomer",
+  "form": "forms5/groomer.txt",
+  "photos": "photos/groomer/client",
+  "logo": null,
+  "channel": "form",
+  "rounds": [
+   "the hero should be the chocolate lab, he's her regular. and can the headline be more fun?",
+   "add that Senior and anxious dog care is $110. and put the request form higher up.",
+   "Dana wants the Instagram link more visible, and can the green be a bit warmer?"
+  ]
+ },
+ {
+  "id": "bookkeeping",
+  "form": "forms5/bookkeeping.txt",
+  "photos": "photos/bookkeeping/client",
+  "logo": null,
+  "channel": "email",
+  "rounds": [
+   "the skyline looks like a bank ad, use it smaller or drop it. main button should be 'Book a free 20-minute call'.",
+   "pricing: say monthly bookkeeping starts at $350/month. add that we reply within one business day.",
+   "can Priya's credentials be more visible near the top?"
+  ]
+ },
+ {
+  "id": "bakery",
+  "form": "forms5/bakery.txt",
+  "photos": "photos/bakery/client",
+  "logo": null,
+  "channel": "form",
+  "rounds": [
+   "love it. the croissant photo should be bigger. can the menu feel more like a chalkboard?",
+   "this week's Friday loaf is a cranberry walnut. add a line for it. and we now open at 7:30 on Sundays.",
+   "make the address easier to find on a phone."
+  ]
+ },
+ {
+  "id": "architect",
+  "form": "forms5/architect.txt",
+  "photos": "photos/architect/client",
+  "logo": null,
+  "channel": "email",
+  "rounds": [
+   "too much text, cut it by half. we want visitors to feel the photos first.",
+   "add our fees: feasibility studies start at $2,500. projects typically take 9 to 18 months.",
+   "can the contact part feel less formal?"
+  ]
+ },
+ {
+  "id": "physio",
+  "form": "forms5/physio.txt",
+  "photos": "photos/physio/client",
+  "logo": null,
+  "channel": "form",
+  "rounds": [
+   "the massage photo isn't really us, remove it. make the booking button say 'Book an evaluation'.",
+   "add that first visits are usually available within 3 days. and add Aetna to the insurance list.",
+   "Sam wants his credentials shown with the quote."
+  ]
+ },
+ {
+  "id": "barber",
+  "form": "forms8/barber.txt",
+  "photos": "photos6/barber/client",
+  "logo": "logos/barber-logo.svg",
+  "channel": "form",
+  "rounds": [
+   "looks sharp. can the prices be easier to find on a phone? put Jess's name next to Marco's.",
+   "we're closed the week of Thanksgiving (Nov 24-28). add a notice.",
+   "can the logo be a bit bigger in the header?"
+  ]
+ },
+ {
+  "id": "plumber",
+  "form": "forms6/plumber.txt",
+  "photos": "photos6/plumber/client",
+  "logo": null,
+  "channel": "email",
+  "rounds": [
+   "make the emergency number way bigger, people panic. we now cover Marana too.",
+   "add Se habla espa\u00f1ol. I speak Spanish.",
+   "can you add that we offer free estimates for water heater replacements?"
+  ]
+ },
+ {
+  "id": "yoga",
+  "form": "forms8/yoga.txt",
+  "photos": "photos6/yoga/client",
+  "logo": "logos/yoga-logo.jpg",
+  "channel": "form",
+  "rounds": [
+   "love the calm. add the weekly schedule as a proper timetable: Gentle Flow Mon/Wed 6:15am, Slow Flow Tue/Thu 12pm, Strong Flow Mon-Fri 5:30pm, Yin Sun 9am, Prenatal Sat 10am, Slow Flow Sat 8am.",
+   "the first class free offer should be the first thing people see.",
+   "add a line that we have a few spots for kids' yoga in summer (ages 8-12)."
+  ]
+ },
+ {
+  "id": "restaurant",
+  "form": "forms6/restaurant.txt",
+  "photos": "photos6/restaurant/client",
+  "logo": null,
+  "channel": "email",
+  "rounds": [
+   "Gina says the menu is the most important part. and the font feels a bit too fancy.",
+   "kids eat half price on Sundays. add that.",
+   "can the private room part mention it has its own entrance?"
+  ]
+ },
+ {
+  "id": "florist",
+  "form": "forms8/florist.txt",
+  "photos": "photos6/florist/client",
+  "logo": "logos/florist-logo.png",
+  "channel": "form",
+  "rounds": [
+   "so pretty! can the same-day cutoff be more obvious? same-day delivery runs Tuesday to Saturday.",
+   "we'd like the wedding part to feel more special, its own section with more room.",
+   "add our Mother's Day pre-order notice: order by May 8, ends 2027-05-09."
+  ]
+ }
+]
