@@ -38,3 +38,31 @@ assert.strictEqual(lpkNextClass(new Date('2026-11-16T15:00:00Z'), sch), 'Next cl
 assert.strictEqual(lpkNextClass(new Date('2026-11-17T01:00:00Z'), sch), 'Next class: Prenatal, Saturday at 8am');  // Mon 7pm CT
 assert.strictEqual(lpkNextClass(new Date('2026-11-21T20:00:00Z'), sch), 'Next class: Gentle Flow, Monday at 6:15am'); // Sat 2pm CT
 console.log('long closure + next class: passed');
+
+// Hours that run past midnight (Fri and Sat 6pm-2am, Thu 5pm-midnight), New York
+const late = { tz: 'America/New_York', hours: { mon: [], tue: [], wed: [], thu: [['17:00', '00:00']], fri: [['18:00', '02:00']], sat: [['18:00', '02:00']], sun: [] },
+  words: { open: 'Open now until {close}', soon: 'Opens at {open} today', closed: 'Closed now. Back {day} at {open}' } };
+assert.strictEqual(lpkStatus(new Date('2026-11-20T22:00:00Z'), late).text, 'Opens at 6pm today');        // Fri 5pm
+assert.strictEqual(lpkStatus(new Date('2026-11-21T04:00:00Z'), late).text, 'Open now until 2am');        // Fri 11pm
+assert.strictEqual(lpkStatus(new Date('2026-11-21T06:00:00Z'), late).text, 'Open now until 2am');        // Sat 1am (Friday night)
+assert.strictEqual(lpkStatus(new Date('2026-11-21T08:00:00Z'), late).text, 'Opens at 6pm today');        // Sat 3am
+assert.strictEqual(lpkStatus(new Date('2026-11-22T06:00:00Z'), late).text, 'Open now until 2am');        // Sun 1am (Saturday night)
+assert.strictEqual(lpkStatus(new Date('2026-11-22T08:00:00Z'), late).text, 'Closed now. Back Thursday at 5pm'); // Sun 3am
+assert.strictEqual(lpkStatus(new Date('2026-11-20T04:30:00Z'), late).text, 'Open now until 12am');       // Thu 11:30pm
+assert.strictEqual(lpkStatus(new Date('2026-11-20T05:30:00Z'), late).text, 'Opens at 6pm today');        // Fri 12:30am, Thu closed at midnight
+
+// Copy button without a clipboard API: falls back to a hidden text box, and to showing the address
+const { lpkCopy } = require('../claude/library/behaviors.js');
+function copyWith(execResult) {
+  let handler; const btn = { dataset: { copy: 'hello@shop.com' }, textContent: 'Copy', addEventListener: (e, h) => { handler = h; } };
+  global.window = { isSecureContext: false }; global.navigator = {};
+  global.document = { querySelectorAll: () => [btn], createElement: () => ({ setAttribute() {}, style: {}, select() {} }),
+    body: { appendChild() {}, removeChild() {} }, execCommand: () => { if (execResult === 'throw') throw new Error('blocked'); return execResult; } };
+  lpkCopy(); handler(); return btn.textContent;
+}
+const realTimeout = global.setTimeout; global.setTimeout = () => 0;
+assert.strictEqual(copyWith(true), 'Copied');
+assert.strictEqual(copyWith(false), 'hello@shop.com');
+assert.strictEqual(copyWith('throw'), 'hello@shop.com');
+global.setTimeout = realTimeout;
+console.log('overnight hours and copy fallback: ok');

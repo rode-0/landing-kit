@@ -9,6 +9,8 @@
      tz: 'America/New_York',
      hours: { mon:[], tue:[], wed:[['07:00','14:00']], thu:[['07:00','14:00']], fri:[['07:00','14:00']],
               sat:[['07:00','14:00']], sun:[['07:00','14:00']] },     // 24h strings; [] = closed
+     // A range that ends after midnight is written as it reads: fri:[['18:00','02:00']]. Closing at
+     // midnight is '00:00'. The early-morning part counts as the night before.
      closed: { '2026-11-26':'Thanksgiving', '2026-11-27':'Thanksgiving' }, // optional
      words: { open:'Open now until {close}', soon:'Opens at {open} today',
               closed:'Closed now. Back {day} at {open}', holiday:'Closed today for {why}. Back {day} at {open}' }
@@ -33,9 +35,16 @@ function lpkStatus(now, cfg) {
   var w = cfg.words, fill = function (s, v) { return s.replace(/\{(\w+)\}/g, function (_, k) { return v[k] || ''; }); };
   var closed = cfg.closed || {}, why = closed[t.date];
   var today = why ? [] : (cfg.hours[t.wd] || []);
+  // last night's hours that run past midnight
+  var yKey = new Date(new Date(t.date + 'T12:00:00Z').getTime() - 864e5).toISOString().slice(0, 10);
+  var yest = closed[yKey] ? [] : (cfg.hours[days[(days.indexOf(t.wd) + 6) % 7]] || []);
+  for (var j = 0; j < yest.length; j++) {
+    var ya = toMin(yest[j][0]), yb = toMin(yest[j][1]);
+    if (yb <= ya && t.mins < yb) return { open: true, text: fill(w.open, { close: lpkClock(yest[j][1]) }) };
+  }
   for (var i = 0; i < today.length; i++) {
     var a = toMin(today[i][0]), b = toMin(today[i][1]);
-    if (t.mins >= a && t.mins < b) return { open: true, text: fill(w.open, { close: lpkClock(today[i][1]) }) };
+    if (b <= a ? t.mins >= a : (t.mins >= a && t.mins < b)) return { open: true, text: fill(w.open, { close: lpkClock(today[i][1]) }) };
     if (t.mins < a) return { open: false, text: fill(w.soon || w.closed, { open: lpkClock(today[i][0]), day: 'today' }) };
   }
   // find the next open day (skips closed dates), up to 14 days ahead
@@ -147,9 +156,15 @@ function lpkForm(id, fallbackText) {
 function lpkCopy() {
   document.querySelectorAll('[data-copy]').forEach(function (b) {
     b.addEventListener('click', function () {
-      var v = b.dataset.copy, done = function (ok) { b.textContent = ok ? 'Copied' : 'Select and copy'; setTimeout(function () { b.textContent = 'Copy'; }, 1800); };
-      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(v).then(function () { done(true); }, function () { done(false); });
-      else done(false);
+      var v = b.dataset.copy, label = b.textContent;
+      var done = function (ok) { b.textContent = ok ? 'Copied' : v; setTimeout(function () { b.textContent = label; }, ok ? 1800 : 6000); };
+      var old = function () {  // no clipboard API (older browsers, in-app browsers): copy through a hidden text box
+        try { var t = document.createElement('textarea'); t.value = v; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+              document.body.appendChild(t); t.select(); var ok = document.execCommand('copy'); document.body.removeChild(t); done(!!ok); }
+        catch (e) { done(false); }  // last resort: the button shows the address itself so it can be read or typed
+      };
+      try { if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(v).then(function () { done(true); }, old); else old(); }
+      catch (e) { old(); }
     });
   });
 }
@@ -162,4 +177,4 @@ function lpkCopy() {
    @media (min-width:760px){.mbar{display:none}}
    body{padding-bottom:64px} on phones so the bar never covers the footer. */
 
-if (typeof module !== 'undefined') module.exports = { lpkStatus: lpkStatus, lpkLocal: lpkLocal, lpkClock: lpkClock, lpkNextClass: lpkNextClass };
+if (typeof module !== 'undefined') module.exports = { lpkStatus: lpkStatus, lpkLocal: lpkLocal, lpkClock: lpkClock, lpkNextClass: lpkNextClass, lpkCopy: lpkCopy };
