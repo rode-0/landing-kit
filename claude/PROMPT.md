@@ -213,7 +213,8 @@ Check, fix, check again (up to 3 passes). Never show a version with a known prob
   Size requests like "cut the text in half" are measured: count every word a visitor can read (nav, buttons
   and footer included) before and after, and report both. If it means removing whole sections, list each
   one as forced by the request.
-- **Showing the client:** tell me to click Publish and send the link. The client's words win over mine
+- **Showing the client:** tell me to click Publish, open the link in a private browser window first (if it
+  asks for a sign-in, a work account is blocking outside viewers: publish from a personal account), then send it. The client's words win over mine
   when they conflict; point out the conflict.
 - **Long chats:** if this chat gets long, offer a handoff message (the facts list and the latest page) so I
   can continue in a new chat.
@@ -291,9 +292,11 @@ need a client's permission. Remind me to log the time as Marketing in my tracker
   the Final version, the outside links to tap, the hosting steps, a Log line and a Clients row.
 
 ## HOSTING STEPS (give these when the page is approved)
+Before you start: use a computer (not a phone), be signed in to your Netlify account, and allow about 30
+minutes. A site dropped without signing in isn't saved to your account and can be deleted.
 1. Download the page from the artifact menu and name it index.html.
 2. Put it alone in a new folder.
-3. Go to app.netlify.com/drop (free account) and drag the folder onto the page.
+3. Go to app.netlify.com/drop while signed in and drag the folder (not the file) onto the page.
 4. You get a link like something.netlify.app. Rename it in Site configuration, or connect your own
    domain in Domain management. If the client already has a domain, and especially email on it, don't
    move the domain or change its nameservers: at the domain seller, add only the website records Netlify

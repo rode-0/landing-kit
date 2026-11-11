@@ -71,4 +71,6 @@ Use the pricing page in `tools/pricing` to set your numbers.
 - **Photos or the logo don't show.** Tell Claude "the photos aren't showing" and it will fix it.
 - **Something looks wrong on a phone.** Attach a screenshot in the chat and say what's wrong.
 - **All my clients' sites say "Site not available".** Your Netlify credits ran out. Upgrade your plan or turn on auto recharge in Netlify's billing settings, or wait for next month.
+- **The client can't open the Claude link (it asks them to sign in).** You're on a work or company Claude account. Publish from a personal account, or ask your admin to allow sharing outside the organization.
+- **I can't get the site online.** Launch needs a computer and you signed in to Netlify. See the checklist and "If you get stuck" in [step 6](sop/06-launch.md).
 - **A pasted tracker line landed in one cell.** Copy it from Claude's box (it uses tabs), click the first empty cell in column A, and paste again.
