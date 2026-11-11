@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Website Questions</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<style>
+/* Layout: one narrow column of questions grouped in three parts; a sticky bar holds the copy action */
+:root{--bg:#f6f4ef;--surface:#fffdf9;--fg:#1d1b18;--muted:#625d55;--line:#d9d3c8;--accent:#2f5d50;--on-accent:#fff;--ok:#2f6b47;
+--head:"Schibsted Grotesk",system-ui,sans-serif;--body:"Literata",Georgia,serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151412;--surface:#1d1b18;--fg:#ece7de;--muted:#a49d92;--line:#35312b;--accent:#8cc7b3;--on-accent:#10201b;--ok:#8fd0a5;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151412;--surface:#1d1b18;--fg:#ece7de;--muted:#a49d92;--line:#35312b;--accent:#8cc7b3;--on-accent:#10201b;--ok:#8fd0a5;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:17px/1.6 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:640px;margin:0 auto;padding-block:40px 120px;display:grid;gap:40px}
+h1,h2,label,button,.hint{font-family:var(--head)}
+h1{font-size:clamp(32px,8vw,44px);line-height:1.05;margin:0;text-wrap:balance}
+.lede{color:var(--muted);margin:12px 0 0;max-width:52ch}
+h2{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 4px;font-weight:600}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:22px}
+.part{border-top:2px solid var(--fg);padding-top:18px}
+.q{display:grid;gap:6px}
+label{font-weight:600;font-size:17px;line-height:1.3}
+.hint{font-size:14px;color:var(--muted);font-weight:500;margin-top:-2px}
+input,textarea{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;width:100%;box-sizing:border-box;min-height:48px}
+textarea{min-height:96px;resize:vertical}
+input:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.photos{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px}
+.photos p{margin:0 0 8px}.photos ul{margin:0;padding-left:20px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bar .in{max-width:640px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+button{font-size:16px;font-weight:600;border:0;border-radius:6px;padding:0 20px;min-height:48px;cursor:pointer;background:var(--accent);color:var(--on-accent)}
+#status{font-family:var(--head);font-size:14px;color:var(--muted)}
+#status.ok{color:var(--ok)}
+#out{display:none}
+.for{font-family:var(--head);color:var(--accent);font-weight:600;margin:8px 0 0}
+.tip{font-size:15px;color:var(--muted);margin:0}
+.chk{display:flex;gap:12px;align-items:center;min-height:44px;font-weight:500;font-size:16px}
+.chk input{width:22px;height:22px;min-height:0;accent-color:var(--accent)}
+#out.show{display:block;font:13px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>A few questions for your website</h1>
+<p class="for" id="for" hidden></p>
+<p class="lede">Answer in your own words. Short is fine, and you can skip anything that doesn't apply. When you're done, tap "Copy my answers" and paste them into a text or email back to me. Your answers stay on this phone until you send them.</p>
+</header>
+
+<fieldset class="part"><h2>Your business</h2>
+<div class="q"><label for="name">Business name</label><input id="name" data-k="Business name"></div>
+<div class="q"><label for="what">What do you do, in one sentence?</label><input id="what" data-k="What you do, in one sentence"></div>
+<div class="q"><label for="who">Who are your customers?</label><span class="hint">For example: busy dog owners in Asheville, small restaurant owners</span><textarea id="who" data-k="Who your customers are"></textarea></div>
+<div class="q"><label for="ask">What do customers usually ask before they buy?</label><span class="hint">The questions you hear on the phone again and again</span><textarea id="ask" data-k="What customers usually ask before they buy"></textarea></div>
+<div class="q"><label for="act">What's the one thing you want visitors to do?</label><span class="hint">Call, text, book online, order, visit, ask for a quote</span><input id="act" data-k="The one thing visitors should do"></div>
+<div class="q"><label for="svc">Your services or products</label><span class="hint">One per line, with a short description. Add prices if you want them shown.</span><textarea id="svc" data-k="Services or products"></textarea></div>
+<div class="q"><label for="why">Why do customers pick you?</label><span class="hint">Real reasons: years in business, licences, how you work</span><textarea id="why" data-k="Why customers pick you"></textarea></div>
+<div class="q"><label for="quotes">Anything nice a customer said?</label><span class="hint">Their words and first name, only with their OK</span><textarea id="quotes" data-k="Real customer quotes (with first name)"></textarea></div>
+</fieldset>
+
+<fieldset class="part"><h2>Where and when</h2>
+<div class="q"><label for="area">Where do you work?</label><span class="hint">Town or area you serve</span><input id="area" data-k="Where you work / service area"></div>
+<div class="q"><label for="hours">Hours</label><input id="hours" data-k="Hours"></div>
+<div class="q"><label for="addr">Address</label><span class="hint">Or write "don't show"</span><input id="addr" data-k="Address"></div>
+<div class="q"><label for="phone">Phone</label><input id="phone" type="tel" data-k="Phone"></div>
+<div class="q"><label for="email">Email</label><input id="email" type="email" data-k="Email"></div>
+<div class="q"><label for="book">Online booking link, if you have one</label><span class="hint">Square, Calendly, OpenTable, or similar</span><input id="book" type="url" data-k="Booking link"></div>
+<div class="q"><label for="social">Instagram, Facebook or other links</label><input id="social" data-k="Social links"></div>
+<div class="q"><label for="notice">Any closure or notice coming up?</label><span class="hint">For example: closed Nov 27-28 for Thanksgiving</span><input id="notice" data-k="Notice and the date it ends"></div>
+</fieldset>
+
+<fieldset class="part"><h2>Look and feel</h2>
+<div class="q"><label for="feel">Describe the feel in three words</label><span class="hint">For example: calm, clean, local</span><input id="feel" data-k="Feel"></div>
+<div class="q"><label for="like">Websites you like, and your competitors</label><span class="hint">Links are perfect</span><textarea id="like" data-k="Sites you like, and competitors"></textarea></div>
+<div class="q"><label for="brand">Logo or brand colors?</label><span class="hint">Say yes and send the logo with your photos</span><input id="brand" data-k="Brand colors or logo"></div>
+<div class="q"><label for="req">If people can send you a request, what should it include?</label><span class="hint">For example: dog breed and size, number of loaves, project address</span><input id="req" data-k="Request fields"></div>
+<div class="q"><label for="inbox">Which email should receive website messages?</label><input id="inbox" type="email" data-k="Email for website messages"></div>
+</fieldset>
+
+<section class="photos" aria-labelledby="ph">
+<h2 id="ph">Photos</h2>
+<p>Send 4 to 10 of your own photos by text or email. Phone photos are fine. The most useful ones:</p>
+<p class="hint">Tick what you've sent:</p>
+<label class="chk"><input type="checkbox" class="ph" value="your work up close" id="ph1"> Your work, up close</label>
+<label class="chk"><input type="checkbox" class="ph" value="your place" id="ph2"> Your place: shop, van, office, room</label>
+<label class="chk"><input type="checkbox" class="ph" value="you or your team at work" id="ph3"> You or your team at work</label>
+<label class="chk"><input type="checkbox" class="ph" value="a detail only your business has" id="ph4"> A detail only your business has</label>
+<label class="chk"><input type="checkbox" class="ph" value="logo" id="ph5"> Your logo</label>
+</section>
+
+<p class="tip">If the Copy button doesn't work, you may have opened this link inside Instagram or Facebook. Tap the menu and choose "Open in browser" (Safari or Chrome), then try again.</p>
+<pre id="out" aria-live="polite"></pre>
+</main>
+
+<div class="bar"><div class="in"><button id="copy" type="button">Copy my answers</button><span id="status" role="status">Nothing to copy yet</span></div></div>
+
+<script>
+(function(){
+  var fields=[].slice.call(document.querySelectorAll('[data-k]'));
+  var who=new URLSearchParams(location.search).get('for');
+  if(who){var f=document.getElementById('for');f.textContent='For '+who.slice(0,60);f.hidden=false;}
+  var KEY='website-intake-v1', status=document.getElementById('status'), out=document.getElementById('out');
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'{}');fields.forEach(function(f){if(saved[f.id])f.value=saved[f.id]})}catch(e){}
+  function text(){
+    var lines=['BUSINESS FORM'];
+    fields.forEach(function(f){var v=f.value.trim();if(v)lines.push(f.dataset.k+': '+v.replace(/\n+/g,'\n  '))});
+    var ph=[].slice.call(document.querySelectorAll('.ph:checked')).map(function(c){return c.value});
+    if(ph.length) lines.push('Photos sent: '+ph.join(', '));
+    return lines.length>1?lines.join('\n'):'';
+  }
+  function update(){
+    var n=fields.filter(function(f){return f.value.trim()}).length;
+    status.className=''; status.textContent=n?n+' of '+fields.length+' answered':'Nothing to copy yet';
+    try{var o={};fields.forEach(function(f){o[f.id]=f.value});localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}
+  }
+  fields.forEach(function(f){f.addEventListener('input',update)}); update();
+  document.getElementById('copy').addEventListener('click',function(){
+    var t=text(); if(!t){status.textContent='Answer at least one question first';return}
+    out.textContent=t; out.classList.add('show');
+    navigator.clipboard.writeText(t).then(function(){status.className='ok';status.textContent='Copied. Paste it into a text or email.'},
+      function(){var r=document.createRange();r.selectNodeContents(out);var s=getSelection();s.removeAllRanges();s.addRange(r);
+        status.textContent='Selected below. Copy it, then paste into a text or email.'});
+  });
+})();
+</script>
+
+</body>
+</html>
