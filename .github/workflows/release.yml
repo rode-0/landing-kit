@@ -40,12 +40,14 @@ jobs:
         with:
           python-version: "3.12"
       - name: Run all checks
-        run: ./tests/run_tests.sh
+        run: |
+          pip install openpyxl==3.1.5
+          ./tests/run_tests.sh
       - name: Build the user ZIP
         run: |
           name="landing-kit-${{ inputs.version }}"
           mkdir -p "dist/$name"
-          cp -r README.md sop claude tools templates examples "dist/$name/"
+          cp -r README.md sop claude tools templates examples extras "dist/$name/"
           [ -d eval ] && mkdir -p "dist/$name/eval" && cp eval/README.md eval/results.md "dist/$name/eval/" 2>/dev/null || true
           (cd dist && zip -qr "$name.zip" "$name")
           ls -la dist
