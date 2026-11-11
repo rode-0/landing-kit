@@ -1,5 +1,6 @@
 """Photo and logo helpers for building a page (Python + Pillow).
 
+    import sys; sys.path.insert(0, "/path/to/the/folder/with/photo_tools.py")  # needed with python -I
     from photo_tools import data_uri, crop_ratio, remove_white_bg
     hero = data_uri(crop_ratio("photo1.jpg", 4, 5), width=1600)        # JPEG data URI, quality 75
     logo = data_uri(remove_white_bg("logo.jpg"), fmt="PNG")              # transparent PNG data URI

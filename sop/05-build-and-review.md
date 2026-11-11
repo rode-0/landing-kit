@@ -1,6 +1,6 @@
 # 5. Build and review
 
-1. **Start a new chat** in your Websites Project (Opus 5.5 or newer). Paste the client's answers and attach their logo and photos. If Gmail is connected, add: "Check my emails with [client email] too."
+1. **Start a new chat** in your Websites Project (Opus 5.5 or newer). Paste the client's answers and attach their logo and photos. Add a line with your extra round price (for example "Price per extra round: $60"). If Gmail is connected, add: "Check my emails with [client email] too."
 2. **Version 1.** Claude writes a short brief about the client's customers, builds the page, checks it, and shows it to you. Want options first? Say "show me concepts" for three quick layout ideas.
 3. **Show the client.** Click **Publish** on the page and send the link (email 3 in `templates/emails.md`).
 4. **Phone check.** Open the published link on your phone and send Claude 3 screenshots (top, middle, contact or form). Claude can't see a real phone, so it checks your screenshots and fixes what it sees.
