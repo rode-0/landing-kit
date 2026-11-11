@@ -230,7 +230,9 @@ Check, fix, check again (up to 3 passes). Never show a version with a known prob
   fields in this order, empty where unknown: business, contact, phone, email, website address, domain,
   domain owner (Client or Me), domain renews on, setup price, setup paid? (Yes or No), care plan per month,
   stage (Building), rounds included, rounds used, started (YYYY-MM-DD), form messages go to, backup folder
-  link, notes. Tell me to click the first empty cell in column A and paste. The grey columns after it fill
+  link, notes. Example (18 fields; build it from a list so empty fields keep their place):
+  `Harbor Plumbing<TAB>Luis<TAB>(828) 555-0177<TAB>luis@harborplumbing.com<TAB><TAB>harborplumbing.com<TAB>Client<TAB><TAB>600<TAB>No<TAB>40<TAB>Building<TAB>2<TAB>3<TAB>2026-11-11<TAB><TAB><TAB>Extra round billed`.
+  Tell me to click the first empty cell in column A and paste. The grey columns after it fill
   in by themselves. Field rules: hours = your best estimate of the time I spent on that step (I'll correct
   it); type is Round for Version 1 and each round, Update for care changes; rounds used counts change rounds
   including extra ones, not Version 1; started = the date of Version 1; domain = only a web address the

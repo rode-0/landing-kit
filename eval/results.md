@@ -70,3 +70,70 @@ Every run reported where the instructions slowed it down. Grouped by how many of
 | Gmail section asks for email dates the inputs didn't have | 5 | Cite date and subject when available, otherwise sender and a short quote |
 | Rules spread across a long prompt; re-reading before every reply | 2 | Added a short reply checklist at the end of the prompt |
 | Smaller conflicts: question headings for clinics, "cut it in half" with no measure, a newer partial timetable, what a notice's end date means, invented dropdown price bands, a domain the form never asked for | 1 each | Each now has a one-line rule, and the form asks for the domain |
+
+## Re-run on the fix release (candidate fcf2267, 2026-11-11)
+
+Same 10 cases, run by Claude Code agents (not a claude.ai Project), with round 3 set past the 2 included rounds so the
+extra-round stop is tested. Human minutes are not measured here; the estimates above still apply.
+
+| Check | Result |
+|---|---|
+| Checker on every version | 50/50 PASS (each with 1 warning: the fictional 555-01xx phone number) |
+| Requested changes made | 45/45 |
+| Round 3 stopped for the client's OK, with an extra-round email draft | 10/10 and 10/10 |
+| Round 3 done after "go ahead" | 10/10 |
+| Log lines tab-separated; Clients row has exactly 18 fields | 10/10; 10/10 |
+| Outside links listed for tapping at approval | 10/10 |
+| Phone screenshots requested | 10/10 |
+| Claude working time per site (lower bound for claude.ai) | 4.2 minutes on average |
+| Tokens per site | about 134k |
+
+| Business | V1 | R1 | R2 | R3 stop | R3 after OK | Final | Total min | Tokens |
+|---|---|---|---|---|---|---|---|---|
+| groomer | 3.1 | 0.3 | 0.3 | 0.1 | 0.5 | 0.3 | 4.5 | 141k |
+| bookkeeping | 3.0 | 0.4 | 0.6 | 0.1 | 0.4 | 0.3 | 4.8 | 138k |
+| bakery | 2.4 | 0.5 | 0.4 | 0.1 | 0.3 | 0.3 | 4.0 | 126k |
+| architect | 2.2 | 0.7 | 0.3 | 0.1 | 0.4 | 0.3 | 3.9 | 135k |
+| physio | 2.4 | 0.2 | 0.3 | 0.1 | 0.3 | 0.3 | 3.6 | 135k |
+| barber | 2.5 | 0.4 | 0.4 | 0.1 | 0.2 | 0.3 | 3.9 | 124k |
+| plumber | 2.0 | 0.6 | 0.2 | 0.1 | 0.2 | 0.3 | 3.6 | 134k |
+| yoga | 2.7 | 0.6 | 0.3 | 0.1 | 0.2 | 0.4 | 4.3 | 133k |
+| restaurant | 2.7 | 0.6 | 0.2 | 0.1 | 0.2 | 0.4 | 4.1 | 138k |
+| florist | 3.0 | 0.7 | 0.7 | 0.1 | 0.3 | 0.6 | 5.4 | 134k |
+
+**Rendered check** (headless Chromium at 1366px and 375px, on the final pages): no script errors; no small tap
+targets; scroll reveals all appear with normal scrolling. One defect: the barber page scrolled sideways at 375px
+(a decorative drawing 18px past the edge). The prompt now tells Claude to clip off-edge graphics.
+
+**What Claude found hard to understand** (every run reported its own list; most common first):
+- Tracker fields (hours, rounds used, started, domain, Log line on the stop reply): 13 mentions
+- Approval reply when no phone screenshots have arrived (hold back or not): 10 mentions
+- No extra-round price on the form for email 5: 9 mentions
+- Doubtful photo rules (placement, premises that can't match, brand marks): 9 mentions
+- Other (half-text counts, button labels, Gmail drafts per round, same-day cutoff days): 9 mentions
+- Whether a map link built from the address counts as a guessed link: 3 mentions
+
+All of these were clarified in PROMPT.md (commit bef1b3d), and 3 cases were re-run on that version to confirm.
+
+### Confirmation on the clarified prompt (bef1b3d, 3 cases: plumber, barber, bakery)
+
+| Check | Result |
+|---|---|
+| Checker on every version | 15/15 PASS (1 warning each: the 555-01xx number) |
+| Requested changes made | 12/12 |
+| Round 3 stopped, email drafted with the extra-round price filled in | 3/3 |
+| Round 3 done after "go ahead"; tab-separated Log lines; 18-field Clients row | 3/3; 3/3; 3/3 |
+| Outside links listed; phone screenshots requested | 3/3; 3/3 |
+| Barber page width at 320, 375 and 414px | fits (no sideways scroll) |
+
+The approval and extra-round price confusion from the first re-run didn't come up again. One run first wrote a
+16-field Clients row, so the prompt now shows a full 18-field example (checked by `tests/test_tracker.py`; it
+was added after this confirmation run).
+
+**Known items for the next version** (judgment calls the confirmation runs still mentioned): small maker's marks
+on tools in photos; a contact-name fallback when the form has none; whether to draft client emails each round
+without Gmail; where "Checks: passed" goes relative to the tracker lines; weekly content that goes out of date;
+partly answered customer questions.
+
+**Not tested here:** a real claude.ai Project, real phone screenshots, Netlify deploys, Web3Forms delivery,
+Google Sheets import, and a real non-technical person. The first user rehearsal is planned (`eval/user-test`).
