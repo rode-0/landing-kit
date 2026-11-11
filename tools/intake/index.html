@@ -74,6 +74,15 @@ button{font-size:16px;font-weight:600;border:0;border-radius:6px;padding:0 20px;
 <div class="q"><label for="notice">Any closure or notice coming up?</label><span class="hint">For example: closed Nov 27-28 for Thanksgiving</span><input id="notice" data-k="Notice and the date it ends"></div>
 </fieldset>
 
+<fieldset class="part"><h2>What you already have</h2>
+<p class="hint">So nothing that already works gets broken. Never send passwords here; we'll ask for an invite if we need access.</p>
+<div class="q"><label for="cur">Your current website, if any</label><span class="hint">The link, and who can log in to change it</span><input id="cur" data-k="Current website, if any (and who can log in to it)"></div>
+<div class="q"><label for="reg">Where is your web address registered?</label><span class="hint">For example GoDaddy, Squarespace, Google. And who has the login</span><input id="reg" data-k="Where the domain is registered, and who has the login"></div>
+<div class="q"><label for="dmail">Do you have email on that web address?</label><span class="hint">For example you@yourbusiness.com. It will keep working.</span><input id="dmail" data-k="Email on that domain, if any"></div>
+<div class="q"><label for="tools">Ordering, store or payment tools you already use</label><span class="hint">Links to your online store, ordering page, gift cards</span><textarea id="tools" data-k="Booking, ordering, store or payment tools you already use (links)"></textarea></div>
+<div class="q"><label for="gbp">Your Google Business Profile link, if you have one</label><span class="hint">The listing that shows on Google Maps</span><input id="gbp" type="url" data-k="Google Business Profile link"></div>
+</fieldset>
+
 <fieldset class="part"><h2>Look and feel</h2>
 <div class="q"><label for="feel">Describe the feel in three words</label><span class="hint">For example: calm, clean, local</span><input id="feel" data-k="Feel"></div>
 <div class="q"><label for="like">Websites you like, and your competitors</label><span class="hint">Links are perfect</span><textarea id="like" data-k="Sites you like, and competitors"></textarea></div>
@@ -122,9 +131,9 @@ button{font-size:16px;font-weight:600;border:0;border-radius:6px;padding:0 20px;
   document.getElementById('copy').addEventListener('click',function(){
     var t=text(); if(!t){status.textContent='Answer at least one question first';return}
     out.textContent=t; out.classList.add('show');
-    navigator.clipboard.writeText(t).then(function(){status.className='ok';status.textContent='Copied. Paste it into a text or email.'},
-      function(){var r=document.createRange();r.selectNodeContents(out);var s=getSelection();s.removeAllRanges();s.addRange(r);
-        status.textContent='Selected below. Copy it, then paste into a text or email.'});
+    var sel=function(){try{var r=document.createRange();r.selectNodeContents(out);var s=getSelection();s.removeAllRanges();s.addRange(r)}catch(e){}
+        status.className='';status.textContent='Your answers are below. Press and hold to copy them, then paste into a text or email.'};
+    try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){status.className='ok';status.textContent='Copied. Paste it into a text or email.'},sel)}else{sel()}}catch(e){sel()}
   });
 })();
 </script>

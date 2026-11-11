@@ -40,7 +40,7 @@ ul{margin:8px 0 0;padding-left:20px}
 <main>
 <header>
 <h1>What to charge for a website</h1>
-<p class="lede">Fill in your own numbers. The page works out what each site costs you, what you actually earn per hour, and a price to quote. Nothing you type leaves this page.</p>
+<p class="lede">Fill in your own numbers. The page works out what each site costs you, what you earn per hour once selling and admin time count, and a price to quote. Nothing you type leaves this page.</p>
 </header>
 
 <section aria-labelledby="h-costs">
@@ -60,9 +60,11 @@ ul{margin:8px 0 0;padding-left:20px}
 <section aria-labelledby="h-time">
 <h2 id="h-time">Your time</h2>
 <div class="grid">
-<div class="q"><label for="hSite">Hours per new site</label><input id="hSite" type="number" min="0" step="0.25" value="1.5"><span class="hint">The time study measured about 1 hour of hands-on work plus waiting on Claude. Add your meeting time.</span></div>
-<div class="q"><label for="hRound">Hours per extra revision round</label><input id="hRound" type="number" min="0" step="0.25" value="0.25"><span class="hint">The time study measured about 10 to 15 minutes</span></div>
+<div class="q"><label for="hSite">Hours per new site</label><input id="hSite" type="number" min="0" step="0.25" value="1.5"><span class="hint">The kit's time study estimated about 1 hour of hands-on work plus waiting on Claude. It hasn't been timed with a real person yet, so track your own.</span></div>
+<div class="q"><label for="hRound">Hours per extra revision round</label><input id="hRound" type="number" min="0" step="0.25" value="0.25"><span class="hint">Estimated at 10 to 15 minutes</span></div>
 <div class="q"><label for="hUpd">Hours per update</label><input id="hUpd" type="number" min="0" step="0.25" value="0.5"><span class="hint">New hours, a holiday notice, a price change</span></div>
+<div class="q"><label for="hSell">Hours finding and signing each new client</label><input id="hSell" type="number" min="0" step="0.5" value="3"><span class="hint">Visits, messages, meetings and the pitches that don't close. A starting guess; use your own number once you have one.</span></div>
+<div class="q"><label for="hAdmin">Admin hours per month</label><input id="hAdmin" type="number" min="0" step="0.5" value="3"><span class="hint">Invoices, the tracker, email, bookkeeping. A starting guess.</span></div>
 <div class="q"><label for="rate">Hourly rate you want ($)</label><input id="rate" type="number" min="0" step="5" value="50"></div>
 </div>
 </section>
@@ -83,7 +85,9 @@ ul{margin:8px 0 0;padding-left:20px}
 <div class="q"><label for="pSite">Price for a new site ($)</label><input id="pSite" type="number" min="0" step="25" value="600"></div>
 <div class="q"><label for="incRounds">Revision rounds included</label><input id="incRounds" type="number" min="0" step="1" value="2"><span class="hint">Rounds of changes the site price covers</span></div>
 <div class="q"><label for="pRound">Price per extra round ($)</label><input id="pRound" type="number" min="0" step="5" value="60"></div>
-<div class="q"><label for="pCare">Monthly care price ($)</label><input id="pCare" type="number" min="0" step="5" value="40"><span class="hint">Updates and keeping the site online</span></div>
+<div class="q"><label for="pCare">Monthly care price ($)</label><input id="pCare" type="number" min="0" step="5" value="40"><span class="hint">Small updates and keeping the site online</span></div>
+<div class="q"><label for="careCap">Small updates included per month</label><input id="careCap" type="number" min="0" step="1" value="2"><span class="hint">Write the same number in your agreement. Bigger changes are quoted first.</span></div>
+<div class="q"><label for="fee">Card payment fee (%)</label><input id="fee" type="number" min="0" step="0.1" value="3"><span class="hint">Check your payment provider's rate</span></div>
 </div>
 </section>
 
@@ -92,7 +96,8 @@ ul{margin:8px 0 0;padding-left:20px}
 <div class="results">
 <div class="r"><div class="k">Your tool costs per new site</div><div class="num" id="oCostSite">$0</div></div>
 <div class="r"><div class="k">Lowest price that pays your rate</div><div class="num" id="oFloor">$0</div></div>
-<div class="r"><div class="k">You earn per hour, really</div><div class="num" id="oHourly">$0</div></div>
+<div class="r"><div class="k">Earned per hour of building</div><div class="num" id="oHourly">$0</div></div>
+<div class="r"><div class="k">Earned per hour, all work counted</div><div class="num" id="oAll">$0</div></div>
 <div class="r"><div class="k">Money in each month</div><div class="num" id="oIn">$0</div></div>
 <div class="r"><div class="k">Costs each month</div><div class="num" id="oOut">$0</div></div>
 <div class="r"><div class="k">Profit each month</div><div class="num" id="oProfit">$0</div></div>
@@ -117,7 +122,7 @@ ul{margin:8px 0 0;padding-left:20px}
 <li><strong>Use Claude Opus 5.5 or newer.</strong> It uses your limit faster than smaller models, and it makes better sites.</li>
 <li><strong>The client pays</strong> for their domain (usually $10 to $20 a year) and owns it.</li>
 <li><strong>Contact forms</strong> are free for up to 250 messages a month per business (Web3Forms).</li>
-<li><strong>Hosting</strong>: host every client in your own Netlify account (Personal or Pro) and include it in the monthly care price. Netlify's free plan allows only one person per account and runs out after roughly 20 updates a month.</li>
+<li><strong>Hosting</strong>: host every client in your own Netlify account (Personal or Pro) and include it in the monthly care price. Netlify's free plan allows only one person per account and runs out after roughly 20 updates a month. If your Netlify credits run out, every site you host pauses until next month, so check usage monthly and decide on auto recharge with a monthly limit.</li>
 <li><strong>Getting paid</strong>: set up the monthly care price as an automatic monthly invoice (Square, Stripe or PayPal all do this), so the client's card is charged each month.</li>
 </ul>
 </section>
@@ -125,7 +130,7 @@ ul{margin:8px 0 0;padding-left:20px}
 <script>
 (function(){
   var $=function(id){return document.getElementById(id)};
-  var ids=['plan','planOther','host','other','hSite','hRound','hUpd','rate','newSites','careClients','updPer','xRounds','incRounds','pRound','pSite','pCare','cName','me'];
+  var ids=['plan','planOther','host','other','hSite','hRound','hUpd','hSell','hAdmin','rate','newSites','careClients','updPer','xRounds','incRounds','pRound','pSite','pCare','careCap','fee','cName','me'];
   var KEY='lk-pricing-v4';
   try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');ids.forEach(function(i){if(s[i]!==undefined)$(i).value=s[i]})}catch(e){}
   var num=function(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0};
@@ -137,11 +142,14 @@ ul{margin:8px 0 0;padding-left:20px}
     var sites=num('newSites'), care=num('careClients'), upd=num('updPer');
     var xr=num('xRounds');
     var hours=sites*(num('hSite')+xr*num('hRound'))+care*upd*num('hUpd');
+    var hoursAll=hours+sites*num('hSell')+num('hAdmin');
+    var keep=1-Math.min(num('fee'),50)/100;
     var costSite=sites>0?fixed/sites:fixed;
-    var floor=costSite+num('hSite')*num('rate');
+    var floor=(costSite+(num('hSite')+num('hSell')+(sites>0?num('hAdmin')/sites:num('hAdmin')))*num('rate'))/keep;
     var moneyIn=sites*(num('pSite')+xr*num('pRound'))+care*num('pCare');
-    var profit=moneyIn-fixed;
+    var profit=moneyIn*keep-fixed;
     var hourly=hours>0?profit/hours:0;
+    var hourlyAll=hoursAll>0?profit/hoursAll:0;
     $('oCostSite').textContent=money(costSite);
     $('oFloor').textContent=money(floor);
     $('oHourly').textContent=money(hourly);
@@ -149,11 +157,13 @@ ul{margin:8px 0 0;padding-left:20px}
     $('oOut').textContent=money(fixed);
     $('oProfit').textContent=money(profit);
     $('oProfit').className='num '+(profit>0?'good':'warn');
-    $('oHourly').className='num '+(hourly>=num('rate')?'good':'warn');
+    $('oHourly').className='num';
+    $('oAll').textContent=money(hourlyAll);
+    $('oAll').className='num '+(hourlyAll>=num('rate')?'good':'warn');
     var msg;
     if(profit<=0) msg='At these numbers you lose money. Raise your prices or take on more clients.';
-    else if(hourly<num('rate')) msg='You make a profit, but less than your hourly rate. A new-site price of at least '+money(floor)+' covers your time and costs.';
-    else msg='These prices cover your costs and pay you at least your hourly rate.';
+    else if(hourlyAll<num('rate')) msg='You make a profit, but once selling and admin time count it is less than your hourly rate. A new-site price of at least '+money(floor)+' covers your time, fees and costs.';
+    else msg='Counting selling, admin and card fees, these prices pay you at least your hourly rate. These are estimates until you track your real hours.';
     var careFloor=care>0?(upd*num('hUpd')*num('rate')):0;
     var roundFloor=num('hRound')*num('rate');
     if(xr>0&&num('pRound')<roundFloor) msg+=' An extra round below '+money(roundFloor)+' doesn\u2019t pay your rate for the time it takes.';
@@ -166,7 +176,8 @@ ul{margin:8px 0 0;padding-left:20px}
 '  working on phones, with your hours, prices and contact details.\n'+
 '  Includes '+num('incRounds')+' rounds of changes. Extra rounds are '+money(num('pRound'))+' each.\n\n'+
 'Monthly care: '+money(num('pCare'))+' a month\n'+
-'  Updates to hours, prices, notices and photos, and keeping the site online.\n\n'+
+'  Up to '+num('careCap')+' small updates a month (hours, prices, notices, photos, short text),\n'+
+'  and keeping the site online. Bigger changes are quoted first.\n\n'+
 'You pay for your own domain name (usually $10 to $20 a year) and own it.\n\n'+
 'From '+($('me').value||'');
     try{var o={};ids.forEach(function(i){o[i]=$(i).value});localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}
@@ -175,8 +186,8 @@ ul{margin:8px 0 0;padding-left:20px}
   $('copy').addEventListener('click',function(){
     var t=$('quote').textContent;
     var done=function(m){$('copied').textContent=m;setTimeout(function(){$('copied').textContent=''},2500)};
-    if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(t).then(function(){done('Copied')},function(){done('Select the text above and copy it')});
-    else done('Select the text above and copy it');
+    var sel=function(){try{var r=document.createRange();r.selectNodeContents($('quote'));var g=getSelection();g.removeAllRanges();g.addRange(r)}catch(e){}done('Selected. Copy it with your keyboard or press and hold')};
+    try{if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(t).then(function(){done('Copied')},sel); else sel()}catch(e){sel()}
   });
 })();
 </script>

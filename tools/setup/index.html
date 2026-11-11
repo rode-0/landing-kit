@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Set up your website business</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<style>
+/* Layout: one column; overall progress, then four levels that unlock in order (first paid job -> organised -> more clients -> one place per customer), with a mock customer page under level 4 */
+:root{--bg:#f6f4ef;--surface:#fffdf9;--fg:#1d1b18;--muted:#625d55;--line:#d9d3c8;--accent:#2f5d50;--accent-soft:#e3ece8;--on-accent:#fff;--grid:#e6e1d8;--done:#2f6b47;--warn:#9a5b13;--warn-soft:#f6ead9;
+--head:"Schibsted Grotesk",system-ui,sans-serif;--body:"Literata",Georgia,serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151412;--surface:#1d1b18;--fg:#ece7de;--muted:#a49d92;--line:#35312b;--accent:#8cc7b3;--accent-soft:#1f2c28;--on-accent:#10201b;--grid:#2e2a25;--done:#8fd0a5;--warn:#e7b170;--warn-soft:#2e2418;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151412;--surface:#1d1b18;--fg:#ece7de;--muted:#a49d92;--line:#35312b;--accent:#8cc7b3;--accent-soft:#1f2c28;--on-accent:#10201b;--grid:#2e2a25;--done:#8fd0a5;--warn:#e7b170;--warn-soft:#2e2418;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:860px;margin:0 auto;padding-block:36px 80px;display:grid;gap:30px}
+h1,h2,h3,button,.meta,.pill,label,th,.bar-label,.unlock,.mini,td{font-family:var(--head)}
+h1{font-size:clamp(30px,6vw,42px);line-height:1.05;margin:0;text-wrap:balance}
+.lede{color:var(--muted);margin:10px 0 0;max-width:60ch}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.overall{display:grid;gap:8px}
+.bar{height:10px;background:var(--grid);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+.bar-label{display:flex;justify-content:space-between;font-size:14px;font-weight:600;gap:12px}
+.bar-label span:last-child{color:var(--muted);font-weight:500;font-variant-numeric:tabular-nums}
+.ladder{display:flex;gap:6px;flex-wrap:wrap}
+.ladder span{font-family:var(--head);font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.ladder span.cur{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.ladder span.ok{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+.level{border-top:2px solid var(--fg);padding-top:14px;display:grid;gap:10px}
+.level.locked{border-top-color:var(--line)}
+.level-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+h2{font-size:21px;margin:0}
+.level.locked h2{color:var(--muted)}
+.meta{font-size:13px;color:var(--muted)}
+.goal{margin:0;font-size:15px;color:var(--muted);max-width:64ch}
+.unlock{font-size:13.5px;background:var(--accent-soft);color:var(--accent);border-radius:8px;padding:8px 12px}
+.unlock b{font-weight:700}
+.level.locked .unlock{background:transparent;border:1px dashed var(--line);color:var(--muted)}
+.step{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.level.locked .step{background:transparent}
+.step input[type=checkbox]{width:22px;height:22px;margin:2px 0 0;accent-color:var(--accent)}
+.step.done h3{text-decoration:line-through;text-decoration-color:var(--muted)}
+.step.done{opacity:.72}
+h3{font-size:16px;margin:0;line-height:1.3}
+.level.locked h3{color:var(--muted)}
+.step p{margin:4px 0 0;font-size:14.5px}
+.level.locked .step p{color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font-family:var(--head);font-size:13.5px}
+.row a{color:var(--accent);font-weight:600;text-underline-offset:3px}
+.pill{font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.lock{background:var(--grid);border-color:transparent}
+.pill.new{background:var(--warn-soft);border-color:transparent;color:var(--warn)}
+.mylinks{display:grid;gap:8px;margin-top:8px}
+.ml{display:grid;grid-template-columns:9.5em minmax(0,1fr);gap:8px;align-items:center;font-family:var(--head);font-size:13.5px}
+.ml input{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0;width:100%;box-sizing:border-box;min-height:40px}
+.ml input:disabled{opacity:.6}
+.next{font-family:var(--head);font-size:15px;font-weight:600;background:var(--surface);border:1px solid var(--accent);border-radius:8px;padding:12px 14px}
+.next span{color:var(--muted);font-weight:500}
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;gap:8px}
+.ask h2{font-size:16px}
+.ask p{margin:0;font-size:14.5px}
+.ask textarea{font:13px/1.45 ui-monospace,Menlo,monospace;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px;min-height:150px;width:100%;box-sizing:border-box;resize:vertical}
+.ask .askrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:var(--head);font-size:13.5px;color:var(--muted)}
+main>*,.level>*,.cust>*,.cols2>*,.step>div{min-width:0}
+/* level 4 mock customer page */
+.cust{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:16px}
+.cust-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 12px}
+.cust-head h3{font-size:18px}
+.mini{font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 6px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+.st-ok{color:var(--done);font-weight:600}
+.st-warn{color:var(--warn);font-weight:600}
+.cols2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.btn{display:inline-block;font-family:var(--head);font-size:13.5px;font-weight:600;background:var(--accent);color:var(--on-accent);border:0;border-radius:6px;padding:8px 12px;min-height:36px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.mocknote{font-family:var(--head);font-size:12.5px;color:var(--warn)}
+.note{font-family:var(--head);font-size:13px;color:var(--muted);margin:0}
+@media (max-width:600px){.cols2{grid-template-columns:1fr}.ml{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Set up your website business</h1>
+  <p class="lede">Start small. Level 1 is everything you need to finish one paid job. Each level unlocks when the one before it is done.</p>
+</header>
+
+<section class="overall" aria-live="polite">
+  <div class="ladder" id="ladder"></div>
+  <div class="bar-label"><span id="lvText">Level 1</span><span id="ovText"></span></div>
+  <div class="bar"><i id="ovBar"></i></div>
+  <div class="next" id="next"></div>
+  <div class="ask">
+    <h2>Not sure what to do next?</h2>
+    <p>Copy this question into your Websites Project in Claude. Add your tracker's Dashboard numbers if you have them. Claude answers with the one next step that matters most.</p>
+    <div class="askrow"><button type="button" class="btn" id="askBtn">Copy question for Claude</button><span id="askOut" aria-live="polite"></span></div>
+    <label for="askText" class="meta">The question</label>
+    <textarea id="askText" readonly></textarea>
+  </div>
+</section>
+
+<div id="levels"></div>
+<p class="note">Times are estimates. Ticks and links are saved in this browser only. The full guide is in the kit's sop folder.</p>
+</main>
+
+<script>
+(function(){
+var LEVELS=[
+ {name:'Level 1 · Finish your first paid job',short:'1 First job',time:'About 1 hour',
+  goal:'The smallest setup that lets you build one site, put it online and get paid for it.',
+  unlocks:'Build, launch and bill your first client (guide steps 3 to 6).',
+  steps:[
+  {id:'claude',t:'Get a paid Claude plan',d:'You use Claude to build every site.',links:[['claude.ai','https://claude.ai']]},
+  {id:'project',t:'Make your "Websites" Project',d:'In Claude, create a Project called Websites. Add the files from the kit\'s claude folder (and its library folder) plus templates/emails.md. Set the instructions to "Follow PROMPT.md for every website." Pick Opus 5.5 or newer.'},
+  {id:'netlify',t:'Open a free Netlify account',d:'This is where the site goes online. Free is enough to start.',links:[['netlify.com','https://www.netlify.com']]},
+  {id:'prices',t:'Set your prices',d:'Open the pricing page. Fill in your own hours and costs; it suggests prices and writes a quote.',links:[['Pricing page','../pricing/index.html']]},
+  {id:'agree',t:'Fill in your agreement',d:'In the kit folder, templates/agreement.md: your name, prices, included rounds, and how many small updates the monthly care covers.'},
+  {id:'getpaid',t:'Decide how you get paid',d:'For one job, the invoice maker is enough: the client pays by bank transfer, check or a payment link.',links:[['Invoice maker','../invoice/index.html']]},
+  {id:'basics',t:'Check local rules',d:'Business license or registered name, and ask an accountant about taxes. The kit isn\'t legal or tax advice.'}
+ ]},
+ {name:'Level 2 · Get organised',short:'2 Organised',time:'About 45 minutes',
+  goal:'Keep track of clients and money, and take card payments and monthly care plans.',
+  unlocks:'Monthly care plans, the Dashboard, and a question page link to send every client.',
+  steps:[
+  {id:'tracker',t:'Set up your tracker',d:'Upload tools/tracker/tracker.xlsx to Google Sheets (File, then Import) or open it in Excel. Every client, payment and round goes here, and each client gets a Next step.',links:[['Google Sheets','https://sheets.google.com']]},
+  {id:'tools',t:'Put your tool pages online',d:'Drag the whole tools folder onto Netlify Drop, once. Your pages are then at /intake/, /pricing/, /invoice/ and /setup/ on the link you get.',links:[['Netlify Drop','https://app.netlify.com/drop'],['Question page (preview)','../intake/index.html']]},
+  {id:'links',t:'Save your links',d:'Paste each link once.',mylinks:true},
+  {id:'pay',t:'Open a card payment account',d:'Card payments and automatic monthly billing for care plans.',links:[['Square','https://squareup.com'],['Stripe','https://stripe.com'],['PayPal','https://www.paypal.com/business']]},
+  {id:'budget',t:'Decide your hosting budget',d:'If Netlify credits run out, every site you host pauses until next month. Pick a plan, check usage monthly, and decide on auto recharge with a monthly limit.'},
+  {id:'gmail',t:'Connect Gmail to Claude',opt:true,d:'Claude reads client emails for details and drafts replies. It never sends anything.'}
+ ]},
+ {name:'Level 3 · Win more clients',short:'3 More clients',time:'About 2 to 4 hours',
+  goal:'Something to show: sample sites and your own portfolio with a way to reach you.',
+  unlocks:'Outreach with a portfolio link (guide step 2), and posts that point to it.',
+  steps:[
+  {id:'demo1',t:'Build sample site 1',d:'A friend\'s or family member\'s business, labelled "Sample".'},
+  {id:'demo2',t:'Build sample site 2',d:'A different kind of business, so you have two styles to show.'},
+  {id:'folio',t:'Build your own site',d:'In a new chat in your Websites Project, say "Build my own site" and attach screenshots of your samples. You get your examples, your packages, your phone and email, and a short enquiry form.'},
+  {id:'test',t:'Test it on your phone',d:'Send yourself a message from the enquiry form. Tap your phone and email. Open every sample.'},
+  {id:'social',t:'Plan a month of posts',opt:true,d:'Ask Claude "Make my marketing plan" (see sop/10). Approve the posts, then schedule them in the platform\'s own scheduler, such as Meta Business Suite for Facebook and Instagram.'}
+ ]}
+];
+var LINKS=[['ql','Question page'],['pl','Pricing page'],['il','Invoice maker'],['tl','Tracker'],['fl','Portfolio']];
+var st={};try{st=JSON.parse(localStorage.getItem('lk-setup2')||'{}')}catch(e){st={}}
+function save(){try{localStorage.setItem('lk-setup2',JSON.stringify(st))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function req(L){return L.steps.filter(function(s){return!s.opt})}
+function lvDone(L){return req(L).every(function(s){return st[s.id]})}
+function current(){for(var i=0;i<LEVELS.length;i++)if(!lvDone(LEVELS[i]))return i;return LEVELS.length}
+function unlocked(i){return i<=current()}
+
+function render(){
+ var cur=current(),h='';
+ LEVELS.forEach(function(L,i){
+  var open=unlocked(i),done=lvDone(L);
+  h+='<section class="level'+(open?'':' locked')+'"><div class="level-head"><h2>'+L.name+'</h2><span class="meta">'+L.time+' · '+(done?'Done':open?req(L).filter(function(s){return st[s.id]}).length+' of '+req(L).length+' done':'Locked')+'</span></div>';
+  h+='<p class="goal">'+L.goal+(L.proposed?' <span class="pill new">Proposed</span>':'')+'</p>';
+  h+='<div class="unlock">'+(open?'<b>Unlocks:</b> ':'<b>Unlocks after level '+i+':</b> ')+L.unlocks+'</div>';
+  L.steps.forEach(function(s){
+   var on=!!st[s.id];
+   h+='<div class="step'+(on?' done':'')+'"><input type="checkbox" id="c-'+s.id+'" data-id="'+s.id+'"'+(on?' checked':'')+(open?'':' disabled')+'><div><label for="c-'+s.id+'"><h3>'+esc(s.t)+(s.opt?' <span class="pill">Optional</span>':'')+(open?'':' <span class="pill lock">Locked</span>')+'</h3></label><p>'+esc(s.d)+'</p>'+
+   (s.links?'<div class="row">'+s.links.map(function(l){return'<a href="'+l[1]+'" target="_blank" rel="noopener">'+esc(l[0])+' ↗</a>'}).join('')+'</div>':'')+
+   (s.mylinks?'<div class="mylinks">'+LINKS.map(function(l){return'<div class="ml"><label for="ml-'+l[0]+'">'+l[1]+'</label><input id="ml-'+l[0]+'" data-k="'+l[0]+'" type="url" inputmode="url" placeholder="Paste the link" value="'+esc(st[l[0]]||'')+'"'+(open?'':' disabled')+'></div>'}).join('')+'</div>':'')+
+   '</div></div>';
+  });
+  h+='</section>';
+ });
+ document.getElementById('levels').innerHTML=h;
+ status();
+}
+function status(){
+ fillAsk && setTimeout(fillAsk,0);
+ var cur=current(),all=[];LEVELS.forEach(function(L){all=all.concat(req(L))});
+ var n=all.filter(function(s){return st[s.id]}).length;
+ document.getElementById('ovBar').style.width=(100*n/all.length)+'%';
+ document.getElementById('ovText').textContent=n+' of '+all.length+' steps done';
+ document.getElementById('lvText').textContent=cur<LEVELS.length?'You are on '+LEVELS[cur].name.split(' · ')[0]:'All levels done';
+ document.getElementById('ladder').innerHTML=LEVELS.map(function(L,i){return'<span class="'+(i<cur?'ok':i===cur?'cur':'')+'">'+L.short+'</span>'}).join('');
+ var nx=document.getElementById('next');
+ if(cur>=LEVELS.length){nx.innerHTML='All set. <span>Keep each customer page up to date at every care check-in.</span>';return}
+ var s=req(LEVELS[cur]).filter(function(x){return!st[x.id]})[0];
+ nx.innerHTML='Next: '+esc(s.t)+' <span>· '+esc(LEVELS[cur].name.split(' · ')[1])+'</span>';
+}
+function askText(){
+ var cur=current(),lines=['What should I do next in my website business? Give me ONE next step, why it matters, and exactly how to start it. Then at most two steps after it.','','Put first anything about money owed or at risk (unpaid invoices, domains renewing, hosting credits), then client work waiting on me, then my next setup step, then finding new clients.','','My setup: '+(cur<LEVELS.length?'on '+LEVELS[cur].name:'all levels done')+'.'];
+ LEVELS.forEach(function(L,i){if(i>cur)return;var d=L.steps.filter(function(s){return st[s.id]}).map(function(s){return s.t}),n=L.steps.filter(function(s){return!st[s.id]}).map(function(s){return s.t+(s.opt?' (optional)':'')});
+  lines.push(L.name.split(' · ')[0]+' done: '+(d.join('; ')||'nothing yet'));if(n.length)lines.push(L.name.split(' · ')[0]+' not done: '+n.join('; '))});
+ lines.push('','My tracker Dashboard (paste it here, or write "no clients yet"):','');
+ return lines.join('\n');
+}
+function fillAsk(){var t=document.getElementById('askText');if(t)t.value=askText()}
+document.getElementById('askBtn').addEventListener('click',function(){
+ var t=document.getElementById('askText'),o=document.getElementById('askOut');fillAsk();
+ function fallback(){t.focus();t.select();o.textContent='Selected. Copy it, then paste it into Claude.'}
+ try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t.value).then(function(){o.textContent='Copied. Paste it into your Websites Project.'},fallback)}else fallback()}catch(e){fallback()}
+});
+render();
+var box=document.getElementById('levels');
+box.addEventListener('change',function(e){
+ var id=e.target.getAttribute('data-id');if(!id)return;
+ var before=current();st[id]=e.target.checked;save();
+ if(current()!==before)render();else{e.target.closest('.step').classList.toggle('done',e.target.checked);render()}
+});
+box.addEventListener('input',function(e){var k=e.target.getAttribute('data-k');if(!k)return;st[k]=e.target.value;save()});
+})();
+</script>
+</body>
+</html>
