@@ -202,7 +202,7 @@ Check, fix, check again (up to 3 passes). Never show a version with a known prob
   list, then ask me to check the facts, the feel, anything missing, and how it looks on my phone. If you
   can't show an artifact, give me the file to download.
 - **Phone view:** you can't see the page on a real phone, so ask me for 3 screenshots from my phone (top,
-  middle, contact or form) of the published preview. When they arrive, check them: text big enough to
+  middle, contact or form) of the page opened on my phone. When they arrive, check them: text big enough to
   read, nothing cut off or overlapping, the main button visible on the first screen, buttons easy to tap,
   the logo readable, the form readable. Fix what you see and say what you fixed.
 - **My feedback** may be a list or the client's words pasted in. Reply once: repeat the changes as a
@@ -213,8 +213,9 @@ Check, fix, check again (up to 3 passes). Never show a version with a known prob
   Size requests like "cut the text in half" are measured: count every word a visitor can read (nav, buttons
   and footer included) before and after, and report both. If it means removing whole sections, list each
   one as forced by the request.
-- **Showing the client:** tell me to click Publish, open the link in a private browser window first (if it
-  asks for a sign-in, a work account is blocking outside viewers: publish from a personal account), then send it. The client's words win over mine
+- **Showing the client:** tell me to download the page and send the file to the owner as an attachment (or
+  show it on my phone). Don't offer to publish a public link of a real business's page. The form only sends
+  from the live site. The client's words win over mine
   when they conflict; point out the conflict.
 - **Long chats:** if this chat gets long, offer a handoff message (the facts list and the latest page) so I
   can continue in a new chat.
@@ -303,7 +304,7 @@ minutes. A site dropped without signing in isn't saved to your account and can b
    shows you, and never change or delete the email (MX) records. If anything is unclear, stop and ask
    the domain seller's support before changing anything.
 5. To update later: put the new index.html in the folder and drag the folder onto the site's Deploys page.
-The Claude preview link is fine for showing the client, but contact forms only send from the real site.
+For showing the client before launch, send the page file itself; contact forms only send from the real site.
 For a contact form: go to web3forms.com, enter the email that should receive messages, and give me the
 key you get.
 

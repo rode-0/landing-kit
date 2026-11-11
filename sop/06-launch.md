@@ -1,6 +1,6 @@
 # 6. Launch
 
-The Claude link is only a preview. To put the real site online you need, once per site:
+The file you sent the client is only a preview. To put the real site online you need, once per site:
 
 **Before you start**
 - [ ] A **computer** (not a phone or tablet): step 3 is drag and drop.
@@ -21,7 +21,6 @@ The Claude link is only a preview. To put the real site online you need, once pe
 7. **Track it:** click the first empty cell in column A of the Clients tab and paste Claude's row. Set Stage to "Live" or "Care plan" and add the website address, domain and renewal date. Save the final `index.html` in the client's backup folder, named by date.
 
 **If you get stuck**
-- **The client's link asks them to sign in.** It's a work or company Claude account. Publish from a personal account, or ask your admin to allow outside sharing (see step 5 of the guide).
 - **Netlify asks you to sign up or "claim" the site.** You weren't signed in. Sign in and claim it, or drop the folder again while signed in.
 - **The site disappeared.** It was dropped without signing in. Sign in and drop the folder again.
 - **Netlify shows a list of files or "Page not found".** The page isn't named `index.html`, or you dropped the file instead of its folder.
