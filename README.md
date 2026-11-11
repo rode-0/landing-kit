@@ -35,6 +35,17 @@ You collect the business's details and photos, Claude designs the page with you,
 
 ---
 
+## What it costs, and what to charge
+
+- **You pay:** a Claude plan (Pro is $20 a month; Max is $100 or $200 for much more use). That's usually it.
+- **Free:** hosting on Netlify (give each client their own free account, so they own their site) and contact forms for up to 250 messages a month.
+- **The client pays:** their domain name, usually $10 to $20 a year.
+- **How many sites your plan covers** isn't a fixed number, because Claude's limits reset every few hours and weekly. After your first two or three sites, check how much of your weekly limit each one used.
+
+Put the `pricing` folder online the same way as the question page, and open it to work out your prices. It shows what each site costs you, what you really earn per hour, and writes a quote you can send the client.
+
+*Prices as of November 2026. Check claude.com/pricing and netlify.com/pricing for current prices.*
+
 ## Changing a site later
 
 Open the same chat (or a new one in the Project), say what changed ("new hours", "closed for the holidays until Jan 2"), and get the new file. In Netlify, open the site, go to **Deploys**, and drag the folder with the new file onto the page.
@@ -63,5 +74,6 @@ If the business already uses Square, Calendly, Jane, OpenTable or similar, give 
 | `PROMPT.md` | The instructions Claude follows. You don't need to read it. |
 | `check_page.py` | A checker Claude runs on each page before showing it to you. |
 | `intake/` | The question page you send to clients. |
+| `pricing/` | A calculator for your costs and prices, with a quote you can send. |
 | `library/` | Notes and tested pieces Claude uses to design well. Add the whole folder to the Project. |
 | `examples/` | Pictures of sites made with this kit. |

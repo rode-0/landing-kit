@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Website Pricing Calculator</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap">
+<style>
+:root{--bg:#f6f4ef;--surface:#fffdf9;--fg:#1d1b18;--muted:#625d55;--line:#d9d3c8;--accent:#2f5d50;--on-accent:#fff;--good:#2f6b47;--warn:#9a5b12;
+--head:"Schibsted Grotesk",system-ui,sans-serif;--body:"Literata",Georgia,serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#151412;--surface:#1d1b18;--fg:#ece7de;--muted:#a49d92;--line:#35312b;--accent:#8cc7b3;--on-accent:#10201b;--good:#8fd0a5;--warn:#e7b65a;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:760px;margin:0 auto;padding-block:40px 80px;display:grid;gap:40px}
+h1,h2,h3,label,button,.num,.k{font-family:var(--head)}
+h1{font-size:clamp(32px,7vw,44px);line-height:1.05;margin:0;text-wrap:balance}
+h2{font-size:22px;margin:0 0 6px}
+.lede{color:var(--muted);margin:12px 0 0;max-width:56ch}
+section{border-top:2px solid var(--fg);padding-top:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px 24px;margin-top:14px}
+.q{display:grid;gap:6px;min-width:0}
+label{font-weight:600;font-size:16px;line-height:1.3}
+.hint{font-family:var(--head);font-size:13px;color:var(--muted)}
+input,select{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;min-height:48px;width:100%}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:14px}
+.r{background:var(--surface);padding:16px}
+.k{font-size:13px;color:var(--muted);font-weight:500}
+.num{font-size:30px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;margin-top:4px}
+.num.good{color:var(--good)}.num.warn{color:var(--warn)}
+.note{font-size:15px;color:var(--muted);margin:12px 0 0}
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;white-space:pre-wrap;font-size:15px;margin-top:14px}
+button{font-size:16px;font-weight:600;border:0;border-radius:6px;padding:0 20px;min-height:48px;cursor:pointer;background:var(--accent);color:var(--on-accent);margin-top:12px}
+#copied{font-family:var(--head);font-size:14px;color:var(--muted);margin-left:10px}
+ul{margin:8px 0 0;padding-left:20px}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>What to charge for a website</h1>
+<p class="lede">Fill in your own numbers. The page works out what each site costs you, what you actually earn per hour, and a price to quote. Nothing you type leaves this page.</p>
+</header>
+
+<section aria-labelledby="h-costs">
+<h2 id="h-costs">Your monthly costs</h2>
+<div class="grid">
+<div class="q"><label for="plan">Claude plan</label>
+<select id="plan"><option value="20">Pro, $20 a month</option><option value="100">Max 5x, $100 a month</option><option value="200">Max 20x, $200 a month</option><option value="other">Other amount</option></select>
+<span class="hint">Prices as of Nov 2026. Check claude.com/pricing.</span></div>
+<div class="q" id="planOtherQ" hidden><label for="planOther">Your Claude cost per month ($)</label><input id="planOther" type="number" min="0" step="1" value="20"></div>
+<div class="q"><label for="host">Hosting</label>
+<select id="host"><option value="0">Each client has their own free Netlify account</option><option value="9">I host everyone: Netlify Personal, $9</option><option value="20">I host everyone: Netlify Pro, $20</option></select>
+<span class="hint">Client-owned free accounts cost you nothing and the client owns the site.</span></div>
+<div class="q"><label for="other">Other monthly costs ($)</label><input id="other" type="number" min="0" step="1" value="0"><span class="hint">Phone, software, anything else for this work</span></div>
+</div>
+</section>
+
+<section aria-labelledby="h-time">
+<h2 id="h-time">Your time</h2>
+<div class="grid">
+<div class="q"><label for="hSite">Hours per new site</label><input id="hSite" type="number" min="0" step="0.5" value="3"><span class="hint">Collecting answers, review rounds, putting it online</span></div>
+<div class="q"><label for="hUpd">Hours per update</label><input id="hUpd" type="number" min="0" step="0.25" value="0.5"><span class="hint">New hours, a holiday notice, a price change</span></div>
+<div class="q"><label for="rate">Hourly rate you want ($)</label><input id="rate" type="number" min="0" step="5" value="50"></div>
+</div>
+</section>
+
+<section aria-labelledby="h-volume">
+<h2 id="h-volume">Your clients</h2>
+<div class="grid">
+<div class="q"><label for="newSites">New sites per month</label><input id="newSites" type="number" min="0" step="1" value="2"></div>
+<div class="q"><label for="careClients">Clients on monthly care</label><input id="careClients" type="number" min="0" step="1" value="4"><span class="hint">Clients who pay you each month for updates</span></div>
+<div class="q"><label for="updPer">Updates per care client per month</label><input id="updPer" type="number" min="0" step="0.5" value="1"></div>
+</div>
+</section>
+
+<section aria-labelledby="h-prices">
+<h2 id="h-prices">Your prices</h2>
+<div class="grid">
+<div class="q"><label for="pSite">Price for a new site ($)</label><input id="pSite" type="number" min="0" step="25" value="600"></div>
+<div class="q"><label for="pCare">Monthly care price ($)</label><input id="pCare" type="number" min="0" step="5" value="40"><span class="hint">Updates and keeping the site online</span></div>
+</div>
+</section>
+
+<section aria-labelledby="h-results" aria-live="polite">
+<h2 id="h-results">What it works out to</h2>
+<div class="results">
+<div class="r"><div class="k">Your tool costs per new site</div><div class="num" id="oCostSite">$0</div></div>
+<div class="r"><div class="k">Lowest price that pays your rate</div><div class="num" id="oFloor">$0</div></div>
+<div class="r"><div class="k">You earn per hour, really</div><div class="num" id="oHourly">$0</div></div>
+<div class="r"><div class="k">Money in each month</div><div class="num" id="oIn">$0</div></div>
+<div class="r"><div class="k">Costs each month</div><div class="num" id="oOut">$0</div></div>
+<div class="r"><div class="k">Profit each month</div><div class="num" id="oProfit">$0</div></div>
+</div>
+<p class="note" id="oMsg"></p>
+</section>
+
+<section aria-labelledby="h-quote">
+<h2 id="h-quote">A quote for your client</h2>
+<div class="grid">
+<div class="q"><label for="cName">Client's business name</label><input id="cName" value="Your business"></div>
+<div class="q"><label for="me">Your name</label><input id="me" value="Your name"></div>
+</div>
+<div class="quote" id="quote"></div>
+<button id="copy" type="button">Copy the quote</button><span id="copied" role="status"></span>
+</section>
+
+<section aria-labelledby="h-know">
+<h2 id="h-know">Good to know</h2>
+<ul>
+<li><strong>How many sites your Claude plan covers</strong> isn't a fixed number. Claude's limits reset every few hours and weekly. After your first two or three sites, check how much of your weekly limit each one used, then plan around that.</li>
+<li><strong>Use Claude Opus 5.5 or newer.</strong> It uses your limit faster than smaller models, and it makes better sites.</li>
+<li><strong>The client pays</strong> for their domain (usually $10 to $20 a year) and owns it.</li>
+<li><strong>Contact forms</strong> are free for up to 250 messages a month per business (Web3Forms).</li>
+<li><strong>Hosting</strong>: a free Netlify account per client is the simplest. If you host everyone in one account, the free plan runs out after roughly 20 updates a month.</li>
+</ul>
+</section>
+</main>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var ids=['plan','planOther','host','other','hSite','hUpd','rate','newSites','careClients','updPer','pSite','pCare','cName','me'];
+  var KEY='lk-pricing-v1';
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');ids.forEach(function(i){if(s[i]!==undefined)$(i).value=s[i]})}catch(e){}
+  var num=function(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0};
+  var money=function(v){return (v<0?'-$':'$')+Math.round(Math.abs(v)).toLocaleString('en-US')};
+  function calc(){
+    $('planOtherQ').hidden=$('plan').value!=='other';
+    var claude=$('plan').value==='other'?num('planOther'):+$('plan').value;
+    var fixed=claude+(+$('host').value)+num('other');
+    var sites=num('newSites'), care=num('careClients'), upd=num('updPer');
+    var hours=sites*num('hSite')+care*upd*num('hUpd');
+    var costSite=sites>0?fixed/sites:fixed;
+    var floor=costSite+num('hSite')*num('rate');
+    var moneyIn=sites*num('pSite')+care*num('pCare');
+    var profit=moneyIn-fixed;
+    var hourly=hours>0?profit/hours:0;
+    $('oCostSite').textContent=money(costSite);
+    $('oFloor').textContent=money(floor);
+    $('oHourly').textContent=money(hourly);
+    $('oIn').textContent=money(moneyIn);
+    $('oOut').textContent=money(fixed);
+    $('oProfit').textContent=money(profit);
+    $('oProfit').className='num '+(profit>0?'good':'warn');
+    $('oHourly').className='num '+(hourly>=num('rate')?'good':'warn');
+    var msg;
+    if(profit<=0) msg='At these numbers you lose money. Raise your prices or take on more clients.';
+    else if(hourly<num('rate')) msg='You make a profit, but less than your hourly rate. A new-site price of at least '+money(floor)+' covers your time and costs.';
+    else msg='These prices cover your costs and pay you at least your hourly rate.';
+    var careFloor=care>0?(upd*num('hUpd')*num('rate')):0;
+    if(care>0&&num('pCare')<careFloor) msg+=' Monthly care below '+money(careFloor)+' doesn’t pay your rate for the updates you expect.';
+    $('oMsg').textContent=msg;
+    $('quote').textContent=
+'Website for '+($('cName').value||'your business')+'\n\n'+
+'New website: '+money(num('pSite'))+' (one time)\n'+
+'  A one-page site designed for your customers, with your logo and photos,\n'+
+'  working on phones, with your hours, prices and contact details.\n'+
+'  Includes review rounds until you are happy.\n\n'+
+'Monthly care: '+money(num('pCare'))+' a month\n'+
+'  Updates to hours, prices, notices and photos, and keeping the site online.\n\n'+
+'You pay for your own domain name (usually $10 to $20 a year) and own it.\n\n'+
+'From '+($('me').value||'');
+    try{var o={};ids.forEach(function(i){o[i]=$(i).value});localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}
+  }
+  ids.forEach(function(i){$(i).addEventListener('input',calc);$(i).addEventListener('change',calc)}); calc();
+  $('copy').addEventListener('click',function(){
+    var t=$('quote').textContent;
+    var done=function(m){$('copied').textContent=m;setTimeout(function(){$('copied').textContent=''},2500)};
+    if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(t).then(function(){done('Copied')},function(){done('Select the text above and copy it')});
+    else done('Select the text above and copy it');
+  });
+})();
+</script>
+</body>
+</html>
