@@ -7,7 +7,7 @@
 **Between** [Your name or business] ("I") **and** [Client business] ("you").
 **Date:** [date]
 
-**1. What I'll make.** A one-page website for [Client business] with your logo, photos, services, hours and contact details, working on phones and computers. Includes up to [3] rounds of changes before launch.
+**1. What I'll make.** A one-page website for [Client business] with your logo, photos, services, hours and contact details, working on phones and computers. Includes [2] rounds of changes before launch. Each extra round of changes is $[amount], and I'll tell you before starting one.
 
 **2. Price and payment.**
 - New website: $[amount]. Half ($[amount]) is due before I start. The rest is due when the site goes live.

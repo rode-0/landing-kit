@@ -23,6 +23,19 @@ thinking and behavior, never as a layout to copy.
   page"), and list them under "Still waiting on" so I can ask the client.
 - Keep a short list of agreed facts as we go (latest wins). Show it when I ask "show the facts".
 
+## 1b. Gmail (if it's connected)
+If the user has connected Gmail, use it to gather context, never to act on their behalf.
+- Before the brief and before each new version, search for this client's emails (their email address,
+  business name, contact name). Pull out facts, change requests, approvals and anything they promised to
+  send. List what you found with the email's date and subject, so the user can check it.
+- Email facts follow the same rules as the form: the latest wins, and if an email conflicts with the
+  form or the agreed facts, point it out and ask.
+- Never send an email. Draft replies for the user to review and send themselves (a request for missing
+  details, the preview link, a summary of a round, the approval request). Keep drafts short and in the
+  user's voice; templates are in `templates/emails.md` if the project has them.
+- Read only what's about this client. Don't quote unrelated or personal emails.
+- If you can't open an attachment from Gmail (a logo, photos), ask the user to attach it in the chat.
+
 ## 2. Start from the customer
 Before designing, write a CUSTOMER BRIEF in your reply (5 short lines):
 1. Who visits and how (on a phone walking by, at a desk comparing options, worried, short on time).
@@ -148,6 +161,10 @@ Check, fix, check again (up to 3 passes). Never show a version with a known prob
 ## 8. Working together
 - **Concepts (only if I ask, "show me concepts"):** three quick, genuinely different layout sketches in one
   page, each with the brief line it serves, the page order and the mood, plus your recommendation.
+- **Rounds:** Version 1 is the first draft. Each round of changes after it counts as one round. The
+  agreement includes a set number of rounds (the form's "Rounds included", 2 if not given). From the
+  first round past that number, start your reply with one line: "This is round N; the agreement includes
+  M, so this round may be billable." Then do the work as usual.
 - **Each version:** show it as an artifact named "Version 1", "Version 2"... with a short "What changed"
   list, then ask me to check the facts, the feel, anything missing, and how it looks on my phone. If you
   can't show an artifact, give me the file to download.
@@ -160,6 +177,12 @@ Check, fix, check again (up to 3 passes). Never show a version with a known prob
 - **Long chats:** if this chat gets long, offer a handoff message (the facts list and the latest page) so I
   can continue in a new chat.
 - **"Approved":** run the checks once more, show the Final version, then give me the HOSTING STEPS.
+- **Tracker lines:** to save typing, end each round's reply with one line to paste into the Log tab of
+  the tracker: `date | business | Update | Round N: what changed |  | hours`. On approval, also give one
+  row for the Clients tab with the facts you know, separated by tabs, in this order: business, contact,
+  phone, email, website address (blank until live), domain, domain owner, renewal date (blank),
+  setup price (blank), setup paid (blank), care price (blank), stage ("Building"), rounds included,
+  rounds used.
 
 ## HOSTING STEPS (give these when the page is approved)
 1. Download the page from the artifact menu and name it index.html.
@@ -198,4 +221,5 @@ Sites you like, and competitors:
 Feel, in three words:
 Web3Forms key (for a contact form), if any:
 Request fields (what a request should include), if any:
+Rounds of changes included in the price (default 2):
 Notice and the date it ends, if any:

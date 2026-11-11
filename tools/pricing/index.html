@@ -61,6 +61,7 @@ ul{margin:8px 0 0;padding-left:20px}
 <h2 id="h-time">Your time</h2>
 <div class="grid">
 <div class="q"><label for="hSite">Hours per new site</label><input id="hSite" type="number" min="0" step="0.5" value="3"><span class="hint">Collecting answers, review rounds, putting it online</span></div>
+<div class="q"><label for="hRound">Hours per extra revision round</label><input id="hRound" type="number" min="0" step="0.25" value="0.75"><span class="hint">Reading their notes, checking the new version, sending it</span></div>
 <div class="q"><label for="hUpd">Hours per update</label><input id="hUpd" type="number" min="0" step="0.25" value="0.5"><span class="hint">New hours, a holiday notice, a price change</span></div>
 <div class="q"><label for="rate">Hourly rate you want ($)</label><input id="rate" type="number" min="0" step="5" value="50"></div>
 </div>
@@ -72,6 +73,7 @@ ul{margin:8px 0 0;padding-left:20px}
 <div class="q"><label for="newSites">New sites per month</label><input id="newSites" type="number" min="0" step="1" value="2"></div>
 <div class="q"><label for="careClients">Clients on monthly care</label><input id="careClients" type="number" min="0" step="1" value="4"><span class="hint">Clients who pay you each month for updates</span></div>
 <div class="q"><label for="updPer">Updates per care client per month</label><input id="updPer" type="number" min="0" step="0.5" value="1"></div>
+<div class="q"><label for="xRounds">Extra rounds per site, on average</label><input id="xRounds" type="number" min="0" step="0.5" value="0.5"><span class="hint">Rounds beyond what's included in your price</span></div>
 </div>
 </section>
 
@@ -79,6 +81,8 @@ ul{margin:8px 0 0;padding-left:20px}
 <h2 id="h-prices">Your prices</h2>
 <div class="grid">
 <div class="q"><label for="pSite">Price for a new site ($)</label><input id="pSite" type="number" min="0" step="25" value="600"></div>
+<div class="q"><label for="incRounds">Revision rounds included</label><input id="incRounds" type="number" min="0" step="1" value="2"><span class="hint">Rounds of changes the site price covers</span></div>
+<div class="q"><label for="pRound">Price per extra round ($)</label><input id="pRound" type="number" min="0" step="5" value="60"></div>
 <div class="q"><label for="pCare">Monthly care price ($)</label><input id="pCare" type="number" min="0" step="5" value="40"><span class="hint">Updates and keeping the site online</span></div>
 </div>
 </section>
@@ -121,8 +125,8 @@ ul{margin:8px 0 0;padding-left:20px}
 <script>
 (function(){
   var $=function(id){return document.getElementById(id)};
-  var ids=['plan','planOther','host','other','hSite','hUpd','rate','newSites','careClients','updPer','pSite','pCare','cName','me'];
-  var KEY='lk-pricing-v2';
+  var ids=['plan','planOther','host','other','hSite','hRound','hUpd','rate','newSites','careClients','updPer','xRounds','incRounds','pRound','pSite','pCare','cName','me'];
+  var KEY='lk-pricing-v3';
   try{var s=JSON.parse(localStorage.getItem(KEY)||'{}');ids.forEach(function(i){if(s[i]!==undefined)$(i).value=s[i]})}catch(e){}
   var num=function(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0};
   var money=function(v){return (v<0?'-$':'$')+Math.round(Math.abs(v)).toLocaleString('en-US')};
@@ -131,10 +135,11 @@ ul{margin:8px 0 0;padding-left:20px}
     var claude=$('plan').value==='other'?num('planOther'):+$('plan').value;
     var fixed=claude+(+$('host').value)+num('other');
     var sites=num('newSites'), care=num('careClients'), upd=num('updPer');
-    var hours=sites*num('hSite')+care*upd*num('hUpd');
+    var xr=num('xRounds');
+    var hours=sites*(num('hSite')+xr*num('hRound'))+care*upd*num('hUpd');
     var costSite=sites>0?fixed/sites:fixed;
     var floor=costSite+num('hSite')*num('rate');
-    var moneyIn=sites*num('pSite')+care*num('pCare');
+    var moneyIn=sites*(num('pSite')+xr*num('pRound'))+care*num('pCare');
     var profit=moneyIn-fixed;
     var hourly=hours>0?profit/hours:0;
     $('oCostSite').textContent=money(costSite);
@@ -150,6 +155,8 @@ ul{margin:8px 0 0;padding-left:20px}
     else if(hourly<num('rate')) msg='You make a profit, but less than your hourly rate. A new-site price of at least '+money(floor)+' covers your time and costs.';
     else msg='These prices cover your costs and pay you at least your hourly rate.';
     var careFloor=care>0?(upd*num('hUpd')*num('rate')):0;
+    var roundFloor=num('hRound')*num('rate');
+    if(xr>0&&num('pRound')<roundFloor) msg+=' An extra round below '+money(roundFloor)+' doesn\u2019t pay your rate for the time it takes.';
     if(care>0&&num('pCare')<careFloor) msg+=' Monthly care below '+money(careFloor)+' doesn’t pay your rate for the updates you expect.';
     $('oMsg').textContent=msg;
     $('quote').textContent=
@@ -157,7 +164,7 @@ ul{margin:8px 0 0;padding-left:20px}
 'New website: '+money(num('pSite'))+' (one time)\n'+
 '  A one-page site designed for your customers, with your logo and photos,\n'+
 '  working on phones, with your hours, prices and contact details.\n'+
-'  Includes review rounds until you are happy.\n\n'+
+'  Includes '+num('incRounds')+' rounds of changes. Extra rounds are '+money(num('pRound'))+' each.\n\n'+
 'Monthly care: '+money(num('pCare'))+' a month\n'+
 '  Updates to hours, prices, notices and photos, and keeping the site online.\n\n'+
 'You pay for your own domain name (usually $10 to $20 a year) and own it.\n\n'+
