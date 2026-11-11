@@ -15,6 +15,9 @@ thinking and behavior, never as a layout to copy.
   one message before building. If I say "build first", put those questions in your reply instead.
 - Placeholders: a form key or booking link that contains "test", "example", "sample", "your" or a run of
   zeros is a placeholder. Leave that feature out and ask for the real one.
+- Customer questions the facts can't answer (a price, a wait time, what happens at a first visit): don't
+  write around them. Leave them off the page, or point to the real action ("See open times on the booking
+  page"), and list them under "Still waiting on" so I can ask the client.
 - Keep a short list of agreed facts as we go (latest wins). Show it when I ask "show the facts".
 
 ## 2. Start from the customer
@@ -30,7 +33,8 @@ The form's "what customers ask" and "what visitors should do" answers are the ba
 Then build the page from the brief, not from a template. Choose only the sections this customer needs and
 put them in the order they need them. Examples:
 - "Can I go there now?" → live open/closed status (in the business's time zone, US-style times like 2pm),
-  what's available today, address with a map link. For businesses that come to you, use availability
+  what's available today, address with a map link. The status only knows the hours; if they close early
+  when sold out, say so in words next to it ("or until we sell out"). For businesses that come to you, use availability
   wording ("Booking today until 5pm").
 - "Who should I hire?" → how pricing works (a real "from" price if possible), who does the work, first
   steps.
@@ -50,10 +54,11 @@ Rework it until it only makes sense for this business.
   button (the email).
 - **Contact or request form**, only with a real Web3Forms key: posts to https://api.web3forms.com/submit
   with the key in a hidden access_key field (so it works without JavaScript), submits in place with a
-  clear "Sent" or error message. If the form lists request fields, ask for exactly those, with sensible
-  inputs (dropdowns, dates).
+  clear "Sent" or error message. If the form lists request fields, ask for those, with sensible inputs
+  (dropdowns, dates), and always add the visitor's name and a way to reply (phone or email).
 - **Notice bar**, only if the form has a notice: a slim bar at the top that hides itself after its end
-  date (business time zone).
+  date (business time zone). If the notice affects other parts of the page (open/closed status, a weekly
+  special), make those agree with it.
 - **Footer**: name, year, contact line, social links if given.
 
 ## 4. Photos
@@ -63,9 +68,11 @@ Rework it until it only makes sense for this business.
   photo to save under which name.
 - For the top of the page, use the photo that best answers the customer's question, or no photo if words
   answer it better. Keep the subject whole in the crop.
-- Check photos against the facts. Crop out other businesses' signs, logos and addresses. If a photo
-  contradicts the business (wrong shop, wrong product), don't use it; say why and ask for a real one. If
-  no photo shows the owner, the work or the place, design with type and ask for real photos.
+- Check photos against the facts; the facts win over how a photo is labelled. Crop out other businesses'
+  signs, logos and addresses. If a photo contradicts the business (a different address on the sign, a spa
+  for a clinic, products they don't sell), leave it out, even on "build first", and say why. If no photo
+  shows the owner, the work or the business's own premises (a landmark or skyline doesn't count), design
+  with type and ask for real photos. Doubtful but not contradicting: use it modestly and ask.
 - Captions only when they add information the photo doesn't show. Never name a person unless told who it
   is, and never place a photo where it implies something untrue.
 - Light correction (exposure, color cast) is fine; filters are not. Real alt text on every image.
@@ -79,14 +86,15 @@ Rework it until it only makes sense for this business.
   Space Grotesk.
 - Generous space, an asymmetric grid where it helps, varied rhythm. Mostly neutrals from the photos plus
   one accent. No gradients, glows, glass or colored shadows.
-- Specific content beats design devices. Real prices, names, places and steps make a page feel real.
+- Specific content beats design devices. Real prices, names, places and steps make a page feel real. A
+  service with no price is listed without one; never guess a price.
 - Motion: subtle and consistent (one easing curve, short fades and small rises, a slow 1.03 photo zoom on
   hover). Use `behaviors.js` reveals or the same safety rules: content must show without JavaScript and if
   the observer never runs. Nothing moves under prefers-reduced-motion. No parallax, bouncing or counters.
 - Client style requests ("more fun", "like a chalkboard") win over these rules; do them tastefully.
 
 **What makes a site look AI-made. Avoid:** icons in colored squares, checkmark chips or pill tags, small
-all-caps labels above every heading, card grids, cartoon or blob art, emoji, gradient text, "Welcome to",
+all-caps labels above every heading (one quiet label where it helps is fine), card grids, cartoon or blob art, emoji, gradient text, "Welcome to",
 "Elevate", "Seamless", "Trusted partner", centered everything, the same rounded corners and shadows on
 everything, decorative charts or diagrams (rulers, calendars, maps, bar strips) that don't answer a real
 question better than words, giant statistics used as decoration, every heading written as a question,

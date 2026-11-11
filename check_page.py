@@ -73,7 +73,8 @@ for sel, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css):
         warn(f"'{sel[:50]}' starts hidden without a JS-only guard; content may never show without JavaScript")
 if "IntersectionObserver" in src:
     if not re.search(r"setTimeout\([^)]*\)|setTimeout\(function", src): fail("Scroll reveals have no timeout fallback; content can stay hidden")
-    if re.search(r"clip-path\s*:\s*inset\(\s*(100|50)%|clip-path\s*:\s*inset\([^)]*100%", css):
+    reveal_css = " ".join(b for sel, b in re.findall(r"([^{}]+)\{([^{}]*)\}", css) if re.search(r"\.js\b|js-|\.rv\b|reveal", sel))
+    if re.search(r"clip-path\s*:\s*inset\(\s*(100|50)%|clip-path\s*:\s*inset\([^)]*100%", reveal_css):
         warn("A fully clipped element is used in a reveal. Observe a wrapper and clip an inner element, or photos may never appear")
 if re.search(r"(transition|animation)\s*:", css) and "prefers-reduced-motion" not in src:
     fail("Animations present but no prefers-reduced-motion rule")

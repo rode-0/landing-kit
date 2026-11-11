@@ -4,6 +4,10 @@ Make a clean, professional website for a small business with Claude. No coding.
 
 You collect the business's details and photos, Claude designs the page with you, and you put it online for free by dragging one file onto a website.
 
+![Five example sites made with this kit](examples/overview.jpg)
+
+*Five made-up businesses, each designed for its own customers. Photo credits are in [examples/CREDITS.md](examples/CREDITS.md).*
+
 
 ---
 
@@ -11,7 +15,7 @@ You collect the business's details and photos, Claude designs the page with you,
 
 1. **Get a Claude account** at [claude.ai](https://claude.ai). A paid plan gives you more room for back-and-forth.
 2. **Make a Project** in Claude called "Websites".
-3. **Add this kit to the Project.** On this page, click the green **Code** button, then **Download ZIP**. Unzip it, then drag `PROMPT.md` and `check_page.py` into the Project's files.
+3. **Add this kit to the Project.** On this page, click the green **Code** button, then **Download ZIP**. Unzip it, then drag `PROMPT.md`, `check_page.py` and everything in the `library` folder into the Project's files.
 4. **In the Project instructions**, type: `Follow PROMPT.md for every website.`
 5. **Pick the model.** When you start a chat, open the model menu (next to the message box) and choose **Claude Opus 5.5**, or a newer Opus if there is one. This kit was built and tested with Opus.
 6. **Get a free Netlify account** at [netlify.com](https://www.netlify.com). This is where the websites live.
@@ -59,3 +63,5 @@ If the business already uses Square, Calendly, Jane, OpenTable or similar, give 
 | `PROMPT.md` | The instructions Claude follows. You don't need to read it. |
 | `check_page.py` | A checker Claude runs on each page before showing it to you. |
 | `intake/` | The question page you send to clients. |
+| `library/` | Notes and tested pieces Claude uses to design well. Add the whole folder to the Project. |
+| `examples/` | Pictures of sites made with this kit. |
