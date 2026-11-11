@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Runs every check the release depends on. Exit code is non-zero on any failure.
 set -euo pipefail
+export PYTHONDONTWRITEBYTECODE=1
 cd "$(dirname "$0")/.."
 echo "== behaviors.js logic"
 node tests/test_behaviors.js
