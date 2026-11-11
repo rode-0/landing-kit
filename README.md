@@ -55,6 +55,16 @@ You collect the business's details and photos, Claude designs the page with you,
 
 Open the same chat (or a new one in the Project), say what changed ("new hours", "closed for the holidays until Jan 2"), and get the new file. In Netlify, open the site, go to **Deploys**, and drag the folder with the new file onto the page.
 
+## Keeping your work safe
+
+You don't need any special tools. Three things together cover it:
+
+- **Netlify keeps every version.** Each time you drag a new file onto a site, Netlify keeps the old one. In the site's **Deploys** page you can put an earlier version back live if something goes wrong.
+- **Claude keeps your drafts.** Each client's chat has every version you made together.
+- **Keep one folder per client** in Google Drive or Dropbox. Put in it the client's answers, their logo and photos, and every final page, named by date, like `2026-11-10 index.html`. If anything else is ever lost, this folder is enough to rebuild the site. It's also what you hand over if a client moves on.
+
+Add each folder's link to your tracker so you can always find it.
+
 ## Contact forms (optional)
 
 Want visitors to send messages from the site? Go to [web3forms.com](https://web3forms.com), enter the email address that should receive the messages, and you'll get a key by email. Give that key to Claude and ask for a contact form. It's free and needs no account.
