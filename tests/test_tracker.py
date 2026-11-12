@@ -1,8 +1,8 @@
-"""Tracker structure must match what Claude pastes (claude/PROMPT.md), and formulas must be intact."""
+"""Tracker structure must match what Claude pastes (the skill's SKILL.md), and formulas must be intact."""
 import re, openpyxl
-wb = openpyxl.load_workbook('tools/tracker/tracker.xlsx')
+wb = openpyxl.load_workbook('plugin/skills/landing-kit/assets/tracker.xlsx')
 c, d, lg = wb['Clients'], wb['Dashboard'], wb['Log']
-prompt = open('claude/PROMPT.md', encoding='utf-8').read()
+prompt = open('plugin/skills/landing-kit/SKILL.md', encoding='utf-8').read()
 order = re.search(r'exactly 18\s+fields in this order, empty where unknown: (.*?)\. Example', prompt, re.S).group(1)
 fields = [re.sub(r'\s*\(.*?\)', '', f).strip().lower() for f in re.split(r',\s*', ' '.join(order.split()))]
 headers = [str(c.cell(1, i).value).lower() for i in range(1, 19)]

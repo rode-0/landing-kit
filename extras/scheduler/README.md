@@ -1,7 +1,7 @@
 # Posting queue (optional, for a technical owner)
 
 **Most people don't need this.** The kit's recommended way to schedule posts is the platform's own free
-scheduler (Meta Business Suite for Facebook and Instagram). See [sop/10](../../sop/10-market-your-business.md).
+scheduler (Meta Business Suite for Facebook and Instagram). See [guide step 10](../../plugin/skills/landing-kit/references/guide/10-market-your-business.md).
 
 This folder is for someone technical who wants posts to go out from a script on a timer (a "cron job").
 It is **dry run by default** and ships **without** any connection to a social platform.

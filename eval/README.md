@@ -10,7 +10,7 @@ How long a website takes and what it costs, measured on ten example businesses.
 - **Prompt feedback:** each run also reports what was hard to understand in the kit's instructions, as
   structured entries: the rule quoted, the kind of problem (unclear, conflicting, missing, too long), what it
   did instead, minutes lost, and a suggested fix. These are summarised in [results.md](results.md) and drive
-  the next changes to `claude/PROMPT.md`.
+  the next changes to `plugin/skills/landing-kit/SKILL.md`.
 - **Scored:** the page checker on every version, whether every requested change was made, whether round 3 was flagged as billable, and whether tracker lines were given. A separate design review scored the final pages.
 
 ## Assumptions for your time
@@ -43,4 +43,4 @@ Opus 5.5 is priced at $4 per million input tokens and $20 per million output tok
 ```
 
 ## Run it again
-Maintainers: see `MAINTAINING.md`. Re-run the study after changing `claude/PROMPT.md` or the library, and compare against `results.json`.
+Maintainers: see `MAINTAINING.md`. Re-run the study after changing `plugin/skills/landing-kit/SKILL.md` or the library, and compare against `results.json`.

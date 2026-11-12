@@ -2,9 +2,9 @@
 
 | Service | Who sets it up | Who pays | Who looks after it |
 |---|---|---|---|
-| Claude plan and Websites Project | You | You | You |
+| Claude plan and the Landing Kit plugin | You | You | You |
 | Netlify account (hosts every client site) | You | You (covered by care prices) | You: check usage monthly; if credits run out, every site pauses |
-| Your tool pages (question page, pricing, invoice, setup) | You, once (one drag onto Netlify) | Included in Netlify | You; replace them when you download a new kit version |
+| Your tool pages (question page, pricing, preview, invoice, setup) | Nobody: they're online at a fixed address | Free | The kit's maintainer |
 | Tracker (Google Sheets or Excel) | You | Free | You: log every payment, round, update, enquiry and marketing session |
 | Card payments (Square, Stripe or PayPal) | You | Fees per payment | You |
 | Client's domain | The client buys it, in their name; you help connect it | The client | The client renews it; your tracker warns you 60 days ahead |

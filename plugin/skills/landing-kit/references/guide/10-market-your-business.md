@@ -4,7 +4,7 @@ Use this once you have two sample sites and your own site (setup Level 3). Organ
 
 ## 1. Get a plan from Claude (about 30 minutes)
 
-In your Websites Project, start a new chat and say **"Make my marketing plan"**. Tell Claude:
+In Claude, start a new chat and say **"Use the landing kit to make my marketing plan"**. Tell Claude:
 - the one kind of business you want to start with (for example, dog groomers in your town),
 - your site's link and which social platform you'll use,
 - how many posts a week you can keep up (3 is plenty).

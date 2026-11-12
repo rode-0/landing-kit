@@ -1,4 +1,4 @@
-# Builds claude/library/behaviors-paste.js from behaviors.js (comments removed). Run: python3 tests/make_paste.py claude/library/behaviors.js > claude/library/behaviors-paste.js
+# Builds plugin/skills/landing-kit/scripts/behaviors-paste.js from behaviors.js (comments removed). Run: python3 tests/make_paste.py plugin/skills/landing-kit/scripts/behaviors.js > plugin/skills/landing-kit/scripts/behaviors-paste.js
 import re,sys
 src=open(sys.argv[1]).read()
 src=re.sub(r'/\*.*?\*/','',src,flags=re.S)

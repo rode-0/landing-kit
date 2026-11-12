@@ -98,7 +98,7 @@ td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
   <div class="next" id="next"></div>
   <div class="ask">
     <h2>Not sure what to do next?</h2>
-    <p>Copy this question into your Websites Project in Claude. Add your tracker's Dashboard numbers if you have them. Claude answers with the one next step that matters most.</p>
+    <p>Copy this question into a new Claude chat. Add your tracker's Dashboard numbers if you have them. Claude answers with the one next step that matters most.</p>
     <div class="askrow"><button type="button" class="btn" id="askBtn">Copy question for Claude</button><span id="askOut" aria-live="polite"></span></div>
     <label for="askText" class="meta">The question</label>
     <textarea id="askText" readonly></textarea>
@@ -117,10 +117,11 @@ var LEVELS=[
   unlocks:'Build, launch and bill your first client (guide steps 3 to 6).',
   steps:[
   {id:'claude',t:'Get a paid Claude plan',d:'You use Claude to build every site.',links:[['claude.ai','https://claude.ai']]},
-  {id:'project',t:'Make your "Websites" Project',d:'In Claude, create a Project called Websites. Add the files from the kit\'s claude folder (and its library folder) plus templates/emails.md. Set the instructions to "Follow PROMPT.md for every website." Pick Opus 5.5 or newer.'},
+  {id:'code',t:'Turn on code execution',d:'In Claude\'s settings, under Capabilities, turn on code execution. The kit needs it for photos, checks and previews.'},
+  {id:'project',t:'Add the Landing Kit to Claude',d:'In Claude: Customize, then Plugins, then Add, then Add marketplace. Type rode-0/landing-kit and add Landing Kit. It updates itself. On a work account, ask whoever manages Claude to add it for everyone. Pick Opus 5.5 or newer in each chat.',links:[['Plugins in Claude','https://claude.ai/customize/plugins']]},
   {id:'netlify',t:'Open a free Netlify account',d:'This is where the site goes online. Free is enough to start. Stay signed in when you launch a site: one dropped without signing in is not saved.',links:[['netlify.com','https://www.netlify.com']]},
   {id:'prices',t:'Set your prices',d:'Open the pricing page. Fill in your own hours and costs; it suggests prices and writes a quote.',links:[['Pricing page','../pricing/index.html']]},
-  {id:'agree',t:'Fill in your agreement',d:'In the kit folder, templates/agreement.md: your name, prices, included rounds, and how many small updates the monthly care covers.'},
+  {id:'agree',t:'Fill in your agreement',d:'In Claude, say "Use the landing kit to fill in my agreement" and give your name, prices, included rounds and how many small updates the care plan covers.'},
   {id:'getpaid',t:'Decide how you get paid',d:'For one job, the invoice maker is enough: the client pays by bank transfer, check or a payment link.',links:[['Invoice maker','../invoice/index.html']]},
   {id:'basics',t:'Check local rules',d:'Business license or registered name, and ask an accountant about taxes. The kit isn\'t legal or tax advice.'}
  ]},
@@ -128,9 +129,8 @@ var LEVELS=[
   goal:'Keep track of clients and money, and take card payments and monthly care plans.',
   unlocks:'Monthly care plans, the Dashboard, and a question page link to send every client.',
   steps:[
-  {id:'tracker',t:'Set up your tracker',d:'Upload tools/tracker/tracker.xlsx to Google Sheets (File, then Import) or open it in Excel. Every client, payment and round goes here, and each client gets a Next step.',links:[['Google Sheets','https://sheets.google.com']]},
-  {id:'tools',t:'Put your tool pages online',d:'Drag the whole tools folder onto Netlify Drop, once. Your pages are then at /intake/, /pricing/, /invoice/ and /setup/ on the link you get.',links:[['Netlify Drop','https://app.netlify.com/drop'],['Question page (preview)','../intake/index.html']]},
-  {id:'links',t:'Save your links',d:'Paste each link once.',mylinks:true},
+  {id:'tracker',t:'Set up your tracker',d:'Download it, then upload it to Google Sheets (File, then Import) or open it in Excel. Every client, payment and round goes here, and each client gets a Next step.',links:[['Download the tracker','../tracker/tracker.xlsx'],['Google Sheets','https://sheets.google.com']]},
+  {id:'links',t:'Save your links',d:'Your question page for clients is the Question page link with ?for=YourName on the end. Paste your links once.',mylinks:true},
   {id:'pay',t:'Open a card payment account',d:'Card payments and automatic monthly billing for care plans.',links:[['Square','https://squareup.com'],['Stripe','https://stripe.com'],['PayPal','https://www.paypal.com/business']]},
   {id:'budget',t:'Decide your hosting budget',d:'If Netlify credits run out, every site you host pauses until next month. Pick a plan, check usage monthly, and decide on auto recharge with a monthly limit.'},
   {id:'gmail',t:'Connect Gmail to Claude',opt:true,d:'Claude reads client emails for details and drafts replies. It never sends anything.'}
@@ -141,9 +141,9 @@ var LEVELS=[
   steps:[
   {id:'demo1',t:'Build sample site 1',d:'A friend\'s or family member\'s business, labelled "Sample".'},
   {id:'demo2',t:'Build sample site 2',d:'A different kind of business, so you have two styles to show.'},
-  {id:'folio',t:'Build your own site',d:'In a new chat in your Websites Project, say "Build my own site" and attach screenshots of your samples. You get your examples, your packages, your phone and email, and a short enquiry form.'},
+  {id:'folio',t:'Build your own site',d:'In a new chat, say "Use the landing kit to build my own site" and attach screenshots of your samples. You get your examples, your packages, your phone and email, and a short enquiry form.'},
   {id:'test',t:'Test it on your phone',d:'Send yourself a message from the enquiry form. Tap your phone and email. Open every sample.'},
-  {id:'social',t:'Plan a month of posts',opt:true,d:'Ask Claude "Make my marketing plan" (see sop/10). Approve the posts, then schedule them in the platform\'s own scheduler, such as Meta Business Suite for Facebook and Instagram.'}
+  {id:'social',t:'Plan a month of posts',opt:true,d:'Ask Claude "Use the landing kit to make my marketing plan". Approve the posts, then schedule them in the platform\'s own scheduler, such as Meta Business Suite for Facebook and Instagram.'}
  ]}
 ];
 var LINKS=[['ql','Question page'],['pl','Pricing page'],['il','Invoice maker'],['tl','Tracker'],['fl','Portfolio']];
@@ -188,7 +188,7 @@ function status(){
  nx.innerHTML='Next: '+esc(s.t)+' <span>· '+esc(LEVELS[cur].name.split(' · ')[1])+'</span>';
 }
 function askText(){
- var cur=current(),lines=['What should I do next in my website business? Give me ONE next step, why it matters, and exactly how to start it. Then at most two steps after it.','','Put first anything about money owed or at risk (unpaid invoices, domains renewing, hosting credits), then client work waiting on me, then my next setup step, then finding new clients.','','My setup: '+(cur<LEVELS.length?'on '+LEVELS[cur].name:'all levels done')+'.'];
+ var cur=current(),lines=['Use the landing kit: what should I do next in my website business? Give me ONE next step, why it matters, and exactly how to start it. Then at most two steps after it.','','Put first anything about money owed or at risk (unpaid invoices, domains renewing, hosting credits), then client work waiting on me, then my next setup step, then finding new clients.','','My setup: '+(cur<LEVELS.length?'on '+LEVELS[cur].name:'all levels done')+'.'];
  LEVELS.forEach(function(L,i){if(i>cur)return;var d=L.steps.filter(function(s){return st[s.id]}).map(function(s){return s.t}),n=L.steps.filter(function(s){return!st[s.id]}).map(function(s){return s.t+(s.opt?' (optional)':'')});
   lines.push(L.name.split(' · ')[0]+' done: '+(d.join('; ')||'nothing yet'));if(n.length)lines.push(L.name.split(' · ')[0]+' not done: '+n.join('; '))});
  lines.push('','My tracker Dashboard (paste it here, or write "no clients yet"):','');

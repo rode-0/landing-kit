@@ -1,0 +1,9 @@
+{
+  "name": "landing-kit",
+  "version": "1.1.0",
+  "description": "Run a small website business with Claude: build, revise, preview and launch one-page sites for local businesses, with quotes, invoices, a tracker and next steps.",
+  "author": { "name": "Rode Peters" },
+  "homepage": "https://github.com/rode-0/landing-kit",
+  "repository": "https://github.com/rode-0/landing-kit",
+  "keywords": ["website", "small business", "landing page", "no-code"]
+}

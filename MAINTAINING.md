@@ -3,9 +3,9 @@
 Technical notes for whoever maintains this repo. Users don't need this file.
 
 ## Layout
-- `claude/PROMPT.md`: the instructions Claude follows. Users drag `claude/` into a Claude Project.
-- `claude/check_page.py`: static checks Claude runs on each page (`python3 check_page.py index.html`).
-- `claude/library/`: `behaviors.js` (tested behavior code), `playbooks.md` (trade notes), `directions.md` (design directions).
+- `plugin/skills/landing-kit/SKILL.md`: the instructions Claude follows. The repo is a plugin marketplace (`.claude-plugin/marketplace.json`) with one plugin in `plugin/`; users add `rode-0/landing-kit` in Claude (Customize > Plugins).
+- `plugin/skills/landing-kit/scripts/`: `check_page.py` (page checks), `behaviors.js` + generated `behaviors-paste.js`, `photo_tools.py`, `make_preview.py` (must match `tools/preview/preview.js`; tested).
+- `plugin/skills/landing-kit/references/`: the business guide, templates, playbooks and design directions. `plugin/skills/landing-kit/assets/tracker.xlsx` is the only tracker copy; releases copy it to the tools site and the ZIP.
 - `tools/`: standalone HTML tools (no build step) and the tracker spreadsheet.
 - `tests/`: `run_tests.sh` runs everything; `test_behaviors.js` tests the library logic; `fixtures/` holds a page the checker must pass and one it must fail.
 - `eval/`: the time study (dataset, method, results).
@@ -24,6 +24,6 @@ Technical notes for whoever maintains this repo. Users don't need this file.
 3. Re-run at least part of the time study (`eval/README.md`) and compare quality and time against the last results.
 
 ## Conventions
-- User-facing text is plain language. No technical terms in `README.md`, `sop/` or `templates/`.
+- User-facing text is plain language. No technical terms in `README.md` or the guide and templates under `references/`.
 - Pages must work as a single `index.html` with no build step.
 - `behaviors.js` comments must never contain a literal script tag; the checker fails pages that paste one.

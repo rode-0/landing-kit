@@ -1,0 +1,12 @@
+{
+  "name": "landing-kit-marketplace",
+  "description": "Landing Kit: a no-code website business with Claude",
+  "owner": { "name": "Rode Peters" },
+  "plugins": [
+    {
+      "name": "landing-kit",
+      "source": "./plugin",
+      "description": "Build, preview and launch small-business websites, and run the business around them."
+    }
+  ]
+}

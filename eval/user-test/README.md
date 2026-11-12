@@ -16,11 +16,11 @@ Write the clock time at the start and end of each step in the time log. Count on
 
 | # | Step | The tester does | Expected outcome |
 |---|---|---|---|
-| 1 | Setup, Level 1 | Downloads the kit ZIP from Releases, unzips it, opens `tools/setup/index.html`, follows Level 1 (Claude Project, Netlify free account, prices, agreement) | Project has the kit files and the instruction; pricing page filled in; Level 2 unlocks on the setup page |
-| 2 | Setup, Level 2 | Imports `tools/tracker/tracker.xlsx` into Google Sheets (or Excel); drags the `tools` folder onto Netlify Drop; saves the links | Tracker opens with the example row and Dashboard numbers; tool pages load at /intake/, /pricing/, /invoice/, /setup/ |
+| 1 | Setup, Level 1 | Opens the setup page (https://rode-0.github.io/landing-kit/tools/setup/), follows Level 1 (adds the Landing Kit plugin in Claude, Netlify free account, prices, agreement) | Project has the kit files and the instruction; pricing page filled in; Level 2 unlocks on the setup page |
+| 2 | Setup, Level 2 | Gets the tracker from Claude, imports it into Google Sheets (or Excel); saves the links | Tracker opens with the example row and Dashboard numbers; tool pages load at /intake/, /pricing/, /invoice/, /setup/ |
 | 3 | Discovery and quote | Reads the sample client's answers, notes what the client already has, sends a quote from the pricing page | Quote shows the price, included rounds, extra-round price and the care update cap |
 | 4 | Deposit (simulated) | Makes a deposit invoice in the invoice maker and saves it as PDF; logs "Payment" in the tracker | PDF made; the Log row shows in "Money received this month" |
-| 5 | Build | New chat in the Project: pastes the answers, attaches the 4 photos | Version 1 with a customer brief, "Checks: passed" or what wasn't checked, a request for phone screenshots, a Log line in a box |
+| 5 | Build | New chat, "Use the landing kit to build a website for Blue Ridge Mobile Grooming": pastes the answers, attaches the 4 photos | Version 1 with a customer brief, "Checks: passed" or what wasn't checked, a request for phone screenshots, a Log line in a box |
 | 6 | Preview and phone check | Downloads the version, makes a preview package in tools/preview, opens the preview on their phone, sends 3 screenshots to Claude | Claude reviews the screenshots and fixes anything it sees |
 | 7 | Rounds | Sends round notes 1 and 2, then 3 | Rounds 1-2 done with "What changed"; round 3 stops with an extra-round email draft; after "the client said yes" it's done |
 | 8 | Tracker paste | Pastes each Log line, and the Clients row after approval | Every value lands in its named column; grey columns fill in; Next step shows something sensible |
@@ -28,7 +28,7 @@ Write the clock time at the start and end of each step in the time log. Count on
 | 10 | Own site | New chat: "Build my own site" with screenshots of the practice site | Portfolio page with the example labelled "Sample design", packages, phone and email, a short enquiry form |
 | 11 | Marketing (rehearsal) | New chat: "Make my marketing plan" for dog groomers | One-line positioning, 3 themes, a post design, a month of posts with captions, a queue with approved = no. **Don't post or schedule anything** |
 | 12 | Care update and backup | Sends the care update to Claude, re-uploads the new page on the site's Deploys page, saves the final page in a backup folder named by date, logs the update | The live site shows Monday hours; backup folder has the dated file |
-| 13 | What next | On the setup page, presses "Copy question for Claude", pastes it into the Project with the Dashboard | One clear next step with how to start it |
+| 13 | What next | On the setup page, presses "Copy question for Claude", pastes it into a Claude chat with the Dashboard | One clear next step with how to start it |
 
 Check first in step 2: **whether the tracker imports cleanly into Google Sheets.** It was tested only in
 LibreOffice before release. Note any formula errors (#NAME?, #VALUE!) or missing colors.

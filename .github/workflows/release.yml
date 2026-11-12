@@ -1,19 +1,20 @@
 name: Release
 # Run this from the Actions tab when the work on the dev branch is ready for users.
-# It runs the checks, moves main up to dev, tags the version, and publishes a GitHub Release
-# with a clean ZIP of the user-facing files. Use "dry run" to try it without publishing.
+# It runs the checks, builds the Claude plugin ZIP and the user ZIP, moves main up to dev, tags the version,
+# publishes a GitHub Release, and publishes the tool pages to GitHub Pages. "Dry run" builds everything and
+# publishes nothing. The version must match plugin/.claude-plugin/plugin.json.
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version number, like 1.1.0"
+        description: "Version number, like 1.1.0 (must match plugin/.claude-plugin/plugin.json)"
         required: true
       notes:
         description: "What changed (optional; shown on the release page)"
         required: false
         default: ""
       dry_run:
-        description: "Dry run: check and build the ZIP only, publish nothing"
+        description: "Dry run: check and build only, publish nothing"
         type: boolean
         default: true
 permissions:
@@ -24,6 +25,8 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ inputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,8 +34,10 @@ jobs:
           fetch-depth: 0
       - name: Check the version number
         run: |
-          echo "${{ inputs.version }}" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' || { echo "Version must look like 1.2.3"; exit 1; }
-          if git rev-parse "v${{ inputs.version }}" >/dev/null 2>&1; then echo "v${{ inputs.version }} already exists"; exit 1; fi
+          echo "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' || { echo "Version must look like 1.2.3"; exit 1; }
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then echo "v$VERSION already exists"; exit 1; fi
+          pv=$(python3 -c "import json;print(json.load(open('plugin/.claude-plugin/plugin.json'))['version'])")
+          [ "$pv" = "$VERSION" ] || { echo "plugin.json says $pv; set it to $VERSION on dev first"; exit 1; }
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -43,24 +48,34 @@ jobs:
         run: |
           pip install openpyxl==3.1.5
           ./tests/run_tests.sh
-      - name: Build the user ZIP
+      - name: Build the plugin ZIP, the user ZIP and the tools site
         run: |
-          name="landing-kit-${{ inputs.version }}"
-          mkdir -p "dist/$name"
-          cp -r README.md sop claude tools templates examples extras "dist/$name/"
-          [ -d eval ] && mkdir -p "dist/$name/eval" && cp eval/README.md eval/results.md "dist/$name/eval/" 2>/dev/null || true
+          mkdir -p dist site/tools
+          (cd plugin && zip -qr "../dist/landing-kit-plugin-$VERSION.zip" . -x '*__pycache__*' '*.pyc')
+          name="landing-kit-$VERSION"
+          mkdir -p "dist/$name/eval"
+          cp -r README.md plugin tools examples extras "dist/$name/"
+          cp plugin/skills/landing-kit/assets/tracker.xlsx "dist/$name/tools/tracker/" 2>/dev/null || { mkdir -p "dist/$name/tools/tracker" && cp plugin/skills/landing-kit/assets/tracker.xlsx "dist/$name/tools/tracker/"; }
+          cp eval/README.md eval/results.md "dist/$name/eval/"
+          find "dist/$name" -name '__pycache__' -prune -exec rm -rf {} +
           (cd dist && zip -qr "$name.zip" "$name")
-          ls -la dist
+          cp -r tools/. site/tools/
+          mkdir -p site/tools/tracker && cp plugin/skills/landing-kit/assets/tracker.xlsx site/tools/tracker/
+          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=tools/"><title>Landing Kit tools</title><a href="tools/">Landing Kit tools</a>\n' > site/index.html
+          unzip -l "dist/landing-kit-plugin-$VERSION.zip" | grep -q '.claude-plugin/plugin.json' || { echo "plugin ZIP lacks .claude-plugin/plugin.json"; exit 1; }
+          ls -la dist site/tools
       - uses: actions/upload-artifact@v4
         with:
           name: landing-kit-${{ inputs.version }}
           path: dist/*.zip
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
       - name: Publish (skipped on dry run)
         if: ${{ !inputs.dry_run }}
         env:
           GH_TOKEN: ${{ github.token }}
           NOTES: ${{ inputs.notes }}
-          VERSION: ${{ inputs.version }}
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
@@ -68,9 +83,22 @@ jobs:
           git checkout main
           git merge --ff-only origin/dev || { echo "main has commits that dev doesn't. Merge main into dev first."; exit 1; }
           git push origin main
-          git tag -a "v${{ inputs.version }}" -m "Landing Kit ${{ inputs.version }}"
-          git push origin "v${{ inputs.version }}"
+          git tag -a "v$VERSION" -m "Landing Kit $VERSION"
+          git push origin "v$VERSION"
           notes="$NOTES"
-          [ -z "$notes" ] && notes="Landing Kit ${{ inputs.version }}. Download the ZIP below and follow sop/01-set-up.md."
-          gh release create "v${{ inputs.version }}" "dist/landing-kit-${{ inputs.version }}.zip" \
-            --title "Landing Kit ${{ inputs.version }}" --notes "$notes"
+          [ -z "$notes" ] && notes="Landing Kit $VERSION. In Claude, add the marketplace rode-0/landing-kit (Customize > Plugins), or upload landing-kit-plugin-$VERSION.zip. Then follow the README."
+          gh release create "v$VERSION" "dist/landing-kit-$VERSION.zip" "dist/landing-kit-plugin-$VERSION.zip" \
+            --title "Landing Kit $VERSION" --notes "$notes"
+  pages:
+    needs: release
+    if: ${{ !inputs.dry_run }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
