@@ -180,3 +180,15 @@ package suggested with the preview maker steps explained, final invoice (email 6
 the first time, one line after); always draft the matching client email even without Gmail; no page or Checks line in
 the extra-round stop reply; add dated content with an end date by default; remind the user to fill in $[amount] in email
 6 when no setup price was given; staff names don't count as the owner for the contact field.
+
+### Plugin layout check (c121d29, 3 cases: bakery, plumber, barber)
+
+Agents worked as Claude with the Landing Kit plugin installed: they read the skill first and opened its files only
+when needed. 3/3 passed every check: checker 15/15, preview package made with `scripts/make_preview.py` (banner, no live
+links), extra round stopped with the $60 price and done after "go ahead", tab-separated Log lines and an 18-field
+Clients row, outside links listed, final invoice before launch, tracker file handed over. One defect found and fixed
+(c8a59e8): the preview banner said "Barbers's". A local install from the repo marketplace in Claude Code showed one
+skill, about 120 tokens per session and 7.3k when used. Not yet tried by a person in claude.ai.
+
+**Known items:** whether a style request may swap a font; whether each round includes a fresh preview file; whether
+"give me the tracker" means a blank copy or one pre-filled with the session's lines.
