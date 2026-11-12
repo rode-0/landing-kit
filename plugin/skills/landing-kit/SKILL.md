@@ -253,7 +253,7 @@ Check, fix, check again (up to 3 passes). Never show a version with a known prob
   `Harbor Plumbing<TAB>Luis<TAB>(828) 555-0177<TAB>luis@harborplumbing.com<TAB><TAB>harborplumbing.com<TAB>Client<TAB><TAB>600<TAB>No<TAB>40<TAB>Building<TAB>2<TAB>3<TAB>2026-11-11<TAB><TAB><TAB>Extra round billed`.
   Tell me to click the first empty cell in column A and paste. The grey columns after it fill
   in by themselves. Field rules: hours = your best estimate of the time I spent on that step (I'll correct
-  it); type is Round for Version 1 and each round, Update for care changes; rounds used counts change rounds
+  it); type is Round for Version 1, each round and the approval line, Update for care changes; rounds used counts change rounds
   including extra ones, not Version 1; started = the date of Version 1; setup price and setup paid? = only if I told you, else empty;
   contact = the form's contact name, else the owner named in the
   form or whoever signed the emails, else empty (use the same name in email drafts, or [Name]); domain = only a web address the

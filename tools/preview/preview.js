@@ -23,7 +23,8 @@ function lkPreview(html, opts) {
     'html::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:2147483000;opacity:.10;background:url("data:image/svg+xml,' + mark + '") repeat;}' +
     '@media (prefers-color-scheme:dark){html::after{filter:invert(1)}}' +
     '.lk-preview-msg{font:600 15px/1.4 system-ui,sans-serif;background:#ffd27a;color:#1d1b18;padding:10px 12px;border-radius:6px}</style>';
-  var banner = '<div id="lk-preview" role="note" tabindex="-1"><strong>PREVIEW of ' + esc(biz) + "'s new website, version " + esc(ver) + '.</strong>' +
+  var poss = /s$/i.test(biz) ? "'" : "'s";
+  var banner = '<div id="lk-preview" role="note" tabindex="-1"><strong>PREVIEW of ' + esc(biz) + poss + " new website, version " + esc(ver) + '.</strong>' +
     '<p>Scroll through it on your phone and computer. Buttons for booking, ordering, calling and maps are switched off in the preview, and the form doesn\'t send. They all work on the live site.</p>' +
     '<p>Reply to ' + (from ? esc(from) : 'me') + ' with anything you\'d like changed. Please don\'t share or post this preview.</p></div>';
   var guard = '<script>document.addEventListener("submit",function(e){e.preventDefault();e.stopPropagation();var f=e.target,m=f.querySelector(".lk-preview-msg");' +

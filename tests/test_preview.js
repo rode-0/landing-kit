@@ -19,4 +19,5 @@ assert((out.match(/<\/body>/g) || []).length === 1 && out.includes('lk-preview-m
 assert(/html::after\{[^}]*pointer-events:none/.test(out), 'watermark does not block taps');
 const msg = lkPreviewMessage({ business: "Vito's Pizzeria", contact: 'Sal', version: '2', from: 'Andre' });
 assert(msg.startsWith('Hi Sal,') && msg.includes('tap the attachment') && msg.endsWith('Andre'));
+assert(lkPreview(src, { business: 'Ridgeline Barbers' }).includes("PREVIEW of Ridgeline Barbers' new website"), 'possessive after s');
 console.log('preview maker: all tests passed');
