@@ -1,5 +1,24 @@
 # Landing Kit
 
+## Install
+
+**In Claude (claude.ai or the desktop app):** turn on code execution (Settings > Capabilities), then go to **Customize > Plugins > Add > Add marketplace** and enter:
+
+```
+rode-0/landing-kit
+```
+
+Add **Landing Kit** from the list. It updates itself.
+
+**In Claude Code:**
+
+```
+/plugin marketplace add rode-0/landing-kit
+/plugin install landing-kit@landing-kit-marketplace
+```
+
+**Then:** open the setup page, https://rode-0.github.io/landing-kit/tools/setup/, and start a client by saying **"Use the landing kit to build a website for [business]"**.
+
 Run a small website business with Claude. No coding.
 
 You find local businesses, collect their details, logo and photos, Claude designs a professional one-page site with you, and you put it online by dragging one file onto a website. Then you keep it updated for a monthly fee.
@@ -7,11 +26,6 @@ You find local businesses, collect their details, logo and photos, Claude design
 ![Five example sites made with this kit](examples/overview.png)
 
 *Example sites for made-up businesses. Open them from `examples/demos` in the kit folder (their buttons are switched off). Photo credits are in [examples/CREDITS.md](examples/CREDITS.md).*
-
-**Start here:**
-1. In Claude, open **Customize**, then **Plugins**, then **Add**, then **Add marketplace**, and type `rode-0/landing-kit`. Add **Landing Kit**. (Turn on code execution in Claude's settings under Capabilities first.)
-2. Open the setup page: https://rode-0.github.io/landing-kit/tools/setup/. It shows what to set up first and what to do next.
-3. To start a client, open a new chat and say **"Use the landing kit to build a website for [business]"**.
 
 ---
 
